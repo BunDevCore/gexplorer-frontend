@@ -42,7 +42,7 @@ const App = ({Component, pageProps}: AppProps) => {
     <GlobalStyles theme={getTheme(themeName)}/>
     <Head>
       <link href="/favicon.png" rel="icon" type="image/png"/>
-      <title>BookLink</title>
+      <title>GExplorer</title>
     </Head>
     <Navbar changeTheme={changeTheme as ChangeTheme}/>
     <Component {...pageProps} />

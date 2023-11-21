@@ -16,7 +16,7 @@ export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
     return <NavbarWrapper>
         <Nav>
             <MenuIcon onClick={toggleDropdown}>{dropdownOpen ? <CloseRoundedIcon/> : <MenuRoundedIcon/>}</MenuIcon>
-            <MainTitle>Gexplorer</MainTitle>
+            <MainTitle>GExplorer</MainTitle>
             <div></div>
         </Nav>
         <Absolute>
