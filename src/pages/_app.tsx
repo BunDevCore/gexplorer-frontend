@@ -9,6 +9,10 @@ import type {Theme, ThemeName} from "@/types/theme";
 import type {AppProps} from "next/app";
 import {ChangeTheme} from "@/types/navbar";
 import {useGExplorerStore} from "@/state";
+import mapboxgl from "mapbox-gl";
+
+mapboxgl.accessToken = "pk.eyJ1IjoiaW5maW5pZmVuIiwiYSI6ImNsZ21uc3d1YjA3b2QzZW1tcWQ4ZWhuZ3kifQ.ide6_yWZQVDRD546IXsfDw"
+
 
 const GlobalStyles = createGlobalStyle`
   html, body {

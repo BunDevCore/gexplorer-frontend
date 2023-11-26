@@ -4,6 +4,7 @@ import {useRouter} from "next/router";
 import {useGExplorerStore} from "@/state";
 import {useEffect, useState} from "react";
 import fetcher from "@/fetcher";
+import TripMap from "@/components/trip/TripMap";
 
 export default function TripPage() {
     const router = useRouter()
@@ -32,5 +33,6 @@ export default function TripPage() {
 
     if (isLoading || !data) return <p>loading...</p>
 
-    return <h1>{data.area}</h1>;
+    console.log("geom", data.geometry)
+    return <TripMap tripGeometry={data.gpsPolygon}></TripMap>;
 }
