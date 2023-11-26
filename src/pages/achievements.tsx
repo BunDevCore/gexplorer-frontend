@@ -1,19 +1,25 @@
 // import AchievementBox from "@/components/AchievementBox";
 import {MainLayout, CenterLayout} from "@/styles/universal"
-import {AchievementItem, AchievementList, AchievementText, AchievementValue} from "@/styles/achievementBox";
+import {AchievementList, AchievementItem, AchievementIcon, AchievementText, AchievementValue} from "@/styles/achievementBox";
 
 export default function Achievements() {
-    const achievements = [["AAA", 3, 5], ["BBB", 6, 10], ["GUN", 0, 100]]
-    // return <div><center>You have achieved nothing!!!</center></div>;
+    const achievements = [["SVG", "AAA", 3, 5], ["IMG", "BBB", 6, 10], ["IDK", "GUN", 0, 100],
+        ["gd_booklink", "Odwiedź każdą bibliotekę w Gdańsku", 3, 43], ["gd_old_city", "Zwiedź całe śródmieście", 45, 1234],
+        ["gd_train_station", "Dostań się na każdą stację kolejową", 2, 13], ["gd_shop", "Spotkajmy się w Centrum Handlowym", 1, 14]]
+
     return <MainLayout>
         <CenterLayout>
             <AchievementList>
                 {achievements.map(achievement => <AchievementItem>
-                    <AchievementText>
+                    <AchievementIcon>
+                        {/*TODO image or svg here as an icon for achievement*/}
                         {achievement[0].toString()}
+                    </AchievementIcon>
+                    <AchievementText>
+                        {achievement[1].toString()}
                     </AchievementText>
                     <AchievementValue>
-                        {achievement[1]}/{achievement[2]}
+                        {achievement[2]}/{achievement[3]}
                     </AchievementValue>
                 </AchievementItem>)}
             </AchievementList>
