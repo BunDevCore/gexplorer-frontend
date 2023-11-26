@@ -8,8 +8,6 @@ import {getTheme} from "@/theme/theme";
 import type {Theme, ThemeName} from "@/types/theme";
 import type {AppProps} from "next/app";
 import {ChangeTheme} from "@/types/navbar";
-import {useRouter} from "next/router";
-import * as jose from "jose";
 import {useGExplorerStore} from "@/state";
 
 const GlobalStyles = createGlobalStyle`

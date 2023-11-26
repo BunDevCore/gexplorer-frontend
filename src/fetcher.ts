@@ -1,4 +1,3 @@
-import {getCookie} from "cookies-next";
 import {useGExplorerStore} from "@/state";
 
 const fetcher = async (key: string) => {

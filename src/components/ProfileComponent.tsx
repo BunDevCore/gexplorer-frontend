@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-import {getCookie} from "cookies-next";
 import {useGExplorerStore} from "@/state";
 import {apiUrl} from "@/config";
 
