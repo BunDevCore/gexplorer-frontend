@@ -31,6 +31,6 @@ export default function ProfileComponent(props: { username: string | undefined |
         <h1>Cześć {data.username}!</h1>
         <LargeAreaCounter m_2={data.overallAreaAmount}></LargeAreaCounter>
         <p>last trips:</p>
-        {data.trips.map(t => <div>{t.id} {t.area}m<sup>2</sup></div>)}
+        {data.trips.map(t => <div key={t.id}>{t.id} {t.area}m<sup>2</sup></div>)}
     </>;
 }
