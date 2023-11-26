@@ -1,3 +1,6 @@
+import LoginComponent from "@/components/LoginComponent";
+import {CenterLayout} from "@/styles/universal";
+
 export default function Login() {
-    return <div><center>ZALOGUJ SIĘ</center></div>
+    return <CenterLayout><LoginComponent></LoginComponent></CenterLayout>
 }

@@ -8,6 +8,9 @@ import {getTheme} from "@/theme/theme";
 import type {Theme, ThemeName} from "@/types/theme";
 import type {AppProps} from "next/app";
 import {ChangeTheme} from "@/types/navbar";
+import {useRouter} from "next/router";
+import * as jose from "jose";
+import {useGExplorerStore} from "@/state";
 
 const GlobalStyles = createGlobalStyle`
   html, body {
@@ -37,6 +40,38 @@ const App = ({Component, pageProps}: AppProps) => {
       sameSite: true
     });
   }
+
+  const token = useGExplorerStore((s) => s.token)
+  const setToken = useGExplorerStore((s) => s.setToken)
+  const setLoggedIn = useGExplorerStore((s) => s.setLoggedIn)
+
+  useEffect(() => {
+    let t = getCookie("token");
+    if (t !== undefined && t !== null) {
+      setToken(t.toString())
+    }
+  }, [token]);
+
+  useEffect(() => {
+    let t = token
+    if (t !== undefined) {
+      (async () => {
+        let res = await fetch("http://localhost:5107/Auth/check", {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            "Authorization": "Bearer " + t
+          },
+        });
+        if (res.status == 401) {
+          setLoggedIn(false)
+        } else {
+          setLoggedIn(true)
+        }
+      })();
+    }
+  }, [token])
+
 
   return <ThemeProvider theme={getTheme(themeName)}>
     <GlobalStyles theme={getTheme(themeName)}/>
