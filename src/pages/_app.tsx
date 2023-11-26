@@ -62,8 +62,10 @@ const App = ({Component, pageProps}: AppProps) => {
           },
         });
         if (res.status == 401) {
+          console.warn("set loggedin false")
           setLoggedIn(false)
         } else {
+          console.warn("set loggedin true")
           setLoggedIn(true)
         }
       })();

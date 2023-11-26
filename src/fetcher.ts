@@ -1,15 +1,20 @@
 import {useGExplorerStore} from "@/state";
 
-const fetcher = async (key: string) => {
-    const token = useGExplorerStore(s => s.token);
+export default function fetcher (key: string) {
+    console.log("fetcher called")
+    console.log(`fetcher url ${key}`)
+    const token = useGExplorerStore.getState().token;
 
     const headers = token ? {
         "Authorization": `Bearer ${token}`
     } : {}
 
 
-    let res = await fetch(key, {
+    console.warn("pre fetch")
+    let res = fetch(key, {
         "headers": headers as Record<string, string>
     });
-    return await res.json();
+    console.warn("post fetch")
+
+    return res.then(r => r.json());
 }
