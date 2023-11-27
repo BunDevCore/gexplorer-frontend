@@ -1,4 +1,4 @@
-import {GeoJSON} from "geojson";
+import {Geometry} from "geojson";
 
 export type FullUser = {
     id: string,
@@ -16,7 +16,7 @@ export type Trip = {
     id: string,
     user: ShortUser,
     area: number,
-    gpsPolygon: GeoJSON.Polygon
+    gpsPolygon: Geometry
 }
 
 export type ShortUser = {
@@ -24,6 +24,13 @@ export type ShortUser = {
     username: string,
     overallAreaAmount: number,
     joinedAt: string,
+}
+
+export type District = {
+    id: string,
+    name: string,
+    geometry: Geometry
+    area: number
 }
 
 export type Leaderboard<V> = {
