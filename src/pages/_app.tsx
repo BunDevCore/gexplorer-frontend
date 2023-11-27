@@ -10,6 +10,7 @@ import type {AppProps} from "next/app";
 import {ChangeTheme} from "@/types/navbar";
 import {useGExplorerStore} from "@/state";
 import mapboxgl from "mapbox-gl";
+import {apiUrl} from "@/config";
 
 mapboxgl.accessToken = "pk.eyJ1IjoiaW5maW5pZmVuIiwiYSI6ImNsZ21uc3d1YjA3b2QzZW1tcWQ4ZWhuZ3kifQ.ide6_yWZQVDRD546IXsfDw"
 
@@ -46,6 +47,13 @@ const App = ({Component, pageProps}: AppProps) => {
   const token = useGExplorerStore((s) => s.token)
   const setToken = useGExplorerStore((s) => s.setToken)
   const setLoggedIn = useGExplorerStore((s) => s.setLoggedIn)
+  const setDistricts = useGExplorerStore(s => s.setDistricts)
+
+  fetch(apiUrl("/District"))
+      .then(res => res.json()).then(json => setDistricts(json)).catch(_ => console.error("kurwa jego mać zjedli dzielnice!!!"));
+
+
+
 
   useEffect(() => {
     let t = getCookie("token");

@@ -1,16 +1,17 @@
 import {create} from 'zustand'
 import * as jose from 'jose'
+import {District} from "@/types/types";
 
 export interface State {
     token: string | undefined,
     loggedIn: boolean,
     initialAuthDone: boolean,
     id: string,
-    districts: any,
+    districts: District[],
 
     setToken: (value: string) => void
     setLoggedIn: (value: boolean) => void
-    setDistricts: (value: any) => void
+    setDistricts: (value: District[]) => void
 }
 
 export const useGExplorerStore = create<State>(
@@ -19,7 +20,7 @@ export const useGExplorerStore = create<State>(
         loggedIn: false,
         initialAuthDone: false,
         id: "",
-        districts: {},
+        districts: [],
         setToken: (value) => set((state) => ({token: value, id: jose.decodeJwt(value).sub})),
         setLoggedIn: (value) => set((state) => ({loggedIn: value, initialAuthDone: true})),
         setDistricts: (value) => set((state) => ({districts: value}))
