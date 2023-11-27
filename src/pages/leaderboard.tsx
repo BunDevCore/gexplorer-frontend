@@ -1,3 +1,3 @@
 export default function Leaderboard() {
-    return <div></div>;
+    return <div><center>SCOREBOARD</center></div>;
 }

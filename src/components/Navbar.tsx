@@ -4,6 +4,8 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import HomeIcon from '@mui/icons-material/Home';
 import LoginIcon from '@mui/icons-material/Login';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import {ChangeTheme} from "@/types/navbar";
 
 export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
@@ -22,6 +24,8 @@ export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
         <Absolute>
             <Dropdown $open={dropdownOpen}>
                 <DropdownLink href="/"><HomeIcon/> Strona Główna</DropdownLink>
+                <DropdownLink href="/achievements"><EmojiEventsIcon/> Osiągnięcia</DropdownLink>
+                <DropdownLink href="/leaderboard"><LeaderboardIcon/> Leaderboard</DropdownLink>
                 <DropdownLink href="/login"><LoginIcon/> Zaloguj się</DropdownLink>
             </Dropdown>
             <Settings $open={dropdownOpen}>

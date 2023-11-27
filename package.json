@@ -15,6 +15,8 @@
     "@mui/material": "^5.14.18",
     "0g": "^0.0.9",
     "cookies-next": "^2.1.2",
+    "jose": "^5.1.1",
+    "mapbox-gl": "^2.15.0",
     "next": "^14.0.3",
     "next-translate-plugin": "^2.6.2",
     "npm": "^10.2.4",
@@ -22,9 +24,12 @@
     "react-dom": "18.2.0",
     "sharp": "^0.32.6",
     "styled-components": "^5.3.11",
-    "usehooks-ts": "^2.9.1"
+    "swr": "^2.2.4",
+    "usehooks-ts": "^2.9.1",
+    "zustand": "^4.4.6"
   },
   "devDependencies": {
+    "@types/mapbox-gl": "^2.7.19",
     "@types/node": "^20.8.10",
     "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
