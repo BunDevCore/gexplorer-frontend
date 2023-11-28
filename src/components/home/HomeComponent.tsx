@@ -1,7 +1,7 @@
-import {CenterLayout, MainLayout} from "@/styles/universal";
+import {MainBox, MainLayout} from "@/styles/universal";
 
 export default function HomeComponent() {
-    return <MainLayout><CenterLayout>
-
-    </CenterLayout></MainLayout>;
+    return <MainLayout>
+        <MainBox>SEX</MainBox>
+    </MainLayout>;
 }

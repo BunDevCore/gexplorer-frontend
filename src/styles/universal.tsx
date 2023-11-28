@@ -21,16 +21,31 @@ export const CenterLayout = styled.main`
   height: 100%;
   grid-column: 2;
   align-items: center;
+  padding-top: 1rem;
 `;
 
-export const MainBox = styled.main`
-  height: 100%;
-  grid-column: 2;
+export const MainBox = styled.div`
+  padding: 1rem;
+  border-radius: 1rem;
   align-items: center;
-  background-color: var(--global-box-background-color);
-  z-index: 1;
-  box-shadow: 0 0 .5rem rgba(0,0,0,50%);
-  margin-bottom: 2rem;
+  background-color: var(--global-secondary-background-color);
+  box-shadow: 0 .25rem .5rem rgba(0,0,0,50%);
+`;
+
+export const LayoutBox = ({children}: {children: ReactNode}) => <MainLayout><MainBox>{children}</MainBox></MainLayout>
+
+// <{$width: string, $height: string}>
+// width: ${props => props.$width};
+// height: ${props => props.$height};
+export const ImageWrapper = styled.div`
+  object-fit: contain;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  
+  img {
+    position: relative;
+  }
 `;
 
 export const FlexSpace = styled.div`

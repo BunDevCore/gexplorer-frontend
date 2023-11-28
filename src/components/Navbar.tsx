@@ -23,6 +23,8 @@ import {getCookie, setCookie} from "cookies-next";
 import useTranslation from "next-translate/useTranslation";
 import useOutside from "../../hooks/useOutside";
 import setLanguage from "next-translate/setLanguage";
+import Image from "next/image";
+import {ImageWrapper} from "@/styles/universal";
 
 export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -48,7 +50,7 @@ export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
     return <NavbarWrapper>
         <Nav>
             <MenuIcon onClick={toggleDropdown}>{dropdownOpen ? <CloseRoundedIcon/> : <MenuRoundedIcon/>}</MenuIcon>
-            <MainTitle>GExplorer</MainTitle>
+            <MainTitle><ImageWrapper><Image src={"/favicon.png"} alt={"GExplorer Icon"} fill={true}/></ImageWrapper> GExplorer</MainTitle>
             <div></div>
         </Nav>
         <Absolute>
