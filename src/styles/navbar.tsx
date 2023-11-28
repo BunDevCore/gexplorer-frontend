@@ -8,6 +8,7 @@ import {ChangeTheme, PolishThemes} from "@/types/navbar";
 
 export const NavbarWrapper = styled.div`
   position: relative;
+  z-index: 621;
 `;
 
 export const Nav = styled.nav`
