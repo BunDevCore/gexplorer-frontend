@@ -18,7 +18,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
-import {ChangeTheme} from "@/types/navbar";
+import {ChangeTheme, LocaleName} from "@/types/navbar";
 import {getCookie, setCookie} from "cookies-next";
 import useTranslation from "next-translate/useTranslation";
 import setLanguage from "next-translate/setLanguage";
@@ -27,7 +27,7 @@ export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const {t} = useTranslation("navbar")
 
-    const changeLocale = (localeName: string) => {
+    const changeLocale = (localeName: LocaleName) => {
         (async () => {
             await setLanguage(localeName);
         })()
@@ -62,8 +62,9 @@ export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
                 <ThemeSettingsButton changeTheme={changeTheme} ownValue={"light"}/>
                 {/*<SettingsButton changeTheme={changeTheme} ownValue={"other"} />*/}
                 <SettingsTitle>Język strony</SettingsTitle>
-                <LanguageSettingsButton changeTheme={changeTheme} ownValue={"pl"}/>
-                <LanguageSettingsButton changeTheme={changeTheme} ownValue={"en"}/>
+                <LanguageSettingsButton changeLocale={changeLocale} ownValue={"pl"}/>
+                <LanguageSettingsButton changeLocale={changeLocale} ownValue={"en"}/>
+                <LanguageSettingsButton changeLocale={changeLocale} ownValue={"de"}/>
             </Settings>
         </Absolute>
     </NavbarWrapper>;

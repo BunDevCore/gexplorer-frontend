@@ -1,10 +1,10 @@
-import styled, {AnyStyledComponent, useTheme} from "styled-components";
+import styled, {useTheme} from "styled-components";
 import Link from "next/link";
 import type {Theme, ThemeName} from "@/types/theme";
 import React from "react";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
-import {ChangeTheme} from "@/types/navbar";
+import {ChangeTheme, ChangeLocale, LocaleName} from "@/types/navbar";
 import useTranslation from "next-translate/useTranslation";
 
 export const NavbarWrapper = styled.div`
@@ -107,11 +107,11 @@ function ThemeSettingsButtonComponent({className, changeTheme, ownValue}: { clas
       </button>;
 }
 
-function LanguageSettingsButtonComponent({className, changeLanguage, ownValue}: { className?: string, changeLanguage: (lang: string) => void, ownValue: LanguageName}) {
+function LanguageSettingsButtonComponent({className, changeLocale, ownValue}: { className?: string, changeLocale: ChangeLocale, ownValue: LocaleName}) {
     const {t, lang} = useTranslation("navbar");
     return lang == ownValue ? <button className={className}>
         <RadioButtonCheckedIcon/> <span>{t(`language.${ownValue}`)}</span>
-    </button> : <button className={className} onClick={() => changeLanguage(ownValue)}>
+    </button> : <button className={className} onClick={() => changeLocale(ownValue)}>
         <RadioButtonUncheckedIcon/> <span>{t(`language.${ownValue}`)}</span>
     </button>;
 }
