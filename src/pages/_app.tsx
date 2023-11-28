@@ -7,10 +7,11 @@ import "../styles/globals.css";
 import {getTheme} from "@/theme/theme";
 import type {Theme, ThemeName} from "@/types/theme";
 import type {AppProps} from "next/app";
-import {ChangeTheme} from "@/types/navbar";
+import {ChangeTheme, LocaleName} from "@/types/navbar";
 import {useGExplorerStore} from "@/state";
 import mapboxgl from "mapbox-gl";
 import {apiUrl} from "@/config";
+import setLanguage from "next-translate/setLanguage";
 
 mapboxgl.accessToken = "pk.eyJ1IjoiaW5maW5pZmVuIiwiYSI6ImNsZ21uc3d1YjA3b2QzZW1tcWQ4ZWhuZ3kifQ.ide6_yWZQVDRD546IXsfDw"
 
@@ -35,6 +36,10 @@ const App = ({Component, pageProps}: AppProps) => {
   useEffect(() => {
     let theme = getCookie("NEXT_THEME") as ThemeName
     setThemeName(theme)
+    let locale = getCookie("NEXT_LOCALE") as LocaleName
+    (async () => {
+      await setLanguage(locale);
+    })()
   }, []);
 
   const changeTheme = (themeName: ThemeName) => {
@@ -51,9 +56,6 @@ const App = ({Component, pageProps}: AppProps) => {
 
   fetch(apiUrl("/District"))
       .then(res => res.json()).then(json => setDistricts(json)).catch(_ => console.error("kurwa jego mać zjedli dzielnice!!!"));
-
-
-
 
   useEffect(() => {
     let t = getCookie("token");

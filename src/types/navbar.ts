@@ -6,8 +6,5 @@ export type ThemeState = [ThemeName, ChangeTheme];
 
 export const themeList: ThemeName[] = ["light", "dark", "other"]
 
-export const PolishThemes: Record<ThemeName, string> = {
-    "light": "Jasny",
-    "dark": "Ciemny",
-    "other": "Inny"
-}
+export type LocaleName = "pl" | "en" | "de"
+export const langList: LocaleName[] = ["pl", "en", "de"]
