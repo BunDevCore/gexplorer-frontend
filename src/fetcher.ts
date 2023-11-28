@@ -16,5 +16,13 @@ export default function fetcher(key: string) {
     });
     console.warn("post fetch")
 
-    return res.then(r => r.json());
+
+
+    return res.then((res) => {
+        if (!res.ok) {
+            throw res.text()
+        }
+
+        return res.json()
+    } );
 }
