@@ -48,6 +48,7 @@ export const MainTitle = styled.div`
   color: ${props => props.theme.type === "dark" ? "var(--secondary-accent)" : "var(--accent)"};
   font-size: 2.5rem;
   font-weight: bold;
+  user-select: none;
 `;
 
 export const Absolute = styled.div`
@@ -78,6 +79,7 @@ export const DropdownLink = styled(Link)`
   padding: 1rem 1.5rem 1rem 1rem;
   font-size: 1.5rem;
   gap: 1rem;
+  user-select: none;
   
   svg {
     font-size: 2rem;
@@ -128,6 +130,7 @@ export const SettingsButton = (v: any) => styled(v)`
   gap: 1rem;
   border: none;
   transition: 200ms;
+  user-select: none;
   
   &:hover {
     filter: brightness(0.75);
@@ -151,5 +154,5 @@ export const SettingsTitle = styled.p`
   padding: 1rem 1.5rem 1rem 1rem;
   font-size: 1.5rem;
   border: none;
-
+  user-select: none;
 `;
