@@ -96,7 +96,7 @@ export const Settings = styled.div<{ $open: boolean }>`
 
 `;
 
-function ThemeSettingsButton({className, changeTheme, ownValue}: { className: string, changeTheme: ChangeTheme,  ownValue: ThemeName}) {
+function ThemeSettingsButton({className, changeTheme, ownValue}: { className?: string, changeTheme: ChangeTheme,  ownValue: ThemeName}) {
     let theme = useTheme() as Theme;
     return theme.type == ownValue ? <button className={className}>
           <RadioButtonCheckedIcon/> <span>{PolishThemes[ownValue]}</span>

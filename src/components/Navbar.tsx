@@ -4,9 +4,11 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import HomeIcon from '@mui/icons-material/Home';
 import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import {ChangeTheme} from "@/types/navbar";
+import {getCookie} from "cookies-next";
 
 export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -26,12 +28,15 @@ export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
                 <DropdownLink href="/"><HomeIcon/> Strona Główna</DropdownLink>
                 <DropdownLink href="/achievements"><EmojiEventsIcon/> Osiągnięcia</DropdownLink>
                 <DropdownLink href="/leaderboard"><LeaderboardIcon/> Leaderboard</DropdownLink>
-                <DropdownLink href="/login"><LoginIcon/> Zaloguj się</DropdownLink>
+                {getCookie("token") === null || getCookie("token") === undefined ?
+                    <DropdownLink href="/login"><LoginIcon/> Zaloguj się</DropdownLink> :
+                    <DropdownLink href="/logout"><LogoutIcon/> Wyloguj się</DropdownLink>
+                }
             </Dropdown>
             <Settings $open={dropdownOpen}>
                 <SettingsTitle>Motyw strony</SettingsTitle>
-                <SettingsButton changeTheme={changeTheme}  ownValue={"dark"} className={""}/>
-                <SettingsButton changeTheme={changeTheme} ownValue={"light"} className={""}/>
+                <SettingsButton changeTheme={changeTheme}  ownValue={"dark"}/>
+                <SettingsButton changeTheme={changeTheme} ownValue={"light"}/>
                 {/*<SettingsButton changeTheme={changeTheme} ownValue={"other"} />*/}
             </Settings>
         </Absolute>
