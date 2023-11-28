@@ -52,28 +52,28 @@ export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
     return <NavbarWrapper>
         <Nav>
             <MenuIcon onClick={toggleDropdown} ref={outsideRef}>
-                <svg style={dropdownOpen ? {
-                    transition: "300ms", transformOrigin: "center",
-                    transform: `translate(-7.5px, 7.5px) rotate(45deg)`
-                } : {transition: "300ms"}}>
+                <svg style={{
+                    stroke: "black",
+                    strokeLinecap: "round",
+                    strokeWidth: hamburgerStrokeWidth,
+                    transition: "300ms"
+                }}>
                     <line x1={hamburgerX} y1={hamburgerY} x2={hamburgerX + hamburgerLength} y2={hamburgerY}
-                          style={{stroke: "black", strokeLinecap: "round", strokeWidth: hamburgerStrokeWidth}}/>
-                </svg>
-                <svg style={dropdownOpen ? {visibility: "hidden", opacity: 0, transition: "300ms"} :
-                    {
-                        visibility: "visible", opacity: 1, transition: "300ms"
-                    }}>
-                    <line x1={hamburgerX} y1={hamburgerY + hamburgerSpacing} x2={hamburgerX + hamburgerLength}
-                          y2={hamburgerY + hamburgerSpacing}
-                          style={{stroke: "black", strokeLinecap: "round", strokeWidth: hamburgerStrokeWidth}}/>
-                </svg>
-                <svg style={dropdownOpen ? {
-                    transition: "300ms", transformOrigin: "center",
-                    transform: `translate(-7.5px, -7.5px) rotate(-45deg)`
-                } : {transition: "300ms"}}>
-                    <line x1={hamburgerX} y1={hamburgerY + hamburgerSpacing * 2} x2={hamburgerX + hamburgerLength}
-                          y2={hamburgerY + hamburgerSpacing * 2}
-                          style={{stroke: "black", strokeLinecap: "round", strokeWidth: hamburgerStrokeWidth}}/>
+                          style={{
+                              ...dropdownOpen ? {
+                                  transform: `translate(-7.5px, 7.5px) rotate(45deg)`
+                              } : {}, transition: "inherit", transformOrigin: "center"
+                          }}/>
+                    <line x1={hamburgerX} y1={hamburgerY + hamburgerSpacing}
+                          x2={hamburgerX + hamburgerLength} y2={hamburgerY + hamburgerSpacing}
+                          style={{opacity: Number(!dropdownOpen), transition: "inherit"}}/>
+                    <line x1={hamburgerX} y1={hamburgerY + hamburgerSpacing * 2}
+                          x2={hamburgerX + hamburgerLength} y2={hamburgerY + hamburgerSpacing * 2}
+                          style={{
+                              ...dropdownOpen ? {
+                                  transform: `translate(-7.5px, -7.5px) rotate(-45deg)`
+                              } : {}, transition: "inherit", transformOrigin: "center"
+                          }}/>
                 </svg>
             </MenuIcon>
             <MainTitle>GExplorer</MainTitle>
