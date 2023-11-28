@@ -11,8 +11,6 @@ import {
     SettingsTitle,
     ThemeSettingsButton, LanguageSettingsButton
 } from "@/styles/navbar";
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import HomeIcon from '@mui/icons-material/Home';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -45,9 +43,39 @@ export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
     const outsideRef = useRef(null);
     useOutside(outsideRef, () => setDropdownOpen(false));
 
+    const hamburgerX = 8.5;
+    const hamburgerY = 13;
+    const hamburgerLength = 31.5;
+    const hamburgerSpacing = 10.5;
+    const hamburgerStrokeWidth = 5;
+
     return <NavbarWrapper>
         <Nav>
-            <MenuIcon onClick={toggleDropdown}>{dropdownOpen ? <CloseRoundedIcon/> : <MenuRoundedIcon/>}</MenuIcon>
+            <MenuIcon onClick={toggleDropdown}>
+                <svg style={dropdownOpen ? {
+                    transition: "300ms", transformOrigin: "center",
+                    transform: `translate(-7.5px, 7.5px) rotate(45deg)`
+                } : {transition: "300ms"}}>
+                    <line x1={hamburgerX} y1={hamburgerY} x2={hamburgerX + hamburgerLength} y2={hamburgerY}
+                          style={{stroke: "black", strokeLinecap: "round", strokeWidth: hamburgerStrokeWidth}}/>
+                </svg>
+                <svg style={dropdownOpen ? {visibility: "hidden", opacity: 0, transition: "300ms"} :
+                    {
+                        visibility: "visible", opacity: 1, transition: "300ms"
+                    }}>
+                    <line x1={hamburgerX} y1={hamburgerY + hamburgerSpacing} x2={hamburgerX + hamburgerLength}
+                          y2={hamburgerY + hamburgerSpacing}
+                          style={{stroke: "black", strokeLinecap: "round", strokeWidth: hamburgerStrokeWidth}}/>
+                </svg>
+                <svg style={dropdownOpen ? {
+                    transition: "300ms", transformOrigin: "center",
+                    transform: `translate(-7.5px, -7.5px) rotate(-45deg)`
+                } : {transition: "300ms"}}>
+                    <line x1={hamburgerX} y1={hamburgerY + hamburgerSpacing * 2} x2={hamburgerX + hamburgerLength}
+                          y2={hamburgerY + hamburgerSpacing * 2}
+                          style={{stroke: "black", strokeLinecap: "round", strokeWidth: hamburgerStrokeWidth}}/>
+                </svg>
+            </MenuIcon>
             <MainTitle>GExplorer</MainTitle>
             <div></div>
         </Nav>
@@ -63,7 +91,7 @@ export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
             </Dropdown>
             <Settings $open={dropdownOpen}>
                 <SettingsTitle>Motyw strony</SettingsTitle>
-                <ThemeSettingsButton changeTheme={changeTheme}  ownValue={"dark"}/>
+                <ThemeSettingsButton changeTheme={changeTheme} ownValue={"dark"}/>
                 <ThemeSettingsButton changeTheme={changeTheme} ownValue={"light"}/>
                 {/*<SettingsButton changeTheme={changeTheme} ownValue={"other"} />*/}
                 <SettingsTitle>Język strony</SettingsTitle>
