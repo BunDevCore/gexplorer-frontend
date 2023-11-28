@@ -3,10 +3,10 @@ import Box from '@mui/material/Box';
 
 export const LoginBox = styled(Box)`
   border-radius: 1rem;
-  background-color: ${props => props.theme.loginBackgroundColor};
+  background-color: var(--global-secondary-background-color);
   padding: 1rem;
   margin-top: 1rem;
-  box-shadow: 0 .25rem .25rem ${props => props.theme.loginBoxShadowColor};
+  box-shadow: 0 .25rem .25rem black;
   justify-self: center;
 `;
 
