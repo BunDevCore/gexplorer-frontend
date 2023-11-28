@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import {
     NavbarWrapper,
     Nav,
@@ -21,6 +21,7 @@ import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import {ChangeTheme, LocaleName} from "@/types/navbar";
 import {getCookie, setCookie} from "cookies-next";
 import useTranslation from "next-translate/useTranslation";
+import useOutside from "../../hooks/useOutside";
 import setLanguage from "next-translate/setLanguage";
 
 export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
@@ -39,6 +40,10 @@ export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
     const toggleDropdown = () => {
         setDropdownOpen(p => !p);
     }
+
+    // close dropdowns when clicked outside of navbar menu
+    const outsideRef = useRef(null);
+    useOutside(outsideRef, () => setDropdownOpen(false));
 
     return <NavbarWrapper>
         <Nav>
