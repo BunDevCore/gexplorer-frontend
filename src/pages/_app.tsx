@@ -66,7 +66,7 @@ const App = ({Component, pageProps}: AppProps) => {
     let t = token
     if (t !== undefined) {
       (async () => {
-        let res = await fetch("http://localhost:5107/Auth/check", {
+        let res = await fetch(apiUrl("/Auth/check"), {
           method: "GET",
           mode: "cors",
           headers: {
