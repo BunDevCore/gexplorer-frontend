@@ -1,4 +1,4 @@
-import {MainLayout, CenterLayout} from "@/styles/universal";
+import {MainLayout} from "@/styles/universal";
 import React, {useEffect, useState} from "react";
 import {getCookie, setCookie} from "cookies-next";
 import {LoginBox, LoginDataBox} from "@/styles/login";
@@ -133,7 +133,7 @@ export default function Login() {
         })();
     };
 
-    return <MainLayout><CenterLayout>
+    return <MainLayout>
         <LoginBox>
             <Box sx={{paddingBottom: "1rem"}}>
                 <Tabs value={login} onChange={changeLogin} aria-label="login tabs" centered>
@@ -158,5 +158,5 @@ export default function Login() {
                 >Zarejestruj się</Button>
             </LoginDataBox>
         </LoginBox>
-    </CenterLayout></MainLayout>;
+    </MainLayout>;
 }

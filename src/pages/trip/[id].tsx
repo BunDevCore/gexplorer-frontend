@@ -4,7 +4,7 @@ import {useRouter} from "next/router";
 import {useGExplorerStore} from "@/state";
 import {useEffect, useState} from "react";
 import fetcher from "@/fetcher";
-import TripMap from "@/components/trip/TripMap";
+import TripMap from "@/components/TripMap";
 
 export default function TripPage() {
     const router = useRouter()

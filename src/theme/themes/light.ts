@@ -4,7 +4,7 @@ import DARK from "./dark";
 const light: Theme = {
     ...DARK,
     type: "light",
-    navbarBackgroundColor: "#a4a4a4",
+    navbarBackgroundColor: "#c0c0c0",
     globalBackgroundColor: "white",
     globalSecondaryBackgroundColor: "#c5c5c5",
 

@@ -1,6 +1,9 @@
 import styled from "styled-components";
+import {ReactNode} from "react";
 
-export const MainLayout = styled.div`
+export const MainLayout = ({children}: {children: ReactNode}) => <Layout><CenterLayout>{children}</CenterLayout></Layout>;
+
+export const Layout = styled.div`
   height: 100%;
   display: grid;
   grid-template-columns: 1fr min(60rem, 100%) 1fr;

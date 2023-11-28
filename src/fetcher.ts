@@ -1,6 +1,6 @@
 import {useGExplorerStore} from "@/state";
 
-export default function fetcher (key: string) {
+export default function fetcher(key: string) {
     console.log("fetcher called")
     console.log(`fetcher url ${key}`)
     const token = useGExplorerStore.getState().token;
