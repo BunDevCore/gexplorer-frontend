@@ -51,7 +51,7 @@ export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
 
     return <NavbarWrapper>
         <Nav>
-            <MenuIcon onClick={toggleDropdown}>
+            <MenuIcon onClick={toggleDropdown} ref={outsideRef}>
                 <svg style={dropdownOpen ? {
                     transition: "300ms", transformOrigin: "center",
                     transform: `translate(-7.5px, 7.5px) rotate(45deg)`
