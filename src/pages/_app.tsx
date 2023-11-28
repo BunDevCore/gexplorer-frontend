@@ -88,7 +88,7 @@ const App = ({Component, pageProps}: AppProps) => {
   return <ThemeProvider theme={getTheme(themeName)}>
     <GlobalStyles theme={getTheme(themeName)}/>
     <Head>
-      <link href="/First_mock_gexplorer.png" rel="icon" type="image/png"/>
+      <link href="/favicon.png" rel="icon" type="image/png"/>
       <title>GExplorer</title>
     </Head>
     <Navbar changeTheme={changeTheme as ChangeTheme}/>
