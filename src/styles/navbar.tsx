@@ -51,11 +51,13 @@ export const MainTitle = styled.div`
   user-select: none;
 `;
 
-export const Absolute = styled.div`
+export const Absolute = styled.div<{$open: boolean}>`
   position: absolute;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  
+  ${props => props.$open ? "transform: translateX(0); transition-delay: 0;" : "transform: translateX(-100%); transition-delay: 500ms;"}
 `;
 
 export const Dropdown = styled.div<{$open: boolean}>`

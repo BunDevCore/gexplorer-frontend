@@ -79,7 +79,7 @@ export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
             <MainTitle>GExplorer</MainTitle>
             <div></div>
         </Nav>
-        <Absolute>
+        <Absolute $open={dropdownOpen}>
             <Dropdown $open={dropdownOpen}>
                 <DropdownLink href="/"><HomeIcon/> {t("home")}</DropdownLink>
                 <DropdownLink href="/achievements"><EmojiEventsIcon/> {t("achievements")}</DropdownLink>
