@@ -1,0 +1,15 @@
+{
+  "bad_entry": "Błędny login lub hasło",
+  "login_base_label": "Wpisz swoją nazwę",
+  "login_not_contains_space": "Login nie może posiadać spacji",
+  "login_longer_than_4": "Login musi być dłuższy niż 4 znaki",
+  "pass_not_contains_space": "Hasło nie może posiadać spacji",
+  "pass_longer_than_7": "Hasło musi być dłuższe niż 7 znaków",
+  "pass_equal": "Hasła muszą być takie same",
+  "user_exists": "Użytkownik o takim loginie już istnieje",
+  "label_login": "Zaloguj się",
+  "label_register": "Zarejestruj się",
+  "login": "Login",
+  "password": "Hasło",
+  "label_pass_again": "Powtórz hasło"
+}
