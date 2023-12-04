@@ -56,6 +56,10 @@ export const Absolute = styled.div<{$open: boolean}>`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  @media (max-width: 450px) {
+    width: 100%;
+  }
   
   ${props => props.$open ? "transform: translateX(0); transition-delay: 0;" : "transform: translateX(-100%); transition-delay: 500ms;"}
 `;
@@ -68,7 +72,11 @@ export const Dropdown = styled.div<{$open: boolean}>`
   border-radius: 0 1rem 1rem 0;
   overflow: hidden;
 
-  ${props => props.$open ? "transform: translateX(0);" : "transform: translateX(-100%);"}
+  @media (max-width: 450px) {
+    border-radius: 0;
+  }
+
+  ${props => props.$open ? "transform: translateX(0); filter: opacity(1);" : "transform: translateX(-100%); filter: opacity(0);"}
 `;
 
 export const DropdownLink = styled(Link)`
@@ -82,6 +90,11 @@ export const DropdownLink = styled(Link)`
   font-size: 1.5rem;
   gap: 1rem;
   user-select: none;
+
+  @media (max-width: 450px) {
+    padding: 1.5rem 2rem 1.5rem 1.5rem;
+    font-size: 1.75rem;
+  }
   
   svg {
     font-size: 2rem;
@@ -97,7 +110,11 @@ export const Settings = styled.div<{ $open: boolean }>`
   overflow: hidden;
   transition-delay: 100ms;
 
-  ${props => props.$open ? "transform: translateX(0);" : "transform: translateX(-100%);"}
+  @media (max-width: 450px) {
+    border-radius: 0;
+  }
+
+  ${props => props.$open ? "transform: translateX(0); filter: opacity(1);" : "transform: translateX(-100%); filter: opacity(0);"}
 
 `;
 
@@ -133,6 +150,11 @@ export const SettingsButton = (v: any) => styled(v)`
   border: none;
   transition: 200ms;
   user-select: none;
+
+  @media (max-width: 450px) {
+    padding: 1.5rem 2rem 1.5rem 1.5rem;
+    font-size: 1.75rem;
+  }
   
   &:hover {
     filter: brightness(0.75);
