@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import {ReactNode} from "react";
-import Box from "@mui/material/Box";
 
-export const MainLayout = ({children}: {children: ReactNode | null}) => <Layout><CenterLayout>{children}</CenterLayout></Layout>;
+export const MainLayout = ({children}: {children: ReactNode}) => <Layout><CenterLayout>{children}</CenterLayout></Layout>;
 
 export const Layout = styled.div`
   height: 100%;
@@ -24,19 +23,16 @@ export const CenterLayout = styled.main`
   align-items: center;
 `;
 
-export const StandardBox = styled(Box)<{$disableBoxShadow?: boolean}>`
-  border-radius: 1rem;
-  background-color: var(--global-secondary-background-color);
-  padding: 1rem;
-  margin-top: 1rem;
-  ${props => props.$disableBoxShadow && !props.$disableBoxShadow ? "" : "box-shadow: 0 .25rem .25rem rgba(0,0,0,50%);"}
-  justify-self: center;
+export const MainBox = styled.main`
+  height: 100%;
+  grid-column: 2;
+  align-items: center;
+  background-color: var(--global-box-background-color);
+  z-index: 1;
+  box-shadow: 0 0 .5rem rgba(0,0,0,50%);
+  margin-bottom: 2rem;
 `;
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+export const FlexSpace = styled.div`
+  flex-grow: 1;
 `;
-
-export const DefaultLayout = ({children}: {children: ReactNode | null}) => <MainLayout><Wrapper>{children}</Wrapper></MainLayout>;

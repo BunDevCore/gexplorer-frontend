@@ -7,9 +7,11 @@ export type FullUser = {
     joinedAt: string,
     trips: Trip[],
     tripAmount: number,
-    districtAreas: {
-        [key: string]: number
-    }
+    districtAreas: DistrictAreas;
+}
+
+export type DistrictAreas = {
+    [key: string]: number
 }
 
 export type Trip = {
