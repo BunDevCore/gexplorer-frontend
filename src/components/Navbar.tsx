@@ -40,8 +40,9 @@ export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
     }
 
     // close dropdowns when clicked outside of navbar menu
-    const outsideRef = useRef(null);
-    useOutside(outsideRef, () => setDropdownOpen(false));
+    const navbarIconRef = useRef(null);
+    const settingsRef = useRef(null);
+    useOutside([navbarIconRef, settingsRef], () => setDropdownOpen(false));
 
     const hamburgerX = 8.5;
     const hamburgerY = 13;
@@ -51,7 +52,7 @@ export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
 
     return <NavbarWrapper>
         <Nav>
-            <MenuIcon onClick={toggleDropdown} ref={outsideRef}>
+            <MenuIcon onClick={toggleDropdown} ref={navbarIconRef}>
                 <svg style={{
                     stroke: "black",
                     strokeLinecap: "round",
@@ -89,7 +90,7 @@ export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
                     <DropdownLink href="/logout"><LogoutIcon/> {t("logout")}</DropdownLink>
                 }
             </Dropdown>
-            <Settings $open={dropdownOpen}>
+            <Settings $open={dropdownOpen} ref={settingsRef}>
                 <SettingsTitle>Motyw strony</SettingsTitle>
                 <ThemeSettingsButton changeTheme={changeTheme} ownValue={"dark"}/>
                 <ThemeSettingsButton changeTheme={changeTheme} ownValue={"light"}/>
