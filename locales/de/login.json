@@ -1,15 +1,15 @@
 {
-  "bad_entry": "Falsches Login oder Passwort",
-  "login_base_label": "Geben Sie Ihren Namen ein",
-  "login_not_contains_space": "Login darf keine Leerzeichen haben",
-  "login_longer_than_4": "Login muss länger als 4 Zeichen sein",
-  "pass_not_contains_space": "Passwort darf keine Leerzeichen enthalten",
-  "pass_longer_than_7": "Passwort muss länger als 7 Zeichen sein",
-  "pass_equal": "Passwörter müssen identisch sein",
-  "user_exists": "Ein Benutzer mit diesem Login existiert bereits",
-  "label_login": "Anmeldung",
-  "label_register": "Registrieren",
+  "badEntry": "Falsches Login oder Passwort",
+  "loginBaseLabel": "Geben Sie Ihren Namen ein",
+  "loginNotContainsSpace": "Login darf keine Leerzeichen haben",
+  "loginLongerThan4": "Login muss länger als 4 Zeichen sein",
+  "passNotContainsSpace": "Passwort darf keine Leerzeichen enthalten",
+  "passLongerThan7": "Passwort muss länger als 7 Zeichen sein",
+  "passEqual": "Passwörter müssen identisch sein",
+  "userExists": "Ein Benutzer mit diesem Login existiert bereits",
+  "labelLogin": "Anmeldung",
+  "labelRegister": "Registrieren",
   "login": "Login",
   "password": "Passwort",
-  "label_pass_again": "Passwort wiederholen"
+  "labelPassAgain": "Passwort wiederholen"
 }

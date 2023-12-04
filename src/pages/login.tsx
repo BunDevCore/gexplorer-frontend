@@ -14,7 +14,7 @@ export default function Login() {
     const {t} = useTranslation("login");
     const [user, setUser] = useState("");
     const [login, setLogin] = useState(0);
-    const [loginLabel, setLoginLabel] = useState("login_base_label"); // t("login_base_label")
+    const [loginLabel, setLoginLabel] = useState("loginBaseLabel");
     const [passLabel, setPassLabel] = useState("");
     const [pass, setPass] = useState("");
     const [passAgain, setPassAgain] = useState("");
@@ -63,7 +63,7 @@ export default function Login() {
             });
             console.log(res.status)
             if (res.status === 400) {
-                setPassLabel("bad_entry")
+                setPassLabel("badEntry")
                 return;
             } else {
                 let data = await res.text();
@@ -87,27 +87,27 @@ export default function Login() {
     }
 
     const handleRegister = (_event: React.MouseEvent<HTMLButtonElement>) => {
-        setLoginLabel("login_base_label")
+        setLoginLabel("loginBaseLabel")
         if (/ /g.test(user)) {
-            setLoginLabel("login_not_contains_space")
+            setLoginLabel("loginNotContainsSpace")
             return;
         }
         if (!/\w{4,}/.test(user)) {
-            setLoginLabel("login_longer_than_4")
+            setLoginLabel("loginLongerThan4")
             return;
         }
 
         setPassLabel("")
         if (/ /g.test(pass)) {
-            setPassLabel("pass_not_contains_space")
+            setPassLabel("passNotContainsSpace")
             return;
         }
         if (!/\w{8,}/.test(pass)) {
-            setPassLabel("pass_longer_than_7")
+            setPassLabel("passLongerThan7")
             return;
         }
         if (pass !== passAgain) {
-            setPassLabel("pass_equal")
+            setPassLabel("passEqual")
             return;
         }
 
@@ -124,7 +124,7 @@ export default function Login() {
                 })
             });
             if (res.status === 422) {
-                setLoginLabel("user_exists")
+                setLoginLabel("userExists")
                 return;
             }
             let data = await res.text();
@@ -139,14 +139,14 @@ export default function Login() {
         <LoginBox>
             <Box sx={{paddingBottom: "1rem"}}>
                 <Tabs value={login} onChange={changeLogin} aria-label="login tabs" centered>
-                    <Tab label={t("label_login")}/>
-                    <Tab label={t("label_register")}/>
+                    <Tab label={t("labelLogin")}/>
+                    <Tab label={t("labelRegister")}/>
                 </Tabs>
             </Box>
             <LoginDataBox>
                 <TextField id="login-name" label={t("login")} variant="filled"
-                           helperText={login === 1 ? t(loginLabel).toString() : t("login_base_label").toString()}
-                           required error={loginLabel !== "login_base_label" && login === 1}
+                           helperText={login === 1 ? t(loginLabel).toString() : t("loginBaseLabel").toString()}
+                           required error={loginLabel !== "loginBaseLabel" && login === 1}
                            onChange={(e) => setUser(e.target.value)}
                            onKeyUp={handleKeyUp}/>
                 <TextField id="login-password" label={t("password")} variant="filled"
@@ -154,14 +154,14 @@ export default function Login() {
                            onChange={(e) => setPass(e.target.value)}
                            onKeyUp={handleKeyUp}/>
                 <Button sx={{display: login === 1 ? "none" : ""}} variant="contained" onClick={handleLogin}>
-                    {t("label_login")}</Button>
+                    {t("labelLogin")}</Button>
                 <TextField sx={{display: login === 0 ? "none" : ""}} id="login-password-again"
-                           label={t("label_pass_again")} variant="filled" type="password" required
+                           label={t("labelPassAgain")} variant="filled" type="password" required
                            error={pass !== passAgain}
                            onChange={(e) => setPassAgain(e.target.value)}
                            onKeyUp={handleKeyUp}/>
                 <Button sx={{display: login === 0 ? "none" : ""}} variant="contained" onClick={handleRegister}
-                >{t("label_register")}</Button>
+                >{t("labelRegister")}</Button>
             </LoginDataBox>
         </LoginBox>
     </MainLayout>;
