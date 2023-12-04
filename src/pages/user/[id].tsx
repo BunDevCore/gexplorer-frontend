@@ -66,6 +66,7 @@ function DistrictTable({areas}: {areas: DistrictAreas}) {
 }
 
 export default function UserPage() {
+    const {t} = useTranslation("common");
     const router = useRouter()
     const [id, setId] = useState<string | null>(null);
 
@@ -95,7 +96,7 @@ export default function UserPage() {
 
     return <MainLayout><CenterLayout><UserPaper variant={"outlined"} elevation={4}>
         <BigProfileBanner user={userSwr.data}></BigProfileBanner>
-        <h2>District areas</h2>
-        <DistrictTable areas={userSwr.data.districtAreas}></DistrictTable>
+        <h2>{t("districtAreas")}</h2>
+        <DistrictTable areas={userSwr.data.districtAreas}/>
     </UserPaper></CenterLayout></MainLayout>
 }

@@ -4,5 +4,6 @@
   "percent": "percent",
   "districtHeader": "District",
   "areaHeader": "Area",
-  "percentHeader": "Percent explored"
+  "percentHeader": "Percent explored",
+  "districtAreas": "District areas"
 }
