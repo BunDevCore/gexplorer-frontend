@@ -25,6 +25,8 @@ export const Nav = styled.nav`
 `;
 
 export const MenuIcon = styled.div`
+  cursor: pointer;
+  user-select: none;
   width: var(--navbar-height);
   height: var(--navbar-height);
   position: relative;
@@ -48,7 +50,6 @@ export const MainTitle = styled.div`
   color: ${props => props.theme.type === "dark" ? "var(--secondary-accent)" : "var(--accent)"};
   font-size: 2.5rem;
   font-weight: bold;
-  user-select: none;
 `;
 
 export const Absolute = styled.div<{$open: boolean}>`
@@ -80,6 +81,7 @@ export const Dropdown = styled.div<{$open: boolean}>`
 `;
 
 export const DropdownLink = styled(Link)`
+  cursor: pointer;
   background-color: var(--navbar-background-color);
   display: flex;
   flex-direction: row;
@@ -91,13 +93,25 @@ export const DropdownLink = styled(Link)`
   gap: 1rem;
   user-select: none;
 
+  svg {
+    font-size: 2rem;
+  }
+
+  &:hover {
+    filter: brightness(0.75);
+  }
+
   @media (max-width: 450px) {
     padding: 1.5rem 2rem 1.5rem 1.5rem;
     font-size: 1.75rem;
-  }
-  
-  svg {
-    font-size: 2rem;
+
+    svg {
+      font-size: 2.5rem;
+    }
+
+    &:hover {
+      filter: brightness(1);
+    }
   }
 `;
 
@@ -138,6 +152,7 @@ function LanguageSettingsButtonComponent({className, changeLocale, ownValue}: { 
 }
 
 export const SettingsButton = (v: any) => styled(v)`
+  cursor: pointer;
   background-color: var(--navbar-background-color);
   display: flex;
   flex-direction: row;
@@ -150,18 +165,22 @@ export const SettingsButton = (v: any) => styled(v)`
   border: none;
   transition: 200ms;
   user-select: none;
+  
+  svg {
+    font-size: 2rem;
+  }
+
+  &:hover {
+    filter: brightness(0.75);
+  }
 
   @media (max-width: 450px) {
     padding: 1.5rem 2rem 1.5rem 1.5rem;
     font-size: 1.75rem;
-  }
-  
-  &:hover {
-    filter: brightness(0.75);
-  }
-  
-  svg {
-    font-size: 2rem;
+
+    &:hover {
+      filter: brightness(1);
+    }
   }
 `;
 
