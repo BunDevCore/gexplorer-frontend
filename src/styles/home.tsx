@@ -73,15 +73,15 @@ export const ItemText = styled.div<{
 `;
 
 export const BoxWithImage = styled(StandardBox)`
-      position: relative;
-      z-index: 2;
-      overflow: hidden;
-      padding: 12rem 0 0;
-      background: none;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  padding: 12rem 0 0;
+  background: none;
 
-      img {
-            z-index: -1;
-            object-fit: cover;
-            border-radius: 0 0 2rem 2rem;
-      }
+  img {
+    z-index: -1;
+    object-fit: cover;
+    border-radius: 0 0 2rem 2rem;
+  }
 `;
