@@ -50,6 +50,18 @@ export const MainTitle = styled.div`
   color: ${props => props.theme.type === "dark" ? "var(--secondary-accent)" : "var(--accent)"};
   font-size: 2.5rem;
   font-weight: bold;
+  display: flex;
+  gap: .5rem;
+`;
+
+export const TitleIcon = styled.div`
+  width: var(--navbar-height);
+  height: var(--navbar-height);
+  position: relative;
+  
+  img {
+    object-fit: cover;
+  }
 `;
 
 export const Absolute = styled.div<{$open: boolean}>`
