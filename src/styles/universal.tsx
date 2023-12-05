@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 export const MainLayout = ({children}: {children: ReactNode | null}) => <Layout><CenterLayout>{children}</CenterLayout></Layout>;
 
 export const Layout = styled.div`
-  height: 100%;
+  min-height: 100%;
   display: grid;
   grid-template-columns: 1fr min(60rem, 100%) 1fr;
 
@@ -37,6 +37,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  position: relative;
 `;
 
 export const DefaultLayout = ({children}: {children: ReactNode | null}) => <MainLayout><Wrapper>{children}</Wrapper></MainLayout>;
