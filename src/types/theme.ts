@@ -5,6 +5,7 @@ export type ThemeName = "light" | "dark" | "other"
 export type Theme = {
     type: "light" | "dark"
     navbarBackgroundColor: Property.Color
+    footerBackgroundColor: Property.Color
     globalBackgroundColor: Property.Color
     globalSecondaryBackgroundColor: Property.Color
     accent: Property.Color

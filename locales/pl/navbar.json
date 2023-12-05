@@ -1,0 +1,17 @@
+{
+  "login": "Zaloguj się",
+  "logout": "Wyloguj się",
+  "home": "Strona główna",
+  "achievements": "Osiągnięcia",
+  "leaderboard": "Leaderboard",
+  "theme": {
+    "light": "Jasny",
+    "dark": "Ciemny",
+    "other": "Inny"
+  },
+  "language": {
+    "pl": "Polski",
+    "en": "Angielski (English)",
+    "de": "Niemiecki (Deutsch)"
+  }
+}

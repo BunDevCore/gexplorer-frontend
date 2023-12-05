@@ -1,0 +1,10 @@
+{
+  "district": "district",
+  "area": "area",
+  "percent": "percent",
+  "districtHeader": "District",
+  "areaHeader": "Area",
+  "percentHeader": "Percent explored",
+  "districtAreas": "District areas",
+  "overallArea": "Overall area"
+}

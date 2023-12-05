@@ -1,0 +1,17 @@
+{
+  "login": "Login",
+  "logout": "Logout",
+  "home": "Hausepage",
+  "achievements": "Achievements",
+  "leaderboard": "Leaderboard",
+  "theme": {
+    "light": "Hell",
+    "dark": "Dunkel",
+    "other": "Andere"
+  },
+  "language": {
+    "pl": "Polieren (Polski)",
+    "en": "Englisch (English)",
+    "de": "Deutsch"
+  }
+}

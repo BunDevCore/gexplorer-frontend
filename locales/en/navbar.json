@@ -1,0 +1,17 @@
+{
+  "login": "Login",
+  "logout": "Logout",
+  "home": "Home page",
+  "achievements": "Achievements",
+  "leaderboard": "Leaderboard",
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "other": "Other"
+  },
+  "language": {
+    "pl": "Polish (Polski)",
+    "en": "English",
+    "de": "German (Deutsch)"
+  }
+}

@@ -5,6 +5,7 @@
 
   /* IDE help */
   --navbar-background-color: black;
+  --footer-background-color: black;
   --global-background-color: black;
   --global-secondary-background-color: black;
   --accent: black;
@@ -14,6 +15,7 @@
 html,
 body {
   --navbar-height: 3rem;
+  --footer-height: 14rem;
 
   font-family: "Roboto", "Segoe UI", sans-serif;
   background-color: #000;
