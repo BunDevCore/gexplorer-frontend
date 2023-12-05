@@ -18,6 +18,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import {makeMultiPolygon} from "@/topologyUtils";
+import TripMap from "@/components/TripMap";
 
 function BigProfileBanner({user}: { user: FullUser }) {
     return <Grid container spacing={2} sx={{padding: 1}}>
