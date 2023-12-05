@@ -2,12 +2,13 @@ import {useEffect, useState} from "react";
 import {getCookie, setCookie} from "cookies-next";
 import {createGlobalStyle, ThemeProvider} from "styled-components";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import Head from "next/head";
 import "../styles/globals.css";
 import {getTheme} from "@/theme/theme";
 import type {Theme, ThemeName} from "@/types/theme";
 import type {AppProps} from "next/app";
-import {ChangeTheme, LocaleName} from "@/types/navbar";
+import type {ChangeTheme, LocaleName} from "@/types/navbar";
 import {useGExplorerStore} from "@/state";
 import mapboxgl from "mapbox-gl";
 import {apiUrl} from "@/config";
@@ -24,6 +25,7 @@ const GlobalStyles = createGlobalStyle`
   // load styles as css variables for ease of use
   * {
     --navbar-background-color: ${(props: { theme: Theme }) => props.theme.navbarBackgroundColor};
+    --footer-background-color: ${(props: { theme: Theme }) => props.theme.footerBackgroundColor};
     --global-background-color: ${(props: { theme: Theme }) => props.theme.globalBackgroundColor};
     --global-secondary-background-color: ${(props: { theme: Theme }) => props.theme.globalSecondaryBackgroundColor};
     --accent: ${(props: { theme: Theme }) => props.theme.accent};
@@ -108,6 +110,7 @@ const App = ({Component, pageProps}: AppProps) => {
     </Head>
     <Navbar changeTheme={changeTheme as ChangeTheme}/>
     <Component {...pageProps} />
+    <Footer/>
   </ThemeProvider>;
 }
 
