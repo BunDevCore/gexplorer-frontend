@@ -6,19 +6,10 @@ import React, {useEffect, useState} from "react";
 import fetcher from "@/fetcher";
 import {CenterLayout, MainLayout} from "@/styles/universal";
 import {Avatar, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
-import {DistrictAreas, FullUser, Leaderboard} from "@/types/types";
-import {Geometry, Polygon} from "geojson";
+import {Leaderboard} from "@/types/types";
 import {UserPaper} from "@/styles/userpage";
-import FollowTheSignsIcon from '@mui/icons-material/FollowTheSigns';
 import useTranslation from "next-translate/useTranslation";
 import AreaCounter from "@/components/AreaCounter";
-import PercentCounter from "@/components/PercentCounter";
-import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Box from "@mui/material/Box";
-import {makeMultiPolygon} from "@/topologyUtils";
-import TripMap from "@/components/TripMap";
 
 function LeaderboardTable({leaderboard}: { leaderboard: Leaderboard<number> }) {
     const {t} = useTranslation("common");
