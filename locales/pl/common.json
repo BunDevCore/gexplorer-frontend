@@ -6,5 +6,6 @@
   "districtHeader": "Dzielnica",
   "areaHeader": "Powierzchnia",
   "percentHeader": "Procent odkryty",
-  "districtAreas": "Pola w dzielnicach"
+  "districtAreas": "Pola w dzielnicach",
+  "overallArea": "Pole ogólne"
 }

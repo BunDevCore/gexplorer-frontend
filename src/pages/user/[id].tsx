@@ -7,15 +7,19 @@ import fetcher from "@/fetcher";
 import {CenterLayout, MainLayout} from "@/styles/universal";
 import {Avatar, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import {DistrictAreas, FullUser} from "@/types/types";
-import {Geometry} from "geojson";
-import { UserPaper } from "@/styles/userpage";
+import {Geometry, Polygon} from "geojson";
+import {UserPaper} from "@/styles/userpage";
 import FollowTheSignsIcon from '@mui/icons-material/FollowTheSigns';
 import useTranslation from "next-translate/useTranslation";
 import AreaCounter from "@/components/AreaCounter";
 import PercentCounter from "@/components/PercentCounter";
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Box from "@mui/material/Box";
+import {makeMultiPolygon} from "@/topologyUtils";
 
-function BigProfileBanner({user}: {user: FullUser}) {
+function BigProfileBanner({user}: { user: FullUser }) {
     return <Grid container spacing={2} sx={{padding: 1}}>
         <Grid item xs={2}>
             <Avatar sx={{width: "100%", height: "unset", aspectRatio: 1}}></Avatar>
@@ -30,7 +34,7 @@ function BigProfileBanner({user}: {user: FullUser}) {
     </Grid>
 }
 
-function DistrictTable({areas}: {areas: DistrictAreas}) {
+function DistrictTable({areas}: { areas: DistrictAreas }) {
     const {t} = useTranslation("common");
     const districts = useGExplorerStore(x => x.districts);
 
@@ -57,7 +61,8 @@ function DistrictTable({areas}: {areas: DistrictAreas}) {
                 return <TableRow component={"th"} key={areaId}>
                     <TableCell>{districts[areaId].name ?? "???"}</TableCell>
                     <TableCell align={"right"}><AreaCounter area={areaAmount}/></TableCell>
-                    <TableCell align={"right"}><PercentCounter percent={calculateDistrictPercentage(areaId, areaAmount)}/></TableCell>
+                    <TableCell align={"right"}><PercentCounter
+                        percent={calculateDistrictPercentage(areaId, areaAmount)}/></TableCell>
                 </TableRow>
             })}
         </TableBody>
@@ -71,6 +76,8 @@ export default function UserPage() {
 
     const loggedIn = useGExplorerStore(s => s.loggedIn);
     const triedAuthenticating = useGExplorerStore(s => s.initialAuthDone);
+    const [tab, setTab] = useState(0);
+
     useEffect(() => {
         console.warn("li")
         console.warn(loggedIn)
@@ -88,14 +95,47 @@ export default function UserPage() {
     console.log("swr")
     console.log(id)
     const userSwr = useSWR<FullUser>(apiUrl(`/User/id/${id}`), fetcher);
-    const polygonSwr = useSWR<Geometry>(apiUrl(`/User/id/${id}/polygon`), fetcher);
+    const polygonSwr = useSWR<Polygon[]>(apiUrl(`/User/id/${id}/polygon`), fetcher);
 
     if (userSwr.isLoading || !userSwr.data) return <CenterLayout><p>loading...</p></CenterLayout>
 
+    // <Box sx={{paddingBottom: "1rem"}}>
+    //     <Tabs value={login} onChange={changeLogin} aria-label="login tabs" centered>
+    //         <Tab label="Zaloguj się"/>
+    //         <Tab label="Zarejestruj się"/>
+    //     </Tabs>
+    // </Box>
+
+    const tabChange = (event: React.SyntheticEvent, newValue: number) => {
+        setTab(newValue);
+    };
+
+    function getTabContent() {
+        if (userSwr.data === undefined) return <></>;
+        if (polygonSwr.data === undefined) return <></>;
+
+        switch (tab) {
+            case 0:
+                return <DistrictTable areas={userSwr.data.districtAreas}/>
+            case 1:
+                console.log(polygonSwr.data)
+                return <TripMap tripGeometry={makeMultiPolygon(polygonSwr.data)}></TripMap>
+        }
+    }
 
     return <MainLayout><CenterLayout><UserPaper variant={"outlined"} elevation={4}>
         <BigProfileBanner user={userSwr.data}></BigProfileBanner>
-        <h2>{t("districtAreas")}</h2>
-        <DistrictTable areas={userSwr.data.districtAreas}/>
+
+        <Box sx={{paddingBottom: "1rem"}}>
+            <Tabs value={tab} onChange={tabChange}>
+                <Tab label={t("districtAreas")}/>
+                <Tab label={t("overallArea")}/>
+            </Tabs>
+        </Box>
+
+        {getTabContent()}
+
+        {/*<h2>{t("districtAreas")}</h2>*/}
+        {/*<DistrictTable areas={userSwr.data.districtAreas}/>*/}
     </UserPaper></CenterLayout></MainLayout>
 }
