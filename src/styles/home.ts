@@ -76,7 +76,7 @@ export const BoxWithImage = styled(StandardBox)`
   position: relative;
   z-index: 2;
   overflow: hidden;
-  padding: 12rem 0 0;
+  padding: 12rem 0 0 !important;
   background: none;
 
   img {
