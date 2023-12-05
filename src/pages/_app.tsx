@@ -26,6 +26,7 @@ const GlobalStyles = createGlobalStyle`
   * {
     --navbar-background-color: ${(props: { theme: Theme }) => props.theme.navbarBackgroundColor};
     --footer-background-color: ${(props: { theme: Theme }) => props.theme.footerBackgroundColor};
+    --footer-color: ${(props: { theme: Theme }) => props.theme.footerColor};
     --global-background-color: ${(props: { theme: Theme }) => props.theme.globalBackgroundColor};
     --global-secondary-background-color: ${(props: { theme: Theme }) => props.theme.globalSecondaryBackgroundColor};
     --accent: ${(props: { theme: Theme }) => props.theme.accent};
