@@ -9,7 +9,9 @@ import {
     Settings,
     Absolute,
     SettingsTitle,
-    ThemeSettingsButton, LanguageSettingsButton
+    ThemeSettingsButton,
+    LanguageSettingsButton,
+    TitleIcon
 } from "@/styles/navbar";
 import HomeIcon from '@mui/icons-material/Home';
 import LoginIcon from '@mui/icons-material/Login';
@@ -19,6 +21,7 @@ import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import {ChangeTheme, LocaleName} from "@/types/navbar";
 import {getCookie, setCookie} from "cookies-next";
 import useTranslation from "next-translate/useTranslation";
+import Image from "next/image";
 import useOutside from "../../hooks/useOutside";
 import setLanguage from "next-translate/setLanguage";
 
@@ -77,7 +80,7 @@ export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
                           }}/>
                 </svg>
             </MenuIcon>
-            <MainTitle>GExplorer</MainTitle>
+            <MainTitle><TitleIcon><Image src={"/favicon.png"} alt={"gexplorer"} fill={true}/></TitleIcon> GExplorer</MainTitle>
             <div></div>
         </Nav>
         <Absolute $open={dropdownOpen}>

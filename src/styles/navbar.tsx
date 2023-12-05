@@ -14,7 +14,7 @@ export const NavbarWrapper = styled.div`
 
 export const Nav = styled.nav`
   --nav-padding: 1rem;
-  
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,11 +32,11 @@ export const MenuIcon = styled.div`
   position: relative;
   background-color: var(--navbar-background-color);
   border-radius: 1rem;
-  
+
   &:active {
     scale: 0.9;
   }
-  
+
   svg {
     position: absolute;
     overflow: hidden;
@@ -50,6 +50,18 @@ export const MainTitle = styled.div`
   color: ${props => props.theme.type === "dark" ? "var(--secondary-accent)" : "var(--accent)"};
   font-size: 2.5rem;
   font-weight: bold;
+  display: flex;
+  gap: .5rem;
+`;
+
+export const TitleIcon = styled.div`
+  width: var(--navbar-height);
+  height: var(--navbar-height);
+  position: relative;
+  
+  img {
+    object-fit: cover;
+  }
 `;
 
 export const Absolute = styled.div<{$open: boolean}>`
@@ -61,7 +73,7 @@ export const Absolute = styled.div<{$open: boolean}>`
   @media (max-width: 450px) {
     width: 100%;
   }
-  
+
   ${props => props.$open ? "transform: translateX(0); transition-delay: 0;" : "transform: translateX(-100%); transition-delay: 500ms;"}
 `;
 
@@ -136,10 +148,10 @@ function ThemeSettingsButtonComponent({className, changeTheme, ownValue}: { clas
     let theme = useTheme() as Theme;
     let {t} = useTranslation("navbar");
     return theme.type == ownValue ? <button className={className}>
-          <RadioButtonCheckedIcon/> <span>{t(`theme.${ownValue}`)}</span>
-      </button> : <button className={className} onClick={() => changeTheme(ownValue)}>
-          <RadioButtonUncheckedIcon/> <span>{t(`theme.${ownValue}`)}</span>
-      </button>;
+        <RadioButtonCheckedIcon/> <span>{t(`theme.${ownValue}`)}</span>
+    </button> : <button className={className} onClick={() => changeTheme(ownValue)}>
+        <RadioButtonUncheckedIcon/> <span>{t(`theme.${ownValue}`)}</span>
+    </button>;
 }
 
 function LanguageSettingsButtonComponent({className, changeLocale, ownValue}: { className?: string, changeLocale: ChangeLocale, ownValue: LocaleName}) {
@@ -165,7 +177,7 @@ export const SettingsButton = (v: any) => styled(v)`
   border: none;
   transition: 200ms;
   user-select: none;
-  
+
   svg {
     font-size: 2rem;
   }
