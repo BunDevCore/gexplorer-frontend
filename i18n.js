@@ -3,5 +3,7 @@ module.exports = {
     "locales": ["pl", "en", "de"],
     "pages": {
         "*": ["common", "navbar"],
+        "/": ["home"],
+        "/login": ["login"]
     },
 }

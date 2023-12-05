@@ -53,9 +53,22 @@ const App = ({Component, pageProps}: AppProps) => {
   const setToken = useGExplorerStore((s) => s.setToken)
   const setLoggedIn = useGExplorerStore((s) => s.setLoggedIn)
   const setDistricts = useGExplorerStore(s => s.setDistricts)
+  // const setDistrictsLoading = useGExplorerStore(s => s.setDistrictsLoading)
+  const districts = useGExplorerStore(s => s.districts)
+  const [districtsLoading, setDistrictsLoading] = useState(false);
 
-  fetch(apiUrl("/District"))
-      .then(res => res.json()).then(json => setDistricts(json)).catch(_ => console.error("kurwa jego mać zjedli dzielnice!!!"));
+  useEffect(() => {
+    if (Object.entries(districts).length === 0) {
+      // useGExplorerStore.getState().districtsLoading = true;
+      if (districtsLoading) return;
+      fetch(apiUrl("/District"))
+          .then(res => res.json()).then(json => setDistricts(json)).catch(_ => {
+        console.error("kurwa jego mać zjedli dzielnice!!!");
+        setDistrictsLoading(false);
+      });
+    }
+  }, []);
+
 
   useEffect(() => {
     let t = getCookie("token");

@@ -38,6 +38,6 @@ export default function ProfileComponent(props: { username: string | undefined |
         <p>last trips:</p>
         {data.trips.map(t => <div key={t.id}>{t.id} {t.area}m<sup>2</sup></div>)}
         <h3>uwaga podaje dzielnice!!!</h3>
-        {districts.map(d => <p>{d.name} <i>{d.area / 1000000}</i> km2</p>)}
+        {Object.values(districts).map(d => <p>{d.name} <i>{d.area / 1000000}</i> km2</p>)}
     </MainLayout>;
 }

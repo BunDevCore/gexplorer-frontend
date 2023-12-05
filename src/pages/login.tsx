@@ -8,11 +8,13 @@ import Tab from "@mui/material/Tab";
 import {TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import {apiUrl} from "@/config";
+import useTranslation from "next-translate/useTranslation";
 
 export default function Login() {
+    const {t} = useTranslation("login");
     const [user, setUser] = useState("");
     const [login, setLogin] = useState(0);
-    const [loginLabel, setLoginLabel] = useState("Wpisz swoją nazwę");
+    const [loginLabel, setLoginLabel] = useState("loginBaseLabel");
     const [passLabel, setPassLabel] = useState("");
     const [pass, setPass] = useState("");
     const [passAgain, setPassAgain] = useState("");
@@ -61,7 +63,7 @@ export default function Login() {
             });
             console.log(res.status)
             if (res.status === 400) {
-                setPassLabel("Błędny login lub hasło")
+                setPassLabel("badEntry")
                 return;
             } else {
                 let data = await res.text();
@@ -85,27 +87,27 @@ export default function Login() {
     }
 
     const handleRegister = (_event: React.MouseEvent<HTMLButtonElement>) => {
-        setLoginLabel("Wpisz swoją nazwę")
+        setLoginLabel("loginBaseLabel")
         if (/ /g.test(user)) {
-            setLoginLabel("Login nie może posiadać spacji")
+            setLoginLabel("loginNotContainsSpace")
             return;
         }
         if (!/\w{4,}/.test(user)) {
-            setLoginLabel("Login musi być dłuższe niż 4 znaki")
+            setLoginLabel("loginLongerThan4")
             return;
         }
 
         setPassLabel("")
         if (/ /g.test(pass)) {
-            setPassLabel("Hasło nie może posiadać spacji")
+            setPassLabel("passNotContainsSpace")
             return;
         }
         if (!/\w{8,}/.test(pass)) {
-            setPassLabel("Hasło musi być dłuższe niż 7 znaków")
+            setPassLabel("passLongerThan7")
             return;
         }
         if (pass !== passAgain) {
-            setPassLabel("Hasła muszą być takie same")
+            setPassLabel("passEqual")
             return;
         }
 
@@ -122,7 +124,7 @@ export default function Login() {
                 })
             });
             if (res.status === 422) {
-                setLoginLabel("Użytkownik o takim loginie już istnieje")
+                setLoginLabel("userExists")
                 return;
             }
             let data = await res.text();
@@ -137,25 +139,29 @@ export default function Login() {
         <LoginBox>
             <Box sx={{paddingBottom: "1rem"}}>
                 <Tabs value={login} onChange={changeLogin} aria-label="login tabs" centered>
-                    <Tab label="Zaloguj się"/>
-                    <Tab label="Zarejestruj się"/>
+                    <Tab label={t("labelLogin")}/>
+                    <Tab label={t("labelRegister")}/>
                 </Tabs>
             </Box>
             <LoginDataBox>
-                <TextField id="login-name" label="Login" variant="filled" helperText={loginLabel} required
-                           error={loginLabel !== "Wpisz swoją nazwę"} onChange={(e) => setUser(e.target.value)}
+                <TextField id="login-name" label={t("login")} variant="filled"
+                           helperText={login === 1 ? t(loginLabel).toString() : t("loginBaseLabel").toString()}
+                           required error={loginLabel !== "loginBaseLabel" && login === 1}
+                           onChange={(e) => setUser(e.target.value)}
                            onKeyUp={handleKeyUp}/>
-                <TextField id="login-password" label="Hasło" variant="filled" helperText={passLabel} type="password"
-                           required
-                           error={passLabel !== ""} onChange={(e) => setPass(e.target.value)} onKeyUp={handleKeyUp}/>
-                <Button sx={{display: login === 1 ? "none" : ""}} variant="contained" onClick={handleLogin}>Zaloguj
-                    się</Button>
-                <TextField sx={{display: login === 0 ? "none" : ""}} id="login-password-again" label="Powtórz hasło"
-                           variant="filled" type="password" required
-                           error={pass !== passAgain} onChange={(e) => setPassAgain(e.target.value)}
+                <TextField id="login-password" label={t("password")} variant="filled"
+                           helperText={t(passLabel).toString()} type="password" required error={passLabel !== ""}
+                           onChange={(e) => setPass(e.target.value)}
+                           onKeyUp={handleKeyUp}/>
+                <Button sx={{display: login === 1 ? "none" : ""}} variant="contained" onClick={handleLogin}>
+                    {t("labelLogin")}</Button>
+                <TextField sx={{display: login === 0 ? "none" : ""}} id="login-password-again"
+                           label={t("labelPassAgain")} variant="filled" type="password" required
+                           error={pass !== passAgain}
+                           onChange={(e) => setPassAgain(e.target.value)}
                            onKeyUp={handleKeyUp}/>
                 <Button sx={{display: login === 0 ? "none" : ""}} variant="contained" onClick={handleRegister}
-                >Zarejestruj się</Button>
+                >{t("labelRegister")}</Button>
             </LoginDataBox>
         </LoginBox>
     </MainLayout>;

@@ -25,6 +25,8 @@ export const Nav = styled.nav`
 `;
 
 export const MenuIcon = styled.div`
+  cursor: pointer;
+  user-select: none;
   width: var(--navbar-height);
   height: var(--navbar-height);
   position: relative;
@@ -50,11 +52,17 @@ export const MainTitle = styled.div`
   font-weight: bold;
 `;
 
-export const Absolute = styled.div`
+export const Absolute = styled.div<{$open: boolean}>`
   position: absolute;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  @media (max-width: 450px) {
+    width: 100%;
+  }
+  
+  ${props => props.$open ? "transform: translateX(0); transition-delay: 0;" : "transform: translateX(-100%); transition-delay: 500ms;"}
 `;
 
 export const Dropdown = styled.div<{$open: boolean}>`
@@ -65,10 +73,15 @@ export const Dropdown = styled.div<{$open: boolean}>`
   border-radius: 0 1rem 1rem 0;
   overflow: hidden;
 
-  ${props => props.$open ? "transform: translateX(0);" : "transform: translateX(-100%);"}
+  @media (max-width: 450px) {
+    border-radius: 0;
+  }
+
+  ${props => props.$open ? "transform: translateX(0); filter: opacity(1);" : "transform: translateX(-100%); filter: opacity(0);"}
 `;
 
 export const DropdownLink = styled(Link)`
+  cursor: pointer;
   background-color: var(--navbar-background-color);
   display: flex;
   flex-direction: row;
@@ -78,9 +91,27 @@ export const DropdownLink = styled(Link)`
   padding: 1rem 1.5rem 1rem 1rem;
   font-size: 1.5rem;
   gap: 1rem;
-  
+  user-select: none;
+
   svg {
     font-size: 2rem;
+  }
+
+  &:hover {
+    filter: brightness(0.75);
+  }
+
+  @media (max-width: 450px) {
+    padding: 1.5rem 2rem 1.5rem 1.5rem;
+    font-size: 1.75rem;
+
+    svg {
+      font-size: 2.5rem;
+    }
+
+    &:hover {
+      filter: brightness(1);
+    }
   }
 `;
 
@@ -93,7 +124,11 @@ export const Settings = styled.div<{ $open: boolean }>`
   overflow: hidden;
   transition-delay: 100ms;
 
-  ${props => props.$open ? "transform: translateX(0);" : "transform: translateX(-100%);"}
+  @media (max-width: 450px) {
+    border-radius: 0;
+  }
+
+  ${props => props.$open ? "transform: translateX(0); filter: opacity(1);" : "transform: translateX(-100%); filter: opacity(0);"}
 
 `;
 
@@ -117,6 +152,7 @@ function LanguageSettingsButtonComponent({className, changeLocale, ownValue}: { 
 }
 
 export const SettingsButton = (v: any) => styled(v)`
+  cursor: pointer;
   background-color: var(--navbar-background-color);
   display: flex;
   flex-direction: row;
@@ -128,13 +164,23 @@ export const SettingsButton = (v: any) => styled(v)`
   gap: 1rem;
   border: none;
   transition: 200ms;
-  
-  &:hover {
-    filter: brightness(0.75);
-  }
+  user-select: none;
   
   svg {
     font-size: 2rem;
+  }
+
+  &:hover {
+    filter: brightness(0.75);
+  }
+
+  @media (max-width: 450px) {
+    padding: 1.5rem 2rem 1.5rem 1.5rem;
+    font-size: 1.75rem;
+
+    &:hover {
+      filter: brightness(1);
+    }
   }
 `;
 
@@ -151,5 +197,5 @@ export const SettingsTitle = styled.p`
   padding: 1rem 1.5rem 1rem 1rem;
   font-size: 1.5rem;
   border: none;
-
+  user-select: none;
 `;

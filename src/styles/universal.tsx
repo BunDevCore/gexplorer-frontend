@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import {ReactNode} from "react";
+import Box from "@mui/material/Box";
 
-export const MainLayout = ({children}: {children: ReactNode}) => <Layout><CenterLayout>{children}</CenterLayout></Layout>;
+export const MainLayout = ({children}: {children: ReactNode | null}) => <Layout><CenterLayout>{children}</CenterLayout></Layout>;
 
 export const Layout = styled.div`
   height: 100%;
@@ -21,33 +22,21 @@ export const CenterLayout = styled.main`
   height: 100%;
   grid-column: 2;
   align-items: center;
-  padding-top: 1rem;
 `;
 
-export const MainBox = styled.div`
-  padding: 1rem;
+export const StandardBox = styled(Box)<{$disableBoxShadow?: boolean}>`
   border-radius: 1rem;
-  align-items: center;
   background-color: var(--global-secondary-background-color);
-  box-shadow: 0 .25rem .5rem rgba(0,0,0,50%);
+  padding: 1rem;
+  margin-top: 1rem;
+  ${props => props.$disableBoxShadow && !props.$disableBoxShadow ? "" : "box-shadow: 0 .25rem .25rem rgba(0,0,0,50%);"}
+  justify-self: center;
 `;
 
-export const LayoutBox = ({children}: {children: ReactNode}) => <MainLayout><MainBox>{children}</MainBox></MainLayout>
-
-// <{$width: string, $height: string}>
-// width: ${props => props.$width};
-// height: ${props => props.$height};
-export const ImageWrapper = styled.div`
-  object-fit: contain;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  
-  img {
-    position: relative;
-  }
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
-export const FlexSpace = styled.div`
-  flex-grow: 1;
-`;
+export const DefaultLayout = ({children}: {children: ReactNode | null}) => <MainLayout><Wrapper>{children}</Wrapper></MainLayout>;
