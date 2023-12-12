@@ -28,7 +28,9 @@ const GlobalStyles = createGlobalStyle`
     --footer-background-color: ${(props: { theme: Theme }) => props.theme.footerBackgroundColor};
     --footer-color: ${(props: { theme: Theme }) => props.theme.footerColor};
     --global-background-color: ${(props: { theme: Theme }) => props.theme.globalBackgroundColor};
+    --global-text-color: ${(props: { theme: Theme }) => props.theme.globalTextColor};
     --global-secondary-background-color: ${(props: { theme: Theme }) => props.theme.globalSecondaryBackgroundColor};
+    --global-secondary-text-color: ${(props: { theme: Theme }) => props.theme.globalSecondaryTextColor};
     --accent: ${(props: { theme: Theme }) => props.theme.accent};
     --secondary-accent: ${(props: { theme: Theme }) => props.theme.secondaryAccent};
   }

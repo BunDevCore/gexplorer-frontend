@@ -4,7 +4,7 @@ import useTranslation from "next-translate/useTranslation";
 import Image from "next/image";
 import SchoolIcon from '@mui/icons-material/School';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 export default function HomeComponent() {
     const {t} = useTranslation("home")
@@ -25,7 +25,7 @@ export default function HomeComponent() {
                 <p>{t("promo.1")}</p>
             </ItemText>
             <ItemText $color={"#00ff93"}>
-                <div><MonetizationOnIcon/></div>
+                <div><VisibilityIcon/></div>
                 <p>{t("promo.2")}</p>
             </ItemText>
         </ItemTextList>
