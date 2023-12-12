@@ -94,11 +94,11 @@ export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
                 }
             </Dropdown>
             <Settings $open={dropdownOpen} ref={settingsRef}>
-                <SettingsTitle>Motyw strony</SettingsTitle>
+                <SettingsTitle>{t("pageTheme")}</SettingsTitle>
                 <ThemeSettingsButton changeTheme={changeTheme} ownValue={"dark"}/>
                 <ThemeSettingsButton changeTheme={changeTheme} ownValue={"light"}/>
                 {/*<SettingsButton changeTheme={changeTheme} ownValue={"other"} />*/}
-                <SettingsTitle>Język strony</SettingsTitle>
+                <SettingsTitle>{t("pageLanguage")}</SettingsTitle>
                 <LanguageSettingsButton changeLocale={changeLocale} ownValue={"pl"}/>
                 <LanguageSettingsButton changeLocale={changeLocale} ownValue={"en"}/>
                 <LanguageSettingsButton changeLocale={changeLocale} ownValue={"de"}/>
