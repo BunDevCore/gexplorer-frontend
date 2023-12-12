@@ -6,5 +6,10 @@
   "areaHeader": "Area",
   "percentHeader": "Percent explored",
   "districtAreas": "District areas",
-  "overallArea": "Overall area"
+  "overallArea": "Overall area",
+  "achievement": "Achievement",
+  "mainPage": "Home page",
+  "aboutUs": "About us",
+  "API": "API",
+  "something": "Something"
 }

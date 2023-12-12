@@ -4,6 +4,8 @@
   "home": "Strona główna",
   "achievements": "Osiągnięcia",
   "leaderboard": "Leaderboard",
+  "pageTheme": "Motyw",
+  "pageLanguage": "Język",
   "theme": {
     "light": "Jasny",
     "dark": "Ciemny",

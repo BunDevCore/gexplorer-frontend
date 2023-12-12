@@ -4,6 +4,8 @@
   "home": "Hausepage",
   "achievements": "Achievements",
   "leaderboard": "Leaderboard",
+  "pageTheme": "ThemeDE",
+  "pageLanguage": "LanguageDE",
   "theme": {
     "light": "Hell",
     "dark": "Dunkel",

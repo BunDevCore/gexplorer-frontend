@@ -4,6 +4,8 @@
   "home": "Home page",
   "achievements": "Achievements",
   "leaderboard": "Leaderboard",
+  "pageTheme": "Theme",
+  "pageLanguage": "Language",
   "theme": {
     "light": "Light",
     "dark": "Dark",
