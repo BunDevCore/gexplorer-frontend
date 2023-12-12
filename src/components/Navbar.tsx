@@ -19,15 +19,17 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import {ChangeTheme, LocaleName} from "@/types/navbar";
-import {getCookie, setCookie} from "cookies-next";
+import {setCookie} from "cookies-next";
 import useTranslation from "next-translate/useTranslation";
 import Image from "next/image";
 import useOutside from "../../hooks/useOutside";
 import setLanguage from "next-translate/setLanguage";
+import {useGExplorerStore} from "@/state";
 
 export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const {t} = useTranslation("navbar")
+    const loggedIn = useGExplorerStore((s) => s.loggedIn)
 
     const changeLocale = (localeName: LocaleName) => {
         (async () => {
@@ -86,9 +88,9 @@ export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
         <Absolute $open={dropdownOpen}>
             <Dropdown $open={dropdownOpen}>
                 <DropdownLink href="/"><HomeIcon/> {t("home")}</DropdownLink>
-                <DropdownLink href="/achievements"><EmojiEventsIcon/> {t("achievements")}</DropdownLink>
+                {loggedIn ?? <DropdownLink href="/achievements"><EmojiEventsIcon/> {t("achievements")}</DropdownLink>}
                 <DropdownLink href="/leaderboard"><LeaderboardIcon/> {t("leaderboard")}</DropdownLink>
-                {getCookie("token") === null || getCookie("token") === undefined ?
+                {!loggedIn ?
                     <DropdownLink href="/login"><LoginIcon/> {t("login")}</DropdownLink> :
                     <DropdownLink href="/logout"><LogoutIcon/> {t("logout")}</DropdownLink>
                 }

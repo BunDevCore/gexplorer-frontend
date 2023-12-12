@@ -8,7 +8,9 @@ export type Theme = {
     footerBackgroundColor: Property.Color
     footerColor: Property.Color
     globalBackgroundColor: Property.Color
+    globalTextColor: Property.Color
     globalSecondaryBackgroundColor: Property.Color
+    globalSecondaryTextColor: Property.Color
     accent: Property.Color
     secondaryAccent: Property.Color
 }

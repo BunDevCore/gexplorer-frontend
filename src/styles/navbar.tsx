@@ -47,7 +47,7 @@ export const MenuIcon = styled.div`
 `;
 
 export const MainTitle = styled.div`
-  color: ${props => props.theme.type === "dark" ? "var(--secondary-accent)" : "var(--accent)"};
+  color: var(--accent);
   font-size: 2.5rem;
   font-weight: bold;
   display: flex;

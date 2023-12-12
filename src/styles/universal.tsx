@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 export const MainLayout = ({children}: {children: ReactNode | null}) => <Layout><CenterLayout>{children}</CenterLayout></Layout>;
 
 export const Layout = styled.div`
-  min-height: 100%;
+  min-height: calc(100% - var(--footer-height)*1.36 + 1px);
   display: grid;
   grid-template-columns: 1fr min(60rem, 100%) 1fr;
 
@@ -31,6 +31,7 @@ export const StandardBox = styled(Box)<{$disableBoxShadow?: boolean}>`
   margin-top: 1rem;
   ${props => props.$disableBoxShadow && !props.$disableBoxShadow ? "" : "box-shadow: 0 .25rem .25rem rgba(0,0,0,50%);"}
   justify-self: center;
+  color: var(--global-secondary-text-color);
 `;
 
 const Wrapper = styled.div`
