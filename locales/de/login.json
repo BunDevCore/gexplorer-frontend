@@ -1,15 +1,15 @@
 {
   "badEntry": "Falsches Login oder Passwort",
-  "loginBaseLabel": "Geben Sie Ihren Namen ein",
-  "loginNotContainsSpace": "Login darf keine Leerzeichen haben",
+  "loginBaseLabel": "Geben Sie Ihre Name ein",
+  "loginNotContainsSpace": "Login darf keine Leerzeichen enthalten",
   "loginLongerThan4": "Login muss länger als 4 Zeichen sein",
   "passNotContainsSpace": "Passwort darf keine Leerzeichen enthalten",
   "passLongerThan7": "Passwort muss länger als 7 Zeichen sein",
   "passEqual": "Passwörter müssen identisch sein",
   "userExists": "Ein Benutzer mit diesem Login existiert bereits",
-  "labelLogin": "Anmeldung",
-  "labelRegister": "Registrieren",
+  "labelLogin": "Anmelden",
+  "labelRegister": "Konto erstellen",
   "login": "Login",
   "password": "Passwort",
-  "labelPassAgain": "Passwort wiederholen"
+  "labelPassAgain": "Passwort nochmals eingeben"
 }
