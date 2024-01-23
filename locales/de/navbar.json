@@ -1,9 +1,9 @@
 {
-  "login": "Login",
-  "logout": "Logout",
-  "home": "Hausepage",
-  "achievements": "Achievements",
-  "leaderboard": "Leaderboard",
+  "login": "Anmelden",
+  "logout": "Abmelden",
+  "home": "Hauptseite",
+  "achievements": "Erfolge",
+  "leaderboard": "Bestenliste",
   "pageTheme": "ThemeDE",
   "pageLanguage": "LanguageDE",
   "theme": {
@@ -12,7 +12,7 @@
     "other": "Andere"
   },
   "language": {
-    "pl": "Polieren (Polski)",
+    "pl": "Polnisch (Polski)",
     "en": "Englisch (English)",
     "de": "Deutsch"
   }
