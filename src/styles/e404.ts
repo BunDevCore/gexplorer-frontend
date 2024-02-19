@@ -2,11 +2,12 @@ import styled from "styled-components";
 import {StandardBox} from "@/styles/universal";
 
 export const ErrorBox = styled(StandardBox)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    margin-bottom: 5rem;
 `;
 
 export const Code = styled.p`

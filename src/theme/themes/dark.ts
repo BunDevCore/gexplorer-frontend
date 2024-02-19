@@ -1,4 +1,5 @@
 import type {Theme} from "@/types/theme";
+import {Property} from "csstype";
 
 const dark: Theme = {
     type: "dark",
@@ -9,7 +10,15 @@ const dark: Theme = {
     globalTextColor: "#cccccc",
     globalSecondaryBackgroundColor: "#545454",
     globalSecondaryTextColor: "#cccccc",
-    accent: "#f01111",
-    secondaryAccent: "#7e0d0d",
+
+
+    background: "#ffffff",
+    primary: "#ffffff",
+    primaryText: "#ffffff",
+    secondary: "#ffffff",
+    secondaryText: "#ffffff",
+
+    accent: "#c80000",
+    secondaryAccent: "#5b0000",
 }
 export default dark;

@@ -31,8 +31,14 @@ const GlobalStyles = createGlobalStyle`
     --global-text-color: ${(props: { theme: Theme }) => props.theme.globalTextColor};
     --global-secondary-background-color: ${(props: { theme: Theme }) => props.theme.globalSecondaryBackgroundColor};
     --global-secondary-text-color: ${(props: { theme: Theme }) => props.theme.globalSecondaryTextColor};
+    
     --accent: ${(props: { theme: Theme }) => props.theme.accent};
     --secondary-accent: ${(props: { theme: Theme }) => props.theme.secondaryAccent};
+    --background: ${(props: { theme: Theme }) => props.theme.background};
+    --primary: ${(props: { theme: Theme }) => props.theme.primary};
+    --primaryText: ${(props: { theme: Theme }) => props.theme.primaryText};
+    --secondary: ${(props: { theme: Theme }) => props.theme.secondary};
+    --secondaryText: ${(props: { theme: Theme }) => props.theme.secondaryText};
   }
 `;
 
@@ -107,11 +113,12 @@ const App = ({Component, pageProps}: AppProps) => {
 
   return <ThemeProvider theme={getTheme(themeName)}>
     <GlobalStyles theme={getTheme(themeName)}/>
-    <Head>
-      <link href="/favicon.png" rel="icon" type="image/png"/>
+    <Head key="main">
+      <link href="/logos/gexplorer_logo.svg" rel="icon" type="image/svg"/>
       <title>GExplorer</title>
     </Head>
-    <Navbar changeTheme={changeTheme as ChangeTheme}/>
+    <Navbar/>
+    {/*<NavbarOld changeTheme={changeTheme as ChangeTheme}/>*/}
     <Component {...pageProps} />
     <Footer/>
   </ThemeProvider>;

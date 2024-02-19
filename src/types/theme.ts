@@ -11,6 +11,14 @@ export type Theme = {
     globalTextColor: Property.Color
     globalSecondaryBackgroundColor: Property.Color
     globalSecondaryTextColor: Property.Color
+
+    // NEW COLORING
+    background: Property.Color
+    primary: Property.Color
+    primaryText: Property.Color
+    secondary: Property.Color
+    secondaryText: Property.Color
+
     accent: Property.Color
     secondaryAccent: Property.Color
 }

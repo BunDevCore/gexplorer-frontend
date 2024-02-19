@@ -5,7 +5,6 @@ import Box from "@mui/material/Box";
 export const MainLayout = ({children}: {children: ReactNode | null}) => <Layout><CenterLayout>{children}</CenterLayout></Layout>;
 
 export const Layout = styled.div`
-  min-height: calc(100% - var(--footer-height)*1.36 + 1px);
   display: grid;
   grid-template-columns: 1fr min(60rem, 100%) 1fr;
 
