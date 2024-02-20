@@ -85,3 +85,8 @@ export const BoxWithImage = styled(StandardBox)`
     border-radius: 0 0 2rem 2rem;
   }
 `;
+
+export const HomeGrid = styled.div`
+    display: grid;
+    grid-auto-columns: 1fr 1fr;
+`;

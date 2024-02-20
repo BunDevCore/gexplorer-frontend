@@ -4,7 +4,7 @@ export const Footer = styled.div`
     align-self: end;
     width: 100%;
     height: var(--footer-height);
-    background-color: var(--footer-background-color);
+    background-color: var(--primary);
     display: grid;
     grid-template-columns: 1fr min(60rem, 100%) 1fr;
         
@@ -32,7 +32,7 @@ export const ImageIcon = styled.div`
     position: relative;
 
     img {
-        filter: brightness(0.5);
+        filter: brightness(0.75);
         object-fit: contain;
     }
 
@@ -40,10 +40,11 @@ export const ImageIcon = styled.div`
         content: "";
         position: absolute;
         top: 1rem;
-        right: 0;
+        right: -1rem;
         width: .25rem;
         height: 10rem;
-        background-color: var(--footer-color);
+        background-color: #808080;
+        filter: brightness(.75);
     }
 `;
 
@@ -55,7 +56,7 @@ export const LinkList = styled.div`
 
     a {
         text-decoration: none;
-        color: var(--footer-color);
+        color: var(--primaryText);
         padding: .25rem;
 
         &:hover {

@@ -1,5 +1,5 @@
 import {DefaultLayout, Space, StandardBox} from "@/styles/universal";
-import {ItemTextList, ItemText, BoxWithImage} from "@/styles/home";
+import {ItemTextList, ItemText, BoxWithImage, HomeGrid} from "@/styles/home";
 import useTranslation from "next-translate/useTranslation";
 import Image from "next/image";
 import SchoolIcon from '@mui/icons-material/School';
@@ -17,19 +17,30 @@ export default function HomeComponent() {
                 {t("aboutShort")}
             </StandardBox>
         </BoxWithImage>
-        <ItemTextList>
-            <ItemText $color={"#0ec2ea"}>
-                <div><SchoolIcon/></div>
-                <p>{t("promo.0")}</p>
-            </ItemText>
-            <ItemText $color={"#e30dbd"} $reverse={true}>
-                <div><LocationOnIcon/></div>
-                <p>{t("promo.1")}</p>
-            </ItemText>
-            <ItemText $color={"#00ff93"}>
-                <div><VisibilityIcon/></div>
-                <p>{t("promo.2")}</p>
-            </ItemText>
-        </ItemTextList>
+        <HomeGrid>
+            <StandardBox>
+                Lubie pociągi
+            </StandardBox>
+            <StandardBox>
+                Lubie tramwaje
+            </StandardBox>
+            <StandardBox>
+                Lubie autobusy
+            </StandardBox>
+        </HomeGrid>
+        {/*<ItemTextList>*/}
+        {/*    <ItemText $color={"#0ec2ea"}>*/}
+        {/*        <div><SchoolIcon/></div>*/}
+        {/*        <p>{t("promo.0")}</p>*/}
+        {/*    </ItemText>*/}
+        {/*    <ItemText $color={"#e30dbd"} $reverse={true}>*/}
+        {/*        <div><LocationOnIcon/></div>*/}
+        {/*        <p>{t("promo.1")}</p>*/}
+        {/*    </ItemText>*/}
+        {/*    <ItemText $color={"#00ff93"}>*/}
+        {/*        <div><VisibilityIcon/></div>*/}
+        {/*        <p>{t("promo.2")}</p>*/}
+        {/*    </ItemText>*/}
+        {/*</ItemTextList>*/}
     </DefaultLayout>;
 }
