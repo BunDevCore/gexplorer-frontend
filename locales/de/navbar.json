@@ -1,8 +1,11 @@
 {
+  "achievements": "Erfolge",
+  "map": "Mappe",
+  "account": "akounten",
+
   "login": "Anmelden",
   "logout": "Abmelden",
   "home": "Hauptseite",
-  "achievements": "Erfolge",
   "leaderboard": "Bestenliste",
   "pageTheme": "ThemeDE",
   "pageLanguage": "LanguageDE",

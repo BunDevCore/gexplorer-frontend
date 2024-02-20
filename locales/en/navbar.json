@@ -1,8 +1,11 @@
 {
+  "achievements": "Achievements",
+  "map": "Map",
+  "account": "Account",
+
   "login": "Login",
   "logout": "Logout",
   "home": "Home page",
-  "achievements": "Achievements",
   "leaderboard": "Leaderboard",
   "pageTheme": "Theme",
   "pageLanguage": "Language",
