@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {ReactNode} from "react";
 import Box from "@mui/material/Box";
+import {Property} from "csstype";
 
 export const MainLayout = ({children}: {children: ReactNode | null}) => <Layout><CenterLayout>{children}</CenterLayout></Layout>;
 
@@ -41,3 +42,5 @@ const Wrapper = styled.div`
 `;
 
 export const DefaultLayout = ({children}: {children: ReactNode | null}) => <MainLayout><Wrapper>{children}</Wrapper></MainLayout>;
+
+export const Space = ({space}: { space:Property.Padding }) => <div style={{padding: space}} />;

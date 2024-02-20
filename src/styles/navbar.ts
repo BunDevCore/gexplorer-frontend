@@ -9,28 +9,43 @@ export const Nav = styled.nav`
     position: sticky;
     display: flex;
     width: 100%;
-    justify-content: space-around;
+    justify-content: space-evenly;
     z-index: 999;
 
     &:after {
         content: "";
         position: absolute;
-        overflow: hidden;
         top: 100%;
         width: 0;
         height: 0;
-        border-left: 50vw solid transparent;
-        border-right: 50vw solid transparent;
+        border-left: 49vw solid transparent;
+        border-right: 49vw solid transparent;
 
         border-top: calc(var(--navbar-height)/2) solid var(--primary);
     }
 `;
 
-export const Gexplorer = styled.div`
+export const GexplorerLink = styled(Link)`
     color: var(--accent);
+    padding: 0 1rem;
     font-size: 2rem;
     font-weight: bold;
-    
+    position: relative;
+    text-decoration: none;
+`;
+
+export const GexplorerIcon = styled.div`
+    height: 6rem;
+    width: 6rem;
+    position: fixed;
+    left: 50%;
+    top: 3rem;
+    transform: translateX(-50%);
+    z-index: 999999;
+
+    img {
+        object-fit: cover;
+    }
 `;
 
 export const NavLink = styled(Link)`
