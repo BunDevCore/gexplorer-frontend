@@ -1,4 +1,7 @@
 {
+  "e404": "NOT FOUND",
+  "eDesc404": "the page you are looking for was not found",
+  "settings": "Settings",
   "district": "district",
   "area": "area",
   "percent": "percent",
