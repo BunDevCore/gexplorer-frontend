@@ -1,14 +1,16 @@
-import {DefaultLayout, StandardBox} from "@/styles/universal";
+import {DefaultLayout, Space, StandardBox} from "@/styles/universal";
 import {ItemTextList, ItemText, BoxWithImage} from "@/styles/home";
 import useTranslation from "next-translate/useTranslation";
 import Image from "next/image";
 import SchoolIcon from '@mui/icons-material/School';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import React from "react";
 
 export default function HomeComponent() {
     const {t} = useTranslation("home")
     return <DefaultLayout>
+        <Space space="2rem" />
         <BoxWithImage>
             <Image src={"/gdansk.webp"} alt={"gdansk"} fill={true}/>
             <StandardBox $disableBoxShadow={true}>

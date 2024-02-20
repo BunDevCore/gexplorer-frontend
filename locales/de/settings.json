@@ -1,0 +1,15 @@
+{
+  "pageSettings": "Page SettingsDE",
+  "pageTheme": "ThemeDE",
+  "pageLanguage": "LanguageDE",
+  "theme": {
+    "light": "Hell",
+    "dark": "Dunkel",
+    "other": "Andere"
+  },
+  "language": {
+    "pl": "Polnisch (Polski)",
+    "en": "Englisch (English)",
+    "de": "Deutsch"
+  }
+}

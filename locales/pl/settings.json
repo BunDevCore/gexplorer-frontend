@@ -1,0 +1,15 @@
+{
+  "pageSettings": "Ustawienia strony",
+  "pageTheme": "Motyw",
+  "pageLanguage": "Język",
+  "theme": {
+    "light": "Jasny",
+    "dark": "Ciemny",
+    "other": "Inny"
+  },
+  "language": {
+    "pl": "Polski",
+    "en": "Angielski (English)",
+    "de": "Niemiecki (Deutsch)"
+  }
+}

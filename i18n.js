@@ -5,6 +5,7 @@ module.exports = {
         "*": ["common", "navbar"],
         "/": ["home"],
         "/login": ["login"],
-        "/about": ["about"]
+        "/about": ["about"],
+        "/settings": ["settings"]
     },
 }

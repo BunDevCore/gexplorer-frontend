@@ -18,6 +18,5 @@ export default function Navbar() {
             <NavLink href={"/account"}>{t("account")}</NavLink>
         </Nav>
         <GexplorerIcon><Image src={"/favicon.png"} alt={"gexplorer"} fill={true}/></GexplorerIcon>
-        <Space space="2rem" />
     </>;
 }

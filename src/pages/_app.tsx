@@ -8,7 +8,7 @@ import "../styles/globals.css";
 import {getTheme} from "@/theme/theme";
 import type {Theme, ThemeName} from "@/types/theme";
 import type {AppProps} from "next/app";
-import type {ChangeTheme, LocaleName} from "@/types/navbar";
+import type {ChangeTheme, LocaleName} from "@/types/settings";
 import {useGExplorerStore} from "@/state";
 import mapboxgl from "mapbox-gl";
 import {apiUrl} from "@/config";
@@ -52,13 +52,6 @@ const App = ({Component, pageProps}: AppProps) => {
       await setLanguage(locale);
     })()
   }, []);
-
-  const changeTheme = (themeName: ThemeName) => {
-    setThemeName(themeName);
-    setCookie("NEXT_THEME", themeName, {
-      sameSite: true
-    });
-  }
 
   const token = useGExplorerStore((s) => s.token)
   const setToken = useGExplorerStore((s) => s.setToken)
@@ -108,8 +101,7 @@ const App = ({Component, pageProps}: AppProps) => {
         }
       })();
     }
-  }, [token])
-
+  }, [token]);
 
   return <ThemeProvider theme={getTheme(themeName)}>
     <GlobalStyles theme={getTheme(themeName)}/>
@@ -118,8 +110,7 @@ const App = ({Component, pageProps}: AppProps) => {
       <title>GExplorer</title>
     </Head>
     <Navbar/>
-    {/*<NavbarOld changeTheme={changeTheme as ChangeTheme}/>*/}
-    <Component {...pageProps} />
+    <Component {...pageProps} theme={{get: themeName, set: setThemeName}}/>
     <Footer/>
   </ThemeProvider>;
 }
