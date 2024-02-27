@@ -13,6 +13,7 @@ import {useGExplorerStore} from "@/state";
 import mapboxgl from "mapbox-gl";
 import {apiUrl} from "@/config";
 import setLanguage from "next-translate/setLanguage";
+import { usePathname } from "next/navigation";
 
 mapboxgl.accessToken = "pk.eyJ1IjoiaW5maW5pZmVuIiwiYSI6ImNsZ21uc3d1YjA3b2QzZW1tcWQ4ZWhuZ3kifQ.ide6_yWZQVDRD546IXsfDw"
 
@@ -43,6 +44,7 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const App = ({Component, pageProps}: AppProps) => {
+
   const [themeName, setThemeName] = useState<ThemeName>("dark");
   useEffect(() => {
     let theme = getCookie("NEXT_THEME") as ThemeName
@@ -109,9 +111,9 @@ const App = ({Component, pageProps}: AppProps) => {
       <link href="/logos/gexplorer_logo.svg" rel="icon" type="image/svg"/>
       <title>GExplorer</title>
     </Head>
-    <Navbar/>
+    {usePathname() === "/map" || <Navbar/>}
     <Component {...pageProps} theme={{get: themeName, set: setThemeName}}/>
-    <Footer/>
+    {usePathname() === "/map" || <Footer/>}
   </ThemeProvider>;
 }
 
