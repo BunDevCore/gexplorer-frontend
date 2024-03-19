@@ -4,7 +4,7 @@ module.exports = {
     "pages": {
         "*": ["common", "navbar"],
         "/": ["home"],
-        "/login": ["login"],
+        "/account": ["account"],
         "/about": ["about"],
         "/settings": ["settings"]
     },

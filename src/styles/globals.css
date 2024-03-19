@@ -27,7 +27,7 @@ body {
     --footer-height: 14rem;
 
     font-family: "Roboto", "Segoe UI", sans-serif;
-    background-color: #000;
+    background-color: #000000;
     scroll-behavior: smooth;
     scroll-padding-top: var(--navbar-height)
 }
