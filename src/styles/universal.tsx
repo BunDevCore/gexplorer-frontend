@@ -31,6 +31,10 @@ export const StandardBox = styled(Box)<{$disableBoxShadow?: boolean}>`
   ${props => props.$disableBoxShadow && !props.$disableBoxShadow ? "" : "box-shadow: 0 .25rem .25rem rgba(0,0,0,50%);"}
   justify-self: center;
   color: var(--primaryText);
+  
+  @media (max-width: 700px) {
+    border-radius: 0;
+  }
 `;
 
 const Wrapper = styled.div`
