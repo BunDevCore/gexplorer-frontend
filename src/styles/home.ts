@@ -88,5 +88,6 @@ export const BoxWithImage = styled(StandardBox)`
 
 export const HomeGrid = styled.div`
     display: grid;
+    gap: 1rem;
     grid-auto-columns: 1fr 1fr;
 `;

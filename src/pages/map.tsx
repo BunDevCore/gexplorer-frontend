@@ -1,10 +1,12 @@
 import {useEffect, useRef, useState} from "react";
 import mapboxgl from "mapbox-gl";
-import {MapBox, MenuButton} from "@/styles/map";
+import {MapBox, MapDarkener, MenuBox, MenuButton, MenuLink, MenuTitle} from "@/styles/map";
 import {useSearchParams} from "next/navigation";
 import {useRouter} from "next/router";
 import {useDebounceCallback} from "usehooks-ts";
 import useTranslation from "next-translate/useTranslation";
+import Head from "next/head";
+import HomeIcon from '@mui/icons-material/Home';
 
 export default function MapPage() {
     const {lang} = useTranslation();
@@ -53,11 +55,6 @@ export default function MapPage() {
                 ]);
             }))
         });
-
-        return () => {
-            map.current?.off("move");
-            map.current?.off("load");
-        }
     });
 
     useEffect(() => {
@@ -83,8 +80,12 @@ export default function MapPage() {
     const menuIconSpacing = 10;
 
     return <div style={{position: "relative"}}>
-            <MapBox ref={mapContainer} />
-        <MenuButton onClick={toggleMenu}>
+        <Head>
+            <meta name="viewport"
+                  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        </Head>
+        <MapBox ref={mapContainer}/>
+        <MenuButton onClick={toggleMenu} $open={menuOpen}>
             <svg
                 width="48"
                 height="48"
@@ -109,7 +110,10 @@ export default function MapPage() {
                           } : {} , transition: "inherit", transformOrigin: "bottom"}}/>
             </svg>
         </MenuButton>
-
-        {/*<LatLonZoom>lat {lat} lon {lng} zoom {zoom}</LatLonZoom>*/}
+        <MenuBox $open={menuOpen}>
+            <MenuTitle>Gexplorer</MenuTitle>
+            <MenuLink href="/"><HomeIcon/> <p>Strona Główna</p></MenuLink>
+        </MenuBox>
+        <MapDarkener $open={menuOpen} onClick={toggleMenu}/>
     </div>;
 }
