@@ -11,6 +11,7 @@ export const Nav = styled.nav`
     width: 100%;
     justify-content: space-evenly;
     z-index: 999;
+    margin-bottom: 5rem;
 
     &:after {
         content: "";

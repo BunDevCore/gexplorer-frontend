@@ -28,7 +28,6 @@ export const StandardBox = styled(Box)<{$disableBoxShadow?: boolean}>`
   border-radius: 1rem;
   background-color: var(--primary);
   padding: 1rem;
-  margin-top: 1rem;
   ${props => props.$disableBoxShadow && !props.$disableBoxShadow ? "" : "box-shadow: 0 .25rem .25rem rgba(0,0,0,50%);"}
   justify-self: center;
   color: var(--primaryText);

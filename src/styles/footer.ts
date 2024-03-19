@@ -7,7 +7,7 @@ export const Footer = styled.div`
     background-color: var(--primary);
     display: grid;
     grid-template-columns: 1fr min(60rem, 100%) 1fr;
-        
+    margin-top: 1rem;
     
     @media (max-width: 1000px) {
         grid-template-columns: 1fr min(40rem, 100%) 1fr;
