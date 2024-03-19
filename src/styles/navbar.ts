@@ -62,4 +62,15 @@ export const NavLink = styled(Link)`
     &:hover {
         filter: brightness(75%);
     }
+    
+    @media (max-width: 700px) {
+        display: none;
+    }
+`;
+
+export const DropdownButton = styled.button`
+    
+    @media (min-width: 700px) {
+        display: none;
+    }
 `;
