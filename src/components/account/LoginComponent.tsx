@@ -37,16 +37,10 @@ export default function LoginComponent() {
                     return;
                 } else {
                     await router.replace("/")
-                    // window.location.replace("/");
                 }
             })();
         }
     }, [])
-
-    // useEffect(() => {
-    //     document.title = `Gexplorer - ${login === 1 ? "Rejestracja" : "Loginizacja"}`;
-    //     setPassLabel("")
-    // }, [login]);
 
     const handleLogin = (_event: React.MouseEvent<HTMLButtonElement>) => {
         (async () => {
