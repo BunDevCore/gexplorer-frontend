@@ -9,6 +9,7 @@
   "userExists": "Użytkownik o takim loginie już istnieje",
   "labelLogin": "Zaloguj się",
   "labelRegister": "Zarejestruj się",
+  "labelEmail": "Email",
   "login": "Login",
   "password": "Hasło",
   "labelPassAgain": "Powtórz hasło"

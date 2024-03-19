@@ -9,6 +9,7 @@
   "userExists": "Ein Benutzer mit diesem Login existiert bereits",
   "labelLogin": "Anmelden",
   "labelRegister": "Konto erstellen",
+  "labelEmail": "Email",
   "login": "Login",
   "password": "Passwort",
   "labelPassAgain": "Passwort nochmals eingeben"

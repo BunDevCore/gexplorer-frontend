@@ -9,6 +9,7 @@ import {TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import {apiUrl} from "@/config";
 import useTranslation from "next-translate/useTranslation";
+import {useRouter} from "next/router";
 
 export default function Login() {
     const {t} = useTranslation("login");
@@ -18,6 +19,8 @@ export default function Login() {
     const [passLabel, setPassLabel] = useState("");
     const [pass, setPass] = useState("");
     const [passAgain, setPassAgain] = useState("");
+    const [email, setEmail] = useState("");
+    const router = useRouter();
 
     useEffect(() => {
         let t = getCookie("token");
@@ -33,14 +36,15 @@ export default function Login() {
                 if (res.status === 401) {
                     return;
                 } else {
-                    window.location.replace("/");
+                    await router.replace("/")
+                    // window.location.replace("/");
                 }
             })();
         }
     }, [])
 
     useEffect(() => {
-        document.title = `Geledit - ${login === 1 ? "Rejestracja" : "Loginizacja"}`;
+        document.title = `Gexplorer - ${login === 1 ? "Rejestracja" : "Loginizacja"}`;
         setPassLabel("")
     }, [login]);
 
@@ -71,7 +75,9 @@ export default function Login() {
                     sameSite: "lax",
                     // httpOnly:
                 });
-                window.location.replace("/");
+                await router.replace("/")
+                //window.location.replace("/");
+                
             }
         })();
     };
@@ -88,7 +94,7 @@ export default function Login() {
 
     const handleRegister = (_event: React.MouseEvent<HTMLButtonElement>) => {
         setLoginLabel("loginBaseLabel")
-        if (/ /g.test(user)) {
+        if (/\s/g.test(user)) {
             setLoginLabel("loginNotContainsSpace")
             return;
         }
@@ -98,7 +104,7 @@ export default function Login() {
         }
 
         setPassLabel("")
-        if (/ /g.test(pass)) {
+        if (/\s/g.test(pass)) {
             setPassLabel("passNotContainsSpace")
             return;
         }
@@ -120,7 +126,8 @@ export default function Login() {
                 },
                 body: JSON.stringify({
                     "userName": user,
-                    "password": pass
+                    "password": pass,
+                    "email": email
                 })
             });
             if (res.status === 422) {
@@ -131,7 +138,8 @@ export default function Login() {
             setCookie("token", data, {
                 sameSite: "lax",
             });
-            window.location.replace("/");
+            await router.replace("/")
+            // window.location.replace("/");
         })();
     };
 
@@ -149,6 +157,13 @@ export default function Login() {
                            required error={loginLabel !== "loginBaseLabel" && login === 1}
                            onChange={(e) => setUser(e.target.value)}
                            onKeyUp={handleKeyUp}/>
+
+                <TextField sx={{display: login === 0 ? "none" : ""}} id="login-password-again"
+                           label={t("labelEmail")} variant="filled" type="email" required
+                           error={false}
+                           onChange={(e) => setEmail(e.target.value)}
+                           onKeyUp={handleKeyUp}/>
+
                 <TextField id="login-password" label={t("password")} variant="filled"
                            helperText={t(passLabel).toString()} type="password" required error={passLabel !== ""}
                            onChange={(e) => setPass(e.target.value)}
