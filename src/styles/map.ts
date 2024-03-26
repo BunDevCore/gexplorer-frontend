@@ -30,6 +30,10 @@ export const MenuButton = styled.button<{ $open: boolean }>`
     border: none;
     z-index: 3;
 
+    @media (max-width: 1200px) {
+        left: ${props => props.$open ? "calc(50vw - 5.5rem)" : "0"};
+    }
+
     @media (max-width: 700px) {
         left: ${props => props.$open ? "calc(100vw - 5.5rem)" : "0"};
     }
@@ -48,6 +52,10 @@ export const MenuBox = styled.div<{ $open: boolean }>`
     height: 100%;
     z-index: 2;
     transform: ${props => props.$open ? "translateX(0)" : "translateX(-100%)"};
+    
+    @media (max-width: 1200px) {
+        width: 50vw;
+    }
 
     @media (max-width: 700px) {
         width: 100vw;

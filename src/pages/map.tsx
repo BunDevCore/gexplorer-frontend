@@ -16,7 +16,7 @@ export default function MapPage() {
     const mapParams = useSearchParams();
     const router = useRouter();
     const params = new URLSearchParams(mapParams.toString());
-    const replaceRouter = useDebounceCallback(router.replace, 250);
+    const replaceRouter = useDebounceCallback(router.replace, 500);
 
     const [zoomLoaded, setZoomLoaded] = useState(false);
     const [centerLoaded, setCenterLoaded] = useState(false);
