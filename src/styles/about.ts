@@ -37,9 +37,11 @@ export const LinkList = styled.div`
     
     a {
         text-decoration: none;
+        color: var(--accent);
         
         :hover {
             text-decoration: underline;
+            color: var(--secondary-accent);
         }
     }
 `;
