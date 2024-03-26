@@ -90,7 +90,6 @@ export default function MapPage() {
                 width="48"
                 height="48"
                 style={{
-                    stroke: "#4f4f4f",
                     strokeLinecap: "round",
                     strokeWidth: 2.5,
                     transition: "300ms",

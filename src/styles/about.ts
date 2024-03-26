@@ -38,6 +38,7 @@ export const LinkList = styled.div`
     a {
         text-decoration: none;
         color: var(--accent);
+        transition: 100ms;
         
         :hover {
             text-decoration: underline;

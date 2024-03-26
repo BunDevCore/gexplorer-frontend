@@ -4,17 +4,9 @@
     margin: 0;
 
     /* IDE help */
-    --navbar-background-color: black;
-    --footer-background-color: black;
-    --footer-color: black;
-    --global-background-color: black;
-    --global-text-color: black;
-    --global-secondary-background-color: black;
-    --global-secondary-text-color: black;
-
+    --background: black;
     --accent: black;
     --secondary-accent: black;
-    --background: black;
     --primary: black;
     --primaryText: black;
     --secondary: black;

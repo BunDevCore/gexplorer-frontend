@@ -3,7 +3,6 @@ import light from "./themes/light";
 import {Theme, ThemeName} from "@/types/theme";
 
 export const getTheme = (name: ThemeName): Theme => {
-
     switch (name) {
         case "light":
             return light;

@@ -58,14 +58,11 @@ export const LinkList = styled.div`
         text-decoration: none;
         color: var(--primaryText);
         padding: .25rem;
+        transition: 100ms;
 
         &:hover {
             text-decoration: underline;
-            color: blue;
-
-            &:visited {
-                color: purple;
-            }
+            color: var(--secondary-accent);
         }
     }
 `;

@@ -15,4 +15,7 @@ export const SettingLine = styled.div`
     justify-items: center;
     align-items: center;
     padding: .5rem 4rem;
+    p {
+        font-size: 1.75rem;
+    }
 `;

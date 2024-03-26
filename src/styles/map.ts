@@ -29,6 +29,10 @@ export const MenuButton = styled.button<{ $open: boolean }>`
     border-radius: 100%;
     border: none;
     z-index: 3;
+    
+    svg {
+        stroke: ${props => props.theme.type === "light" ? "#4f4f4f" : "#f4f4f4"};
+    }
 
     @media (max-width: 1200px) {
         left: ${props => props.$open ? "calc(50vw - 5.5rem)" : "0"};
