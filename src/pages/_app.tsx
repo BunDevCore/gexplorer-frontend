@@ -50,6 +50,9 @@ const App = ({Component, pageProps}: AppProps) => {
     let theme = getCookie("NEXT_THEME") as ThemeName
     setThemeName(theme)
     let locale = getCookie("NEXT_LOCALE") as LocaleName
+    if (locale === "prefer") {
+      locale = navigator.language.split("-")[0] as LocaleName;
+    }
     (async () => {
       await setLanguage(locale);
     })()

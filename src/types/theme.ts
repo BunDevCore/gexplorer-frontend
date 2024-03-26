@@ -1,6 +1,6 @@
 import {Property} from "csstype";
 
-export type ThemeName = "light" | "dark" | "other"
+export type ThemeName = "prefer" | "light" | "dark" | "other"
 
 export type Theme = {
     type: "light" | "dark"

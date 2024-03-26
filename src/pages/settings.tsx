@@ -6,7 +6,7 @@ import {Dispatch, SetStateAction, useState} from "react";
 import useTranslation from "next-translate/useTranslation";
 import {langList, themeList} from "@/types/settings";
 import setLanguage from "next-translate/setLanguage";
-import {setCookie} from "cookies-next";
+import {setCookie, getCookie} from "cookies-next";
 import type {ThemeName} from "@/types/theme";
 
 const MenuProps = {
@@ -18,7 +18,7 @@ const MenuProps = {
     },
 };
 
-export default function Settings({theme}: {theme: {get: ThemeName, set: Dispatch<SetStateAction<ThemeName>>}}) {
+export default function Settings({theme}: { theme: { get: ThemeName, set: Dispatch<SetStateAction<ThemeName>> } }) {
     const {t, lang} = useTranslation("settings");
 
     const handleTheme = (e: SelectChangeEvent) => {
@@ -29,8 +29,12 @@ export default function Settings({theme}: {theme: {get: ThemeName, set: Dispatch
     }
 
     const handleLanguage = (e: SelectChangeEvent) => {
+        let newLang = e.target.value;
+        if (newLang === "prefer") {
+            newLang = navigator.language.split("-")[0];
+        }
         (async () => {
-            await setLanguage(e.target.value);
+            await setLanguage(newLang);
         })();
         setCookie("NEXT_LOCALE", e.target.value, {
             sameSite: true
@@ -43,23 +47,23 @@ export default function Settings({theme}: {theme: {get: ThemeName, set: Dispatch
             <SettingLine>
                 <p>{t("pageLanguage")}</p>
                 <Select
-                    value={lang}
+                    value={(getCookie("NEXT_LOCALE") ?? "prefer") as string}
                     onChange={handleLanguage}
                     MenuProps={MenuProps}
                     sx={{width: 300}}
                 >
-                    {langList.map(v => <MenuItem value={v} key={v}>{t("language."+v)}</MenuItem>)}
+                    {langList.map(v => <MenuItem value={v} key={v}>{t("language." + v)}</MenuItem>)}
                 </Select>
             </SettingLine>
             <SettingLine>
                 <p>{t("pageTheme")}</p>
                 <Select
-                    value={theme.get}
+                    value={theme.get ?? "prefer"}
                     onChange={handleTheme}
                     MenuProps={MenuProps}
                     sx={{width: 300}}
                 >
-                    {themeList.map(v => <MenuItem value={v} key={v}>{t("theme."+v)}</MenuItem>)}
+                    {themeList.map(v => <MenuItem value={v} key={v}>{t("theme." + v)}</MenuItem>)}
                 </Select>
             </SettingLine>
         </StandardBox>

@@ -3,11 +3,13 @@
   "pageTheme": "ThemeDE",
   "pageLanguage": "LanguageDE",
   "theme": {
+    "prefer": "System preferred",
     "light": "Hell",
     "dark": "Dunkel",
     "other": "Andere"
   },
   "language": {
+    "prefer": "System preferred",
     "pl": "Polnisch (Polski)",
     "en": "Englisch (English)",
     "de": "Deutsch"

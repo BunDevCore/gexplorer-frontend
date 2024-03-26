@@ -3,11 +3,13 @@
   "pageTheme": "Motyw",
   "pageLanguage": "Język",
   "theme": {
+    "prefer": "Preferencja systemu",
     "light": "Jasny",
     "dark": "Ciemny",
     "other": "Inny"
   },
   "language": {
+    "prefer": "Preferencja systemu",
     "pl": "Polski",
     "en": "Angielski (English)",
     "de": "Niemiecki (Deutsch)"
