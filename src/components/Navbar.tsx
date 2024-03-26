@@ -17,6 +17,6 @@ export default function Navbar() {
             <NavLink href={"/settings"}>{t("settings", null, {ns: "common"})}</NavLink>
             <NavLink href={"/account"}>{t("account")}</NavLink>
         </Nav>
-        <GexplorerIcon><Image src={"/favicon.png"} alt={"gexplorer"} fill={true}/></GexplorerIcon>
+        <GexplorerIcon><Image src={"/logos/gexplorer_logo.png"} alt={"gexplorer"} fill={true}/></GexplorerIcon>
     </>;
 }

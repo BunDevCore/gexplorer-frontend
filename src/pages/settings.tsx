@@ -48,7 +48,7 @@ export default function Settings({theme}: {theme: {get: ThemeName, set: Dispatch
                     MenuProps={MenuProps}
                     sx={{width: 300}}
                 >
-                    {langList.map(v => <MenuItem value={v}>{t("language."+v)}</MenuItem>)}
+                    {langList.map(v => <MenuItem value={v} key={v}>{t("language."+v)}</MenuItem>)}
                 </Select>
             </SettingLine>
             <SettingLine>
@@ -59,7 +59,7 @@ export default function Settings({theme}: {theme: {get: ThemeName, set: Dispatch
                     MenuProps={MenuProps}
                     sx={{width: 300}}
                 >
-                    {themeList.map(v => <MenuItem value={v}>{t("theme."+v)}</MenuItem>)}
+                    {themeList.map(v => <MenuItem value={v} key={v}>{t("theme."+v)}</MenuItem>)}
                 </Select>
             </SettingLine>
         </StandardBox>
