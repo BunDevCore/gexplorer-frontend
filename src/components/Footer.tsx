@@ -15,7 +15,6 @@ export default function FooterComponent() {
                 <Link href={"/"}>{t("mainPage")}</Link>
                 <Link href={"/about"}>{t("aboutUs")}</Link>
                 <Link href={"/settings"}>{t("settings")}</Link>
-                <Link href={"/thanks"}>{t("thanks")}</Link>
             </LinkList>
         </FooterContent>
     </Footer>;
