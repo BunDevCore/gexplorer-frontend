@@ -1,0 +1,37 @@
+{
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Polsat Plus Arena Gdańsk",
+        "type": "Stadion",
+        "description": "Wybudowany na Euro 2012 supernowoczesny stadion, na którym rozgrywane są mecze ligowe, pucharowe i międzynarodowe.",
+        "image": "stadion.jpg",
+        "address": "Pokoleń Lechii Gdańsk 1, 80-560 Gdańsk",
+        "website": "https://polsatplusarenagdansk.pl/"
+      },
+      "geometry": {
+        "coordinates": [
+          18.640329719849717,
+          54.389942535723776
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Lincoln Park",
+        "description": "A northside park that is home to the Lincoln Park Zoo"
+      },
+      "geometry": {
+        "coordinates": [
+          18.63,
+          54.35
+        ],
+        "type": "Point"
+      }
+    }
+  ],
+  "type": "FeatureCollection"
+}

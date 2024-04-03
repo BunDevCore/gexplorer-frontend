@@ -47,3 +47,7 @@ const Wrapper = styled.div`
 export const DefaultLayout = ({children}: {children: ReactNode | null}) => <MainLayout><Wrapper>{children}</Wrapper></MainLayout>;
 
 export const Space = ({space}: { space:Property.Padding }) => <div style={{padding: space}} />;
+
+export const Separator = styled.div`
+  border-top: 1px solid #8a8a8a;
+`;
