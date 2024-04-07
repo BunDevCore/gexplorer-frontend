@@ -12,6 +12,7 @@ import {useRouter} from "next/router";
 import Button from "@mui/material/Button";
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import PercentCounter from "@/components/PercentCounter";
+import {DistrictTable} from "@/components/DistrictTable";
 
 export default function ProfileComponent(props: { username: string | undefined | null }) {
     const districts = useGExplorerStore(s => s.districts)
@@ -24,8 +25,6 @@ export default function ProfileComponent(props: { username: string | undefined |
 
     if (isLoading || data === undefined) return <LoadingComponent></LoadingComponent>
 
-    const districtCompletionInfo = getDistrictCompletionInfo(data.districtAreas, Object.values(districts));
-    console.log(districtCompletionInfo)
 
     return <DefaultLayout>
         <StandardBox>
@@ -37,65 +36,11 @@ export default function ProfileComponent(props: { username: string | undefined |
             {/*{Object.values(districts).map(d => <p>{d.name} <i>{d.area / 1000000}</i> km2</p>)}*/}
 
             <h2>Dzielnice</h2>
-            <TableContainer component={UserPaper} elevation={14}><Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>
-                            Dzielnica
-                        </TableCell>
-                        <TableCell>
-                            Odkryte pole
-                        </TableCell>
-                        <TableCell>
-                            Pole dzielnicy
-                        </TableCell>
-                        <TableCell>
-                            Poziom eksploracji
-                        </TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {districtCompletionInfo.map(districtInfo => {
-                        return <TableRow component={"th"} key={districtInfo.name}>
-                            <TableCell sx={{fontSize: "1.4rem", width: "5rem"}}>{districtInfo.name}</TableCell>
-                            <TableCell sx={{fontSize: "1.4rem"}}>
-                                <AreaCounter area={districtInfo.explored}></AreaCounter>
-                            </TableCell>
-                            <TableCell sx={{fontSize: "1.1rem"}}>
-                                <AreaCounter area={districtInfo.total}></AreaCounter>
-                            </TableCell>
-                            <TableCell sx={{fontSize: "1.4rem"}} align={"right"}>
-                                <PercentCounter percent={districtInfo.percentage}></PercentCounter>
-                            </TableCell>
-                        </TableRow>
-                    })}
-                </TableBody>
-            </Table></TableContainer>
+            <DistrictTable areas={data.districtAreas}></DistrictTable>
         </StandardBox>
     </DefaultLayout>;
 }
 
-function getDistrictCompletionInfo(districtAreas: DistrictAreas, districts: District[]): {
-    name: string,
-    explored: number,
-    total: number,
-    percentage: number
-}[] {
-    return districts.map(x => ({
-        name: x.name,
-        explored: districtAreas[x.id],
-        total: x.area,
-        percentage: districtAreas[x.id] / x.area * 100
-    })).sort(districtInfoSortFn);
-}
-
-// @ts-ignore
-function districtInfoSortFn(x, y) {
-    const percentageDelta = y.percentage - x.percentage;
-    if (percentageDelta != 0) return percentageDelta
-
-    return y.total - x.total
-}
 
 //TODO: make this look bearable @LempekPL
 function TripListEntry({t, onclick}: { t: Trip, onclick: any }) {

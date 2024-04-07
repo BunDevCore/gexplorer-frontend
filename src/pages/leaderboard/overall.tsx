@@ -1,5 +1,4 @@
 import useSWR from "swr";
-import {apiUrl} from "@/config";
 import {useRouter} from "next/router";
 import {useGExplorerStore} from "@/state";
 import React, {useEffect, useState} from "react";
@@ -61,7 +60,7 @@ export default function OverallLeaderboardPage() {
 
     console.log("swr")
     console.log(id)
-    const leaderboardSwr = useSWR<Leaderboard<number>>(apiUrl(`/Leaderboard/overall`), fetcher);
+    const leaderboardSwr = useSWR<Leaderboard<number>>(`/Leaderboard/overall`, fetcher);
 
     if (leaderboardSwr.isLoading || !leaderboardSwr.data) return <CenterLayout><p>loading...</p></CenterLayout>
 
