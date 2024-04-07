@@ -122,7 +122,12 @@ export default function MapPage() {
             }, event)
             setMenuOpen(true);
         });
-    });
+        return () => {
+            console.warn("remove")
+            map.current?.remove();
+            map.current = null;
+        }
+    }, []); // eslint is whining here but we do NOT want to reinitialize the map on every prop change trust me
 
     useEffect(() => {
         if (!zoomLoaded && router.query.zoom) {
