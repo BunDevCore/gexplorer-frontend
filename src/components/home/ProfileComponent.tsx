@@ -1,19 +1,16 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {useGExplorerStore} from "@/state";
-import {apiUrl} from "@/config";
-import LargeAreaCounter from "@/components/LargeAreaCounter";
-import {DefaultLayout, MainLayout, StandardBox} from "@/styles/universal";
-import {FullUser, DetailedTrip, Trip, DistrictAreas, District} from "@/types/types";
+import {DefaultLayout, StandardBox} from "@/styles/universal";
+import {FullUser, Trip, DistrictAreas, District} from "@/types/types";
 import useSWR from "swr";
 import fetcher from "@/fetcher";
 import LoadingComponent from "@/components/LoadingComponent";
 import AreaCounter from "@/components/AreaCounter";
 import {DateTime} from "luxon";
 import {UserPaper} from "@/styles/userpage";
-import {NextRouter, useRouter} from "next/router";
+import {useRouter} from "next/router";
 import Button from "@mui/material/Button";
-import {Avatar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
-import {Percent} from "@mui/icons-material";
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import PercentCounter from "@/components/PercentCounter";
 
 export default function ProfileComponent(props: { username: string | undefined | null }) {

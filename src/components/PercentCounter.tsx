@@ -1,4 +1,4 @@
-import {AreaCounterContainer, MediumText, LargeText, UnitText} from "@/styles/areaCounter";
+import {AreaCounterContainer, MediumText, LargeText} from "@/styles/areaCounter";
 import {Percent} from "@mui/icons-material";
 
 
