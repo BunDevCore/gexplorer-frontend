@@ -1,7 +1,7 @@
 import React from "react";
 import {useGExplorerStore} from "@/state";
 import {DefaultLayout, StandardBox} from "@/styles/universal";
-import {FullUser, Trip, DistrictAreas, District} from "@/types/types";
+import {FullUser, Trip} from "@/types/types";
 import useSWR from "swr";
 import fetcher from "@/fetcher";
 import LoadingComponent from "@/components/LoadingComponent";
@@ -10,8 +10,6 @@ import {DateTime} from "luxon";
 import {UserPaper} from "@/styles/userpage";
 import {useRouter} from "next/router";
 import Button from "@mui/material/Button";
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
-import PercentCounter from "@/components/PercentCounter";
 import {DistrictTable} from "@/components/DistrictTable";
 
 export default function ProfileComponent(props: { username: string | undefined | null }) {
