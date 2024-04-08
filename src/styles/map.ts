@@ -65,11 +65,12 @@ export const MenuBox = styled.div<{ $open: boolean }>`
     }
 `;
 
-export const MenuTitle = styled.p`
+export const MenuTitle = styled(Link)`
     color: var(--accent);
     font-weight: bold;
     font-size: 2rem;
     padding: 1.75rem 1.75rem 1rem;
+    text-decoration: none;
 `;
 
 export const MenuLink = styled(Link)`

@@ -12,7 +12,7 @@ import {
     POIsubtitle,
     POItitle, POIwebsite, POIminiMenu, POIminiMenuItem
 } from "@/styles/map";
-import {redirect, useSearchParams} from "next/navigation";
+import {useSearchParams} from "next/navigation";
 import {useRouter} from "next/router";
 import {useDebounceCallback} from "usehooks-ts";
 import useTranslation from "next-translate/useTranslation";
@@ -25,14 +25,16 @@ import {Separator} from "@/styles/universal";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import BeenhereIcon from '@mui/icons-material/Beenhere';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import PhoneIcon from '@mui/icons-material/Phone';
 
 // TODO: move to separate types file
 type POIProperties = {
-    "title": string,
-    "type": string,
-    "description": string,
-    "image": string,
-    "address": string | null,
+    "title": string
+    "type": string
+    "description": string
+    "image": string
+    "address": string | null
+    "phone": string | null
     "website": string | null
 }
 
@@ -198,11 +200,11 @@ export default function MapPage() {
         <MenuBox $open={menuOpen}>
             {POI === null ?
                 <>
-                    <MenuTitle>Gexplorer</MenuTitle>
+                    <MenuTitle href={"/"}>Gexplorer</MenuTitle>
                     <MenuLink href="/"><HomeIcon/> <p>Strona Główna</p></MenuLink>
                 </> :
                 <>
-                    <MenuTitle>Gexplorer</MenuTitle>
+                    <MenuTitle href={"/"}>Gexplorer</MenuTitle>
                     <POIinfo>
                         <POIimage>
                             <Image src={"/geo/images/" + POI.image} alt={POI.title} fill={true}/>
@@ -225,8 +227,9 @@ export default function MapPage() {
                         <POIdesc>{POI.description}</POIdesc>
                         <Separator/>
                         <POIlist>
-                            {POI.address !== null ? <POIlistItem><PlaceIcon/> <p>{POI.address}</p></POIlistItem> : <></>}
-                            {POI.website !== null ? <POIlistItem><PublicIcon/> <POIwebsite href={POI.website}>{POI.website}</POIwebsite></POIlistItem> : <></>}
+                            {POI.address ? <POIlistItem><PlaceIcon/> <p>{POI.address}</p></POIlistItem> : <></>}
+                            {POI.phone ? <POIlistItem><PhoneIcon/> <p>{POI.phone}</p></POIlistItem> : <></>}
+                            {POI.website ? <POIlistItem><PublicIcon/> <POIwebsite href={POI.website}>{POI.website}</POIwebsite></POIlistItem> : <></>}
                         </POIlist>
                     </POIinfo>
                 </>
