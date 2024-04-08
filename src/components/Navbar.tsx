@@ -1,7 +1,6 @@
 import {
     Nav, NavLink, GexplorerLink, GexplorerIcon
 } from "@/styles/navbar";
-import { Space } from "@/styles/universal";
 import Image from "next/image";
 import React from "react";
 import useTranslation from "next-translate/useTranslation";
@@ -11,7 +10,7 @@ export default function Navbar() {
 
     return <>
         <Nav>
-            <NavLink href={"/achievements"}>{t("achievements")}</NavLink>
+            <NavLink href={"/"}>{t("home")}</NavLink>
             <NavLink href={"/map"}>{t("map")}</NavLink>
             <GexplorerLink href={"/"}>GEXPLORER</GexplorerLink>
             <NavLink href={"/settings"}>{t("settings", null, {ns: "common"})}</NavLink>

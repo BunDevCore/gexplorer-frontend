@@ -10,6 +10,7 @@ export const Nav = styled.nav`
     display: flex;
     width: 100%;
     justify-content: space-evenly;
+    align-items: center;
     z-index: 999;
     margin-bottom: 5rem;
 
@@ -58,6 +59,8 @@ export const NavLink = styled(Link)`
     color: var(--secondaryText);
     font-size: 1.125rem;
     transition: 50ms;
+    width: 10rem;
+    text-align: center;
     
     &:hover {
         filter: brightness(75%);
