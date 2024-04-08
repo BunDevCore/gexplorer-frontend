@@ -63,11 +63,8 @@ export default function LoginComponent() {
                 let data = await res.text();
                 setCookie("token", data, {
                     sameSite: "lax",
-                    // httpOnly:
                 });
                 await router.replace("/")
-                //window.location.replace("/");
-
             }
         })();
     };
@@ -141,19 +138,19 @@ export default function LoginComponent() {
                 </Tabs>
             </Box>
             <LoginDataBox>
-                <TextField id="login-name" label={t("login")} variant="filled"
+                <TextField id="login-name" label={t("login")} variant="outlined"
                            helperText={t(login ? loginLabel : "").toString()}
                            required error={loginLabel !== "loginBaseLabel" && login}
                            onChange={(e) => setUser(e.target.value)}
                            onKeyUp={handleKeyUp}/>
 
                 <TextField sx={{display: !login ? "none" : ""}} id="login-password-again"
-                           label={t("labelEmail")} variant="filled" type="email" required
+                           label={t("labelEmail")} variant="outlined" type="email" required
                            error={false}
                            onChange={(e) => setEmail(e.target.value)}
                            onKeyUp={handleKeyUp}/>
 
-                <TextField id="login-password" label={t("password")} variant="filled"
+                <TextField id="login-password" label={t("password")} variant="outlined"
                            helperText={t(login ? passLabel : "").toString()} type="password" required
                            error={passLabel !== "passBaseLabel" && passLabel !== ""}
                            onChange={(e) => setPass(e.target.value)}
@@ -161,7 +158,7 @@ export default function LoginComponent() {
                 <Button sx={{display: login ? "none" : ""}} variant="contained" onClick={handleLogin}>
                     {t("labelLogin")}</Button>
                 <TextField sx={{display: !login ? "none" : ""}} id="login-password-again"
-                           label={t("labelPassAgain")} variant="filled" type="password" required
+                           label={t("labelPassAgain")} variant="outlined" type="password" required
                            error={pass !== passAgain}
                            onChange={(e) => setPassAgain(e.target.value)}
                            onKeyUp={handleKeyUp}/>
