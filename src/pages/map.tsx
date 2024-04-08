@@ -223,8 +223,8 @@ export default function MapPage() {
                                 <i><BeenhereIcon/></i> <p>Zwiedzone</p>
                             </POIminiMenuItem>
                         </POIminiMenu>
-                        <Separator/>
-                        <POIdesc>{POI.description}</POIdesc>
+                        {POI.description ? <Separator/> : <></>}
+                        {POI.description ? <POIdesc>{POI.description}</POIdesc> : <></>}
                         <Separator/>
                         <POIlist>
                             {POI.address ? <POIlistItem><PlaceIcon/> <p>{POI.address}</p></POIlistItem> : <></>}
