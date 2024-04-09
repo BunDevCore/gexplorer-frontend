@@ -1,0 +1,17 @@
+{
+  "badEntry": "Błędny login lub hasło",
+  "loginBaseLabel": "Wpisz swoją nazwę",
+  "loginNotContainsSpace": "Login nie może posiadać spacji",
+  "loginLongerThan4": "Login musi być dłuższy niż 4 znaki",
+  "passBaseLabel": "Hasło musi być dłuższe niż 7 znaków",
+  "passNotContainsSpace": "Hasło nie może posiadać spacji",
+  "passLongerThan7": "Hasło musi być dłuższe niż 7 znaków",
+  "passEqual": "Hasła muszą być takie same",
+  "userExists": "Użytkownik o takim loginie już istnieje",
+  "labelLogin": "Zaloguj się",
+  "labelRegister": "Zarejestruj się",
+  "labelEmail": "Email",
+  "login": "Login",
+  "password": "Hasło",
+  "labelPassAgain": "Powtórz hasło"
+}

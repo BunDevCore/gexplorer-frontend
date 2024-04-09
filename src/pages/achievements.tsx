@@ -1,5 +1,5 @@
 // import AchievementBox from "@/components/AchievementBox";
-import {MainLayout, CenterLayout} from "@/styles/universal"
+import {MainLayout} from "@/styles/universal"
 import {AchievementList, AchievementItem, AchievementIcon, AchievementText, AchievementValue} from "@/styles/achievementBox";
 
 export default function Achievements() {
@@ -8,7 +8,6 @@ export default function Achievements() {
         ["gd_train_station", "Dostań się na każdą stację kolejową", 2, 13], ["gd_shop", "Spotkajmy się w Centrum Handlowym", 1, 14]]
 
     return <MainLayout>
-        <CenterLayout>
             <AchievementList>
                 {achievements.map(achievement => <AchievementItem>
                     <AchievementIcon>
@@ -23,6 +22,5 @@ export default function Achievements() {
                     </AchievementValue>
                 </AchievementItem>)}
             </AchievementList>
-        </CenterLayout>
     </MainLayout>;
 }

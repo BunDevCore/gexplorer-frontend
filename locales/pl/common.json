@@ -1,0 +1,19 @@
+{
+  "e404": "NIE ZNALEZIONO",
+  "eDesc404": "a niech to dunder świśnie",
+  "settings": "Ustawienia",
+  "district": "dzielnica",
+  "area": "powierzchnia",
+  "percent": "procent",
+  "districtHeader": "Dzielnica",
+  "areaHeader": "Powierzchnia",
+  "totalAreaHeader": "Całkowita powierzchnia",
+  "percentHeader": "Stopień eksploracji",
+  "goToTrip": "Zobacz podróż",
+  "districtAreas": "Pola w dzielnicach",
+  "overallArea": "Pole ogólne",
+  "mainPage": "Strona główna",
+  "aboutUs": "O nas",
+  "API": "API",
+  "something": "Coś"
+}

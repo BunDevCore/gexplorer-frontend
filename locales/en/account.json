@@ -1,0 +1,17 @@
+{
+  "badEntry": "Wrong login or password",
+  "loginBaseLabel": "Enter your name",
+  "loginNotContainsSpace": "The login cannot contain spaces",
+  "loginLongerThan4": "The login must be longer than 4 symbols",
+  "passBaseLabel": "The password must be longer than 7 symbols",
+  "passNotContainsSpace": "The password cannot contain spaces",
+  "passLongerThan7": "The password must be longer than 7 symbols",
+  "passEqual": "The passwords must be the same",
+  "userExists": "A user with this login already exists",
+  "labelLogin": "Log in",
+  "labelRegister": "Register",
+  "labelEmail": "Email",
+  "login": "Login",
+  "password": "Password",
+  "labelPassAgain": "Repeat password"
+}

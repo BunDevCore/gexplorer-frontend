@@ -1,0 +1,10 @@
+{
+  "achievements": "Achievements",
+  "map": "Map",
+  "account": "Account",
+
+  "login": "Login",
+  "logout": "Logout",
+  "home": "Home page",
+  "leaderboard": "Leaderboard"
+}

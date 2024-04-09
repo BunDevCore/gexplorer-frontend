@@ -1,39 +1,21 @@
-import React, {useState} from "react";
-import {NavbarWrapper, Nav, MenuIcon, MainTitle, Dropdown, DropdownLink, Settings, SettingsButton, Absolute, SettingsTitle} from "@/styles/navbar";
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import HomeIcon from '@mui/icons-material/Home';
-import LoginIcon from '@mui/icons-material/Login';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import LeaderboardIcon from '@mui/icons-material/Leaderboard';
-import {ChangeTheme} from "@/types/navbar";
+import {
+    Nav, NavLink, GexplorerLink, GexplorerIcon
+} from "@/styles/navbar";
+import Image from "next/image";
+import React from "react";
+import useTranslation from "next-translate/useTranslation";
 
-export default function Navbar({changeTheme}: { changeTheme: ChangeTheme }) {
-    const [dropdownOpen, setDropdownOpen] = useState(false);
+export default function Navbar() {
+    const {t} = useTranslation("navbar");
 
-    const toggleDropdown = () => {
-        setDropdownOpen(p => !p);
-    }
-
-    return <NavbarWrapper>
+    return <>
         <Nav>
-            <MenuIcon onClick={toggleDropdown}>{dropdownOpen ? <CloseRoundedIcon/> : <MenuRoundedIcon/>}</MenuIcon>
-            <MainTitle>GExplorer</MainTitle>
-            <div></div>
+            <NavLink href={"/"}>{t("home")}</NavLink>
+            <NavLink href={"/map"}>{t("map")}</NavLink>
+            <GexplorerLink href={"/"}>GEXPLORER</GexplorerLink>
+            <NavLink href={"/settings"}>{t("settings", null, {ns: "common"})}</NavLink>
+            <NavLink href={"/account"}>{t("account")}</NavLink>
         </Nav>
-        <Absolute>
-            <Dropdown $open={dropdownOpen}>
-                <DropdownLink href="/"><HomeIcon/> Strona Główna</DropdownLink>
-                <DropdownLink href="/achievements"><EmojiEventsIcon/> Osiągnięcia</DropdownLink>
-                <DropdownLink href="/leaderboard"><LeaderboardIcon/> Leaderboard</DropdownLink>
-                <DropdownLink href="/login"><LoginIcon/> Zaloguj się</DropdownLink>
-            </Dropdown>
-            <Settings $open={dropdownOpen}>
-                <SettingsTitle>Motyw strony</SettingsTitle>
-                <SettingsButton changeTheme={changeTheme}  ownValue={"dark"} className={""}/>
-                <SettingsButton changeTheme={changeTheme} ownValue={"light"} className={""}/>
-                {/*<SettingsButton changeTheme={changeTheme} ownValue={"other"} />*/}
-            </Settings>
-        </Absolute>
-    </NavbarWrapper>;
+        <GexplorerIcon><Image src={"/logos/gexplorer_logo.png"} alt={"gexplorer"} fill={true}/></GexplorerIcon>
+    </>;
 }

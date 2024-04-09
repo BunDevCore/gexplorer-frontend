@@ -1,0 +1,12 @@
+{
+  "importTrip": "Import a trip",
+  "uploadDescription1": "You can import a trip from a GPX file. Most fitness tracker apps and GPS devices support exporting to this file format.",
+  "uploadDescription2": "All GPX files must have timestamps on their track points. We use the timestamps to track trip start and end times and detect potential cheating. All files without timestamps will be rejected.",
+  "attention": "Attention!",
+  "successfulImport": "Import successful +{{newArea}}m<sup>2</sup>",
+  "failedImport": "Import failed: {{cause}}",
+  "SyntaxError": "GPX syntax error - are you sure this is a valid GPX file?",
+  "TimeRequired": "No timestamps",
+  "noFilePicked": "No file picked!",
+  "importStarted": "Import started - please wait"
+}

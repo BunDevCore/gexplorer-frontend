@@ -1,0 +1,20 @@
+{
+  "e404": "NOT FOUND",
+  "eDesc404": "the page you are looking for was not found",
+  "settings": "Settings",
+  "district": "district",
+  "area": "area",
+  "percent": "percent",
+  "districtHeader": "District",
+  "areaHeader": "Area",
+  "totalAreaHeader": "Total area",
+  "percentHeader": "Exploration level",
+  "goToTrip": "Go to trip",
+  "districtAreas": "District areas",
+  "overallArea": "Overall area",
+  "achievement": "Achievement",
+  "mainPage": "Home page",
+  "aboutUs": "About us",
+  "API": "API",
+  "something": "Something"
+}
