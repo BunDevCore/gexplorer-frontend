@@ -30,7 +30,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import PhoneIcon from '@mui/icons-material/Phone';
 import {useGExplorerStore} from "@/state";
 import POIs from "../../public/geo/poi.json";
-import {FavoriteBorderOutlined} from "@mui/icons-material";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // TODO: move to separate types file
 type POIProperties = {
@@ -175,8 +175,17 @@ export default function MapPage() {
     }, [router.query.lng, router.query.lat, centerLoaded])
 
     const toggleMenu = () => {
-        setPOI(null);
         setMenuOpen(!menuOpen);
+        setPOI(null);
+    }
+
+    const toggleMenuOrBack = () => {
+        if (POI !== null) {
+            setMenuOpen(true);
+        } else {
+            setMenuOpen(!menuOpen);
+        }
+        setPOI(null);
     }
 
     const menuIconX = 10;
@@ -189,33 +198,45 @@ export default function MapPage() {
                   content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
         </Head>
         <MapBox ref={mapContainer}/>
-        <MenuButton onClick={toggleMenu} $open={menuOpen}>
-            <svg
-                width="48"
-                height="48"
-                style={{
-                    strokeLinecap: "round",
-                    strokeWidth: 2.5,
-                    transition: "300ms",
-                    transform: "translate(-50%, -50%)"
-                }}>
-                <line x1={menuIconX} y1={menuIconY - menuIconSpacing} x2={48 - menuIconX}
-                      y2={menuIconY - menuIconSpacing}
-                      style={{
-                          ...menuOpen ? {
-                              transform: `translate(${menuIconSpacing}px, ${menuIconY - menuIconSpacing}px) rotate(45deg)`
-                          } : {}, transition: "inherit", transformOrigin: "top"
-                      }}/>
-                <line x1={menuIconX} y1={menuIconY} x2={48 - menuIconX} y2={menuIconY}
-                      style={{opacity: Number(!menuOpen), transition: "inherit"}}/>
-                <line x1={menuIconX} y1={menuIconY + menuIconSpacing} x2={48 - menuIconX}
-                      y2={menuIconY + menuIconSpacing}
-                      style={{
-                          ...menuOpen ? {
-                              transform: `translate(${menuIconSpacing}px, -${menuIconY - menuIconSpacing}px) rotate(-45deg)`
-                          } : {}, transition: "inherit", transformOrigin: "bottom"
-                      }}/>
-            </svg>
+        <MenuButton onClick={toggleMenuOrBack} $open={menuOpen}>
+            {POI !== null ? <svg
+                    width="48"
+                    height="48"
+                    style={{
+                        strokeLinecap: "round",
+                        strokeWidth: 3,
+                        transition: "300ms",
+                        transform: "translate(-50%, -50%)"
+                    }}>
+                    <line x1={18} y1={24} x2={48 - 18} y2={12}/>
+                    <line x1={18} y1={24} x2={48 - 18} y2={48 - 12}/>
+                </svg> :
+                <svg
+                    width="48"
+                    height="48"
+                    style={{
+                        strokeLinecap: "round",
+                        strokeWidth: 2.5,
+                        transition: "300ms",
+                        transform: "translate(-50%, -50%)"
+                    }}>
+                    <line x1={menuIconX} y1={menuIconY - menuIconSpacing} x2={48 - menuIconX}
+                          y2={menuIconY - menuIconSpacing}
+                          style={{
+                              ...menuOpen ? {
+                                  transform: `translate(${menuIconSpacing}px, ${menuIconY - menuIconSpacing}px) rotate(45deg)`
+                              } : {}, transition: "inherit", transformOrigin: "top"
+                          }}/>
+                    <line x1={menuIconX} y1={menuIconY} x2={48 - menuIconX} y2={menuIconY}
+                          style={{opacity: Number(!menuOpen), transition: "inherit"}}/>
+                    <line x1={menuIconX} y1={menuIconY + menuIconSpacing} x2={48 - menuIconX}
+                          y2={menuIconY + menuIconSpacing}
+                          style={{
+                              ...menuOpen ? {
+                                  transform: `translate(${menuIconSpacing}px, -${menuIconY - menuIconSpacing}px) rotate(-45deg)`
+                              } : {}, transition: "inherit", transformOrigin: "bottom"
+                          }}/>
+                </svg>}
         </MenuButton>
         <MenuBox $open={menuOpen}>
             {POI === null ? <MapMenu/> : <SelectedPOI POI={POI}/>}
@@ -235,7 +256,7 @@ const MapMenu = () => {
     </>
 }
 
-const SelectedPOI = ({POI}: {POI: POIProperties}) => {
+const SelectedPOI = ({POI}: { POI: POIProperties }) => {
     const router = useRouter()
     const {t} = useTranslation("poi");
     const loggedIn = useGExplorerStore(s => s.loggedIn);
@@ -243,13 +264,13 @@ const SelectedPOI = ({POI}: {POI: POIProperties}) => {
     // TODO: if logged try to send request
     const save = () => {
         if (!loggedIn) {
-            router.push("/account?cb=/map?select="+POI.id)
+            router.push("/account?cb=/map?select=" + POI.id)
         }
     }
 
     const been = () => {
         if (!loggedIn) {
-            router.push("/account?cb=/map?select="+POI.id)
+            router.push("/account?cb=/map?select=" + POI.id)
         }
     }
 
