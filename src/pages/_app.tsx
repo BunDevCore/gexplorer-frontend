@@ -15,6 +15,8 @@ import {apiUrl} from "@/config";
 import setLanguage from "next-translate/setLanguage";
 import {usePathname} from "next/navigation";
 import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles';
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 mapboxgl.accessToken = "pk.eyJ1IjoiaW5maW5pZmVuIiwiYSI6ImNsZ21uc3d1YjA3b2QzZW1tcWQ4ZWhuZ3kifQ.ide6_yWZQVDRD546IXsfDw"
 
@@ -120,6 +122,7 @@ const App = ({Component, pageProps}: AppProps) => {
                 <title>GExplorer</title>
             </Head>
             {usePathname() === "/map" || <Navbar/>}
+            <ToastContainer />
             <Component {...pageProps} theme={{get: themeName, set: setThemeName}}/>
             {usePathname() === "/map" || <Footer/>}
         </MuiThemeProvider>

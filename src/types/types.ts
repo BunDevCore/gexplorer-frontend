@@ -70,3 +70,9 @@ export type LeaderboardEntry<V> = {
     user: ShortUser,
     value: V,
 }
+
+export type GpxImportErrorKind = "SyntaxError" | "TimeRequired"
+
+export type GpxImportError = {
+    cause: GpxImportErrorKind
+}

@@ -1,0 +1,12 @@
+{
+  "importTrip": "Importuj podróż",
+  "uploadDescription1": "Możesz zaimportować swoją podróż z pliku GPX. Eksport do takiego formatu obsługuje większość aplikacji sportowych czy urządzeń GPS.",
+  "uploadDescription2": "Plik musi posiadać czasy poszczególnych punktów w celu zbadania m.in. czasu początku i końca podróży i wykrywania potencjalnych oszustw. Pliki bez czasów będą odrzucane.",
+  "attention": "Uwaga!",
+  "successfulImport": "Import się udał! +{{newArea}}m<sup>2</sup>",
+  "failedImport": "Błąd importu: {{cause}}",
+  "SyntaxError": "Błąd składni GPX - czy to na pewno prawidłowy plik GPX?",
+  "TimeRequired": "Brak czasów",
+  "noFilePicked": "Nie wybrano pliku",
+  "importStarted": "Import rozpoczęty - poczekaj kilka sekund"
+}
