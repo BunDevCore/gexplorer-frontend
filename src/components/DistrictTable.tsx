@@ -2,7 +2,7 @@ import {District, DistrictAreas} from "@/types/types";
 import useTranslation from "next-translate/useTranslation";
 import {useGExplorerStore} from "@/state";
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
-import {UserPaper} from "@/styles/userpage";
+import {TablePaper} from "@/styles/userpage";
 import AreaCounter from "@/components/AreaCounter";
 import PercentCounter from "@/components/PercentCounter";
 import React from "react";
@@ -13,7 +13,7 @@ export function DistrictTable({areas}: { areas: DistrictAreas }) {
 
     let districtInfos = getDistrictCompletionInfo(areas, Object.values(districts));
 
-    return <TableContainer component={UserPaper} elevation={14}><Table>
+    return <TableContainer component={TablePaper} elevation={14}><Table>
         <TableHead>
             <TableRow>
                 <TableCell>

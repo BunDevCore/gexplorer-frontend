@@ -38,7 +38,7 @@ export default function ProfileComponent(props: { username: string | undefined |
 
 //TODO: make this look bearable @LempekPL
 function TripListEntry({t, onclick}: { t: Trip, onclick: any }) {
-    return <UserPaper>
+    return <UserPaper key={t.id}>
         {DateTime.fromISO(t.startTime).toLocaleString(DateTime.DATETIME_MED)} - {t.area.toFixed(0)} m<sup>2</sup> (+{t.newArea.toFixed(0)} m<sup>2</sup>)
         <Button variant={"contained"} onClick={onclick}>Go to trip</Button>
     </UserPaper>

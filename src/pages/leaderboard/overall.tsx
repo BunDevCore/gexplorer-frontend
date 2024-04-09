@@ -4,7 +4,7 @@ import {useGExplorerStore} from "@/state";
 import React, {useEffect, useState} from "react";
 import fetcher from "@/fetcher";
 import {CenterLayout, MainLayout} from "@/styles/universal";
-import {Avatar, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import {Avatar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import {Leaderboard} from "@/types/types";
 import {UserPaper} from "@/styles/userpage";
 import useTranslation from "next-translate/useTranslation";
