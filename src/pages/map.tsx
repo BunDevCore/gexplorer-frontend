@@ -12,7 +12,6 @@ import {
     POIsubtitle,
     POItitle, POIwebsite, POIminiMenu, POIminiMenuItem, MenuItem
 } from "@/styles/map";
-import {useSearchParams} from "next/navigation";
 import {useRouter} from "next/router";
 import {useDebounceCallback} from "usehooks-ts";
 import useTranslation from "next-translate/useTranslation";
@@ -22,7 +21,6 @@ import Image from "next/image";
 import PlaceIcon from '@mui/icons-material/Place';
 import PublicIcon from '@mui/icons-material/Public';
 import {Separator} from "@/styles/universal";
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import BeenhereIcon from '@mui/icons-material/Beenhere';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import RouteIcon from '@mui/icons-material/Route';
@@ -30,7 +28,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import PhoneIcon from '@mui/icons-material/Phone';
 import {useGExplorerStore} from "@/state";
 import POIs from "../../public/geo/poi.json";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // TODO: move to separate types file
 type POIProperties = {
@@ -48,21 +45,13 @@ export default function MapPage() {
     const {lang} = useTranslation("map");
     const [menuOpen, setMenuOpen] = useState(false);
     const mapContainer = useRef<HTMLDivElement>(null);
-    const map = useRef<null | mapboxgl.Map>(null);
-    const mapParams = useSearchParams();
     const router = useRouter();
-    const params = new URLSearchParams(mapParams.toString());
     const replaceRouter = useDebounceCallback(router.replace, 500);
-
-    const [zoomLoaded, setZoomLoaded] = useState(false);
-    const [centerLoaded, setCenterLoaded] = useState(false);
-
     const [POI, setPOI] = useState<POIProperties | null>(null)
-    const selected = mapParams.get("select");
 
     useEffect(() => {
-        if (map.current) return; // initialize map only once
-        map.current = new mapboxgl.Map({
+        const params = new URLSearchParams(window.location.search);
+        const map = new mapboxgl.Map({
             //@ts-ignore
             container: mapContainer.current,
             default: false,
@@ -73,40 +62,71 @@ export default function MapPage() {
             zoom: 11,
         });
 
-        map.current.on('move', () => {
-            params.set("lng", String(map.current?.getCenter().lng));
-            params.set("lat", String(map.current?.getCenter().lat));
-            params.set("zoom", String(map.current?.getZoom()));
+        map.on('move', () => {
+            params.set("lng", String(map.getCenter().lng));
+            params.set("lat", String(map.getCenter().lat));
+            params.set("zoom", String(map.getZoom()));
             replaceRouter(router.pathname + '?' + params)
         });
 
-        map.current.on('load', () => {
-            if (!map.current) return;
-            map.current?.resize();
+        map.on('load', () => {
+            const lng = params.get("lng");
+            const lat = params.get("lat");
+            const zoom = params.get("zoom");
+            const selected = params.get("select");
+            if (lng !== null && lat !== null) {
+                map.setCenter({lng: Number(lng), lat: Number(lat)})
+            }
+            if (zoom !== null) {
+                map.setZoom(Number(zoom))
+            }
+            if (selected !== null) {
+                for (let i = 0; i < POIs.features.length; i++) {
+                    if (POIs.features[i].properties.id === selected) {
+                        // @ts-ignore it works
+                        setPOI(POIs.features[i].properties)
+                        setMenuOpen(true);
+                        map.flyTo({
+                            // @ts-ignore coordinates exist in geometry
+                            center: POIs.features[i].geometry.coordinates,
+                            zoom: 16
+                        })
+                    }
+                }
+            }
+
+            map.addSource("mapbox-dem", {
+                type: "raster-dem",
+                url: "mapbox://mapbox.mapbox-terrain-dem-v1",
+                tileSize: 512,
+            });
+            map.setTerrain({source: "mapbox-dem"});
+
+            map.resize();
             let labels = ['country-label', 'state-label',
                 'airport-label', 'poi-label', 'water-point-label',
                 'water-line-label', 'natural-point-label',
                 'natural-line-label', 'waterway-label', 'road-label'];
 
             labels.forEach((label => {
-                map.current?.setLayoutProperty(label, 'text-field', [
+                map.setLayoutProperty(label, 'text-field', [
                     'get',
                     `name_${lang !== "pl" ? lang : "en"}`
                 ]);
             }));
 
-            map.current?.addSource("g-poi", {
+            map.addSource("g-poi", {
                 type: "geojson",
-                data: "/geo/poi.json"
+                data: POIs as any
             });
 
-            map.current?.loadImage("/logos/gexplorer_logo.png", (e, image) => {
+            map.loadImage("/logos/gexplorer_logo.png", (e, image) => {
                 if (e) throw e;
                 if (image === undefined) throw ":(";
-                map.current?.addImage("gexplorer-icon", image);
+                map.addImage("gexplorer-icon", image);
             });
 
-            map.current?.addLayer({
+            map.addLayer({
                 "id": "gdansk-layer",
                 "type": "symbol",
                 "source": "g-poi",
@@ -118,25 +138,10 @@ export default function MapPage() {
                     "icon-size": 0.025
                 }
             });
-
-            if (selected !== null) {
-                for (let i = 0; i < POIs.features.length; i++) {
-                    if (POIs.features[i].properties.id === selected) {
-                        // @ts-ignore it works
-                        setPOI(POIs.features[i].properties)
-                        setMenuOpen(true);
-                        map.current?.flyTo({
-                            // @ts-ignore coordinates exist in geometry
-                            center: POIs.features[i].geometry.coordinates,
-                            zoom: 16
-                        })
-                    }
-                }
-            }
         });
 
-        map.current?.on('click', (event) => {
-            const features = map.current?.queryRenderedFeatures(event.point, {
+        map.on('click', (event) => {
+            const features = map.queryRenderedFeatures(event.point, {
                 layers: ['gdansk-layer']
             });
             if (!features?.length) {
@@ -146,33 +151,16 @@ export default function MapPage() {
             if (feature.properties) {
                 setPOI(feature.properties as POIProperties);
             }
-            map.current?.flyTo({
+            map.flyTo({
                 // @ts-ignore coordinates exist in geometry
                 center: feature.geometry.coordinates,
                 zoom: 16
             }, event)
             setMenuOpen(true);
         });
-        return () => {
-            console.warn("remove")
-            map.current?.remove();
-            map.current = null;
-        }
-    }, []); // eslint is whining here, but we do NOT want to reinitialize the map on every prop change trust me
 
-    useEffect(() => {
-        if (!zoomLoaded && router.query.zoom) {
-            map.current?.setZoom(Number(router.query.zoom))
-            setZoomLoaded(true)
-        }
-    }, [router.query.zoom, zoomLoaded]);
-
-    useEffect(() => {
-        if (!centerLoaded && router.query.lng && router.query.lat) {
-            map.current?.setCenter({lng: Number(router.query.lng), lat: Number(router.query.lat)})
-            setCenterLoaded(true)
-        }
-    }, [router.query.lng, router.query.lat, centerLoaded])
+        return () => map.remove();
+    }, []);
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
