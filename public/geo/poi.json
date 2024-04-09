@@ -1,0 +1,95 @@
+{
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "example",
+        "title": "example",
+        "type": "Example",
+        "description": "lorem impsum coś tam coś tam",
+        "website": "https://example.com/"
+      },
+      "geometry": {
+        "coordinates": [
+          18.651661167340762,
+          54.34922187793481
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "stadion",
+        "title": "Polsat Plus Arena Gdańsk",
+        "type": "Stadion",
+        "description": "Wybudowany na Euro 2012 supernowoczesny stadion, na którym rozgrywane są mecze ligowe, pucharowe i międzynarodowe.",
+        "image": "stadion.jpg",
+        "address": "Pokoleń Lechii Gdańsk 1, 80-560 Gdańsk",
+        "website": "https://polsatplusarenagdansk.pl/"
+      },
+      "geometry": {
+        "coordinates": [
+          18.640329719849717,
+          54.389942535723776
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ww2-museum",
+        "title": "Muzeum II Wojny Światowej w Gdańsku",
+        "type": "Muzeum",
+        "description": "Nowoczesne muzeum o charakterystycznej bryle poświęcone losom Polaków podczas II wojny światowej.",
+        "phone": "58 760 09 60",
+        "address": "plac Władysława Bartoszewskiego 1, 80-862 Gdańsk",
+        "website": "https://muzeum1939.pl/"
+      },
+      "geometry": {
+        "coordinates": [
+          18.66093537712061,
+          54.356012391308695
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "zsl",
+        "title": "Zespół Szkół Łączności Im. Obrońców Poczty Polskiej Gdańsk",
+        "type": "Szkoła",
+        "address": "Podwale Staromiejskie 51, 80-845 Gdańsk",
+        "website": "https://waszaedukacja.pl/"
+      },
+      "geometry": {
+        "coordinates": [
+          18.657053699565495,
+          54.353999372784415
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "westerplatte",
+        "title": "Westerplatte",
+        "type": "Miejsce historyczne",
+        "description": "Dawny obszar wojskowy i miejsce pierwszej inwazji w II wojnie światowej, obecnie z wielkim kamiennym pomnikiem.",
+        "address": "80-001 Gdańsk",
+        "website": "https://gdansk.pl/"
+      },
+      "geometry": {
+        "coordinates": [
+          18.666969149382737,
+          54.40670154239365
+        ],
+        "type": "Point"
+      }
+    }
+  ],
+  "type": "FeatureCollection"
+}

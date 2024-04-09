@@ -1,0 +1,17 @@
+{
+  "pageSettings": "Page Settings",
+  "pageTheme": "Theme",
+  "pageLanguage": "Language",
+  "theme": {
+    "prefer": "System preferred",
+    "light": "Light",
+    "dark": "Dark",
+    "other": "Other"
+  },
+  "language": {
+    "prefer": "System preferred",
+    "pl": "Polish (Polski)",
+    "en": "English",
+    "de": "German (Deutsch)"
+  }
+}

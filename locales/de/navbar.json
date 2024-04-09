@@ -1,19 +1,10 @@
 {
+  "achievements": "Erfolge",
+  "map": "Mappe",
+  "account": "akounten",
+
   "login": "Anmelden",
   "logout": "Abmelden",
   "home": "Hauptseite",
-  "achievements": "Erfolge",
-  "leaderboard": "Bestenliste",
-  "pageTheme": "ThemeDE",
-  "pageLanguage": "LanguageDE",
-  "theme": {
-    "light": "Hell",
-    "dark": "Dunkel",
-    "other": "Andere"
-  },
-  "language": {
-    "pl": "Polnisch (Polski)",
-    "en": "Englisch (English)",
-    "de": "Deutsch"
-  }
+  "leaderboard": "Bestenliste"
 }

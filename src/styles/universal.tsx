@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import {ReactNode} from "react";
 import Box from "@mui/material/Box";
+import {Property} from "csstype";
 
 export const MainLayout = ({children}: {children: ReactNode | null}) => <Layout><CenterLayout>{children}</CenterLayout></Layout>;
 
 export const Layout = styled.div`
-  min-height: calc(100% - var(--footer-height)*1.36 + 1px);
   display: grid;
   grid-template-columns: 1fr min(60rem, 100%) 1fr;
 
@@ -26,12 +26,15 @@ export const CenterLayout = styled.main`
 
 export const StandardBox = styled(Box)<{$disableBoxShadow?: boolean}>`
   border-radius: 1rem;
-  background-color: var(--global-secondary-background-color);
+  background-color: var(--primary);
   padding: 1rem;
-  margin-top: 1rem;
   ${props => props.$disableBoxShadow && !props.$disableBoxShadow ? "" : "box-shadow: 0 .25rem .25rem rgba(0,0,0,50%);"}
   justify-self: center;
-  color: var(--global-secondary-text-color);
+  color: var(--primaryText);
+  
+  @media (max-width: 700px) {
+    border-radius: 0;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -42,3 +45,9 @@ const Wrapper = styled.div`
 `;
 
 export const DefaultLayout = ({children}: {children: ReactNode | null}) => <MainLayout><Wrapper>{children}</Wrapper></MainLayout>;
+
+export const Space = ({space}: { space:Property.Padding }) => <div style={{padding: space}} />;
+
+export const Separator = styled.div`
+  border-top: 1px solid #8a8a8a;
+`;

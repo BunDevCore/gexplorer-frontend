@@ -5,20 +5,47 @@ export type FullUser = {
     username: string,
     overallAreaAmount: number,
     joinedAt: string,
-    trips: Trip[],
+    trips: DetailedTrip[],
     tripAmount: number,
-    districtAreas: DistrictAreas;
+    districtAreas: DistrictAreas,
+    achievements: AchievementGet[]
+}
+
+export type AchievementGet = {
+    user: ShortUser,
+    achievementId: string,
+    timeAchieved: string,
+    achievedOnTripId: string
 }
 
 export type DistrictAreas = {
     [key: string]: number
 }
 
+export type DetailedTrip = {
+    id: string,
+    user: ShortUser,
+    area: number,
+    length: number,
+    gpsPolygon: Geometry
+    newArea: number,
+    newAchievements: AchievementGet[],
+    startTime: string,
+    endTime: string,
+    uploadTime: string,
+    starred: boolean,
+}
+
 export type Trip = {
     id: string,
     user: ShortUser,
     area: number,
-    gpsPolygon: Geometry
+    length: number,
+    newArea: number,
+    startTime: string,
+    endTime: string,
+    uploadTime: string,
+    starred: boolean,
 }
 
 export type ShortUser = {
@@ -42,4 +69,10 @@ export type Leaderboard<V> = {
 export type LeaderboardEntry<V> = {
     user: ShortUser,
     value: V,
+}
+
+export type GpxImportErrorKind = "SyntaxError" | "TimeRequired"
+
+export type GpxImportError = {
+    cause: GpxImportErrorKind
 }

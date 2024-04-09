@@ -1,4 +1,5 @@
 import {useGExplorerStore} from "@/state";
+import {BASE_API_URL} from "@/config";
 
 export default function fetcher(key: string) {
     console.log("fetcher called")
@@ -9,9 +10,10 @@ export default function fetcher(key: string) {
         "Authorization": `Bearer ${token}`
     } : {}
 
+    console.log("headers are", headers)
 
     console.warn("pre fetch")
-    let res = fetch(key, {
+    let res = fetch(BASE_API_URL+key, {
         "headers": headers as Record<string, string>
     });
     console.warn("post fetch")

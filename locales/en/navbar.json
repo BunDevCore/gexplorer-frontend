@@ -1,19 +1,10 @@
 {
+  "achievements": "Achievements",
+  "map": "Map",
+  "account": "Account",
+
   "login": "Login",
   "logout": "Logout",
   "home": "Home page",
-  "achievements": "Achievements",
-  "leaderboard": "Leaderboard",
-  "pageTheme": "Theme",
-  "pageLanguage": "Language",
-  "theme": {
-    "light": "Light",
-    "dark": "Dark",
-    "other": "Other"
-  },
-  "language": {
-    "pl": "Polish (Polski)",
-    "en": "English",
-    "de": "German (Deutsch)"
-  }
+  "leaderboard": "Leaderboard"
 }

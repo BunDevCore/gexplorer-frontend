@@ -1,7 +1,7 @@
-import {MainLayout} from "@/styles/universal";
+import {DefaultLayout, StandardBox} from "@/styles/universal";
 import React, {useEffect, useState} from "react";
 import {getCookie, setCookie} from "cookies-next";
-import {LoginBox, LoginDataBox} from "@/styles/login";
+import {LoginDataBox} from "@/styles/login";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -9,15 +9,18 @@ import {TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import {apiUrl} from "@/config";
 import useTranslation from "next-translate/useTranslation";
+import {useRouter} from "next/router";
 
-export default function Login() {
-    const {t} = useTranslation("login");
+export default function LoginComponent() {
+    const {t} = useTranslation("account");
     const [user, setUser] = useState("");
-    const [login, setLogin] = useState(0);
+    const [login, setLogin] = useState(false);
     const [loginLabel, setLoginLabel] = useState("loginBaseLabel");
-    const [passLabel, setPassLabel] = useState("");
+    const [passLabel, setPassLabel] = useState("passBaseLabel");
     const [pass, setPass] = useState("");
     const [passAgain, setPassAgain] = useState("");
+    const [email, setEmail] = useState("");
+    const router = useRouter();
 
     useEffect(() => {
         let t = getCookie("token");
@@ -33,20 +36,11 @@ export default function Login() {
                 if (res.status === 401) {
                     return;
                 } else {
-                    window.location.replace("/");
+                    await router.replace("/")
                 }
             })();
         }
     }, [])
-
-    useEffect(() => {
-        document.title = `Geledit - ${login === 1 ? "Rejestracja" : "Loginizacja"}`;
-        setPassLabel("")
-    }, [login]);
-
-    const changeLogin = (event: React.SyntheticEvent, newValue: number) => {
-        setLogin(newValue);
-    };
 
     const handleLogin = (_event: React.MouseEvent<HTMLButtonElement>) => {
         (async () => {
@@ -69,16 +63,15 @@ export default function Login() {
                 let data = await res.text();
                 setCookie("token", data, {
                     sameSite: "lax",
-                    // httpOnly:
                 });
-                window.location.replace("/");
+                await router.replace("/")
             }
         })();
     };
 
     const handleKeyUp = (event: any) => {
         if (event.key === "Enter") {
-            if (login === 0) {
+            if (login) {
                 handleLogin(event)
             } else {
                 handleRegister(event)
@@ -88,7 +81,7 @@ export default function Login() {
 
     const handleRegister = (_event: React.MouseEvent<HTMLButtonElement>) => {
         setLoginLabel("loginBaseLabel")
-        if (/ /g.test(user)) {
+        if (/\s/g.test(user)) {
             setLoginLabel("loginNotContainsSpace")
             return;
         }
@@ -98,7 +91,7 @@ export default function Login() {
         }
 
         setPassLabel("")
-        if (/ /g.test(pass)) {
+        if (/\s/g.test(pass)) {
             setPassLabel("passNotContainsSpace")
             return;
         }
@@ -120,7 +113,8 @@ export default function Login() {
                 },
                 body: JSON.stringify({
                     "userName": user,
-                    "password": pass
+                    "password": pass,
+                    "email": email
                 })
             });
             if (res.status === 422) {
@@ -131,38 +125,46 @@ export default function Login() {
             setCookie("token", data, {
                 sameSite: "lax",
             });
-            window.location.replace("/");
+            await router.replace("/")
         })();
     };
 
-    return <MainLayout>
-        <LoginBox>
+    return <DefaultLayout>
+        <StandardBox style={{margin: "0 10rem"}}>
             <Box sx={{paddingBottom: "1rem"}}>
-                <Tabs value={login} onChange={changeLogin} aria-label="login tabs" centered>
+                <Tabs value={Number(login)} onChange={(_, v) => setLogin(v)} aria-label="login tabs" centered>
                     <Tab label={t("labelLogin")}/>
                     <Tab label={t("labelRegister")}/>
                 </Tabs>
             </Box>
             <LoginDataBox>
-                <TextField id="login-name" label={t("login")} variant="filled"
-                           helperText={login === 1 ? t(loginLabel).toString() : t("loginBaseLabel").toString()}
-                           required error={loginLabel !== "loginBaseLabel" && login === 1}
+                <TextField id="login-name" label={t("login")} variant="outlined"
+                           helperText={t(login ? loginLabel : "").toString()}
+                           required error={loginLabel !== "loginBaseLabel" && login}
                            onChange={(e) => setUser(e.target.value)}
                            onKeyUp={handleKeyUp}/>
-                <TextField id="login-password" label={t("password")} variant="filled"
-                           helperText={t(passLabel).toString()} type="password" required error={passLabel !== ""}
+
+                <TextField sx={{display: !login ? "none" : ""}} id="login-password-again"
+                           label={t("labelEmail")} variant="outlined" type="email" required
+                           error={false}
+                           onChange={(e) => setEmail(e.target.value)}
+                           onKeyUp={handleKeyUp}/>
+
+                <TextField id="login-password" label={t("password")} variant="outlined"
+                           helperText={t(login ? passLabel : "").toString()} type="password" required
+                           error={passLabel !== "passBaseLabel" && passLabel !== ""}
                            onChange={(e) => setPass(e.target.value)}
                            onKeyUp={handleKeyUp}/>
-                <Button sx={{display: login === 1 ? "none" : ""}} variant="contained" onClick={handleLogin}>
+                <Button sx={{display: login ? "none" : ""}} variant="contained" onClick={handleLogin}>
                     {t("labelLogin")}</Button>
-                <TextField sx={{display: login === 0 ? "none" : ""}} id="login-password-again"
-                           label={t("labelPassAgain")} variant="filled" type="password" required
+                <TextField sx={{display: !login ? "none" : ""}} id="login-password-again"
+                           label={t("labelPassAgain")} variant="outlined" type="password" required
                            error={pass !== passAgain}
                            onChange={(e) => setPassAgain(e.target.value)}
                            onKeyUp={handleKeyUp}/>
-                <Button sx={{display: login === 0 ? "none" : ""}} variant="contained" onClick={handleRegister}
+                <Button sx={{display: !login ? "none" : ""}} variant="contained" onClick={handleRegister}
                 >{t("labelRegister")}</Button>
             </LoginDataBox>
-        </LoginBox>
-    </MainLayout>;
+        </StandardBox>
+    </DefaultLayout>;
 }

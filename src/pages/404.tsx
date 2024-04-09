@@ -8,8 +8,8 @@ export default function E404() {
     return <MainLayout>
         <ErrorBox>
             <Code>404</Code>
-            <Name>NOT FOUND</Name>
-            <Desc>the page you are looking for was not found</Desc>
+            <Name>{t("e404")}</Name>
+            <Desc>{t("eDesc404")}</Desc>
         </ErrorBox>
     </MainLayout>;
 }

@@ -1,33 +1,35 @@
 * {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 
-  /* IDE help */
-  --navbar-background-color: black;
-  --footer-background-color: black;
-  --footer-color: black;
-  --global-background-color: black;
-  --global-text-color: black;
-  --global-secondary-background-color: black;
-  --global-secondary-text-color: black;
-  --accent: black;
-  --secondary-accent: black;
+    /* IDE help */
+    --background: black;
+    --accent: black;
+    --secondary-accent: black;
+    --primary: black;
+    --primaryText: black;
+    --secondary: black;
+    --secondaryText: black;
 }
 
 html,
 body {
-  --navbar-height: 3rem;
-  --footer-height: 14rem;
+    --navbar-height: 4rem;
+    --footer-height: 14rem;
 
-  font-family: "Roboto", "Segoe UI", sans-serif;
-  background-color: #000;
-  scroll-behavior: smooth;
-  scroll-padding-top: var(--navbar-height)
+    font-family: "Roboto", "Segoe UI", sans-serif;
+    background-color: #000000;
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--navbar-height)
 }
 
 html,
 body,
 div#__next {
-  height: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    column-gap: 1.5rem;
 }

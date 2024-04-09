@@ -1,5 +1,4 @@
 import useSWR from "swr";
-import {apiUrl} from "@/config";
 import {useRouter} from "next/router";
 import {useGExplorerStore} from "@/state";
 import {useEffect, useState} from "react";
@@ -17,7 +16,7 @@ export default function TripPage() {
         console.warn(loggedIn)
         if (!triedAuthenticating) return;
         if (!loggedIn) router.push("/login")
-    }, [loggedIn, triedAuthenticating])
+    }, [loggedIn, router, triedAuthenticating])
 
     useEffect(() => {
         const id = router.query.id;
@@ -29,8 +28,9 @@ export default function TripPage() {
 
     console.log("swr")
     console.log(id)
-    const {data, error, isLoading} = useSWR(apiUrl(`/Trip/id/${id}`), fetcher);
+    const {data, error, isLoading} = useSWR(`/Trip/id/${id}`, fetcher);
 
+    if (error) console.log(error)
     if (isLoading || !data) return <p>loading...</p>
 
     console.log("geom", data.geometry)

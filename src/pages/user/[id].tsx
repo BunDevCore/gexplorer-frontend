@@ -1,24 +1,23 @@
 import useSWR from "swr";
-import {apiUrl} from "@/config";
 import {useRouter} from "next/router";
 import {useGExplorerStore} from "@/state";
 import React, {useEffect, useState} from "react";
 import fetcher from "@/fetcher";
 import {CenterLayout, MainLayout} from "@/styles/universal";
-import {Avatar, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
-import {DistrictAreas, FullUser} from "@/types/types";
-import {Geometry, Polygon} from "geojson";
+import {Avatar, Grid} from "@mui/material";
+import {FullUser} from "@/types/types";
+import {Polygon} from "geojson";
 import {UserPaper} from "@/styles/userpage";
 import FollowTheSignsIcon from '@mui/icons-material/FollowTheSigns';
 import useTranslation from "next-translate/useTranslation";
-import AreaCounter from "@/components/AreaCounter";
-import PercentCounter from "@/components/PercentCounter";
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import {makeMultiPolygon} from "@/topologyUtils";
 import TripMap from "@/components/TripMap";
+import {DateTime} from "luxon";
+import {DistrictTable} from "@/components/DistrictTable";
 
 function BigProfileBanner({user}: { user: FullUser }) {
     return <Grid container spacing={2} sx={{padding: 1}}>
@@ -30,44 +29,9 @@ function BigProfileBanner({user}: { user: FullUser }) {
             <h3 style={{display: "inline"}}>{user.overallAreaAmount.toFixed(0)}&nbsp;m<sup>2</sup>&nbsp;</h3>
             <FollowTheSignsIcon/> x{user.tripAmount}
             <hr/>
-            <div><PersonAddAltIcon/> {new Date(Date.parse(user.joinedAt)).toLocaleDateString()}</div>
+            <div><PersonAddAltIcon/> {DateTime.fromISO(user.joinedAt).toLocaleString(DateTime.DATE_MED)}</div>
         </Grid>
     </Grid>
-}
-
-function DistrictTable({areas}: { areas: DistrictAreas }) {
-    const {t} = useTranslation("common");
-    const districts = useGExplorerStore(x => x.districts);
-
-    function calculateDistrictPercentage(id: string, area: number) {
-        return ((area / districts[id].area) * 100);
-    }
-
-    return <TableContainer component={UserPaper} elevation={14}><Table>
-        <TableHead>
-            <TableRow>
-                <TableCell>
-                    {t("districtHeader")}
-                </TableCell>
-                <TableCell>
-                    {t("areaHeader")}
-                </TableCell>
-                <TableCell>
-                    {t("percentHeader")}
-                </TableCell>
-            </TableRow>
-        </TableHead>
-        <TableBody>
-            {Object.entries(areas).map(([areaId, areaAmount]) => {
-                return <TableRow component={"th"} key={areaId}>
-                    <TableCell>{districts[areaId].name ?? "???"}</TableCell>
-                    <TableCell align={"right"}><AreaCounter area={areaAmount}/></TableCell>
-                    <TableCell align={"right"}><PercentCounter
-                        percent={calculateDistrictPercentage(areaId, areaAmount)}/></TableCell>
-                </TableRow>
-            })}
-        </TableBody>
-    </Table></TableContainer>
 }
 
 export default function UserPage() {
@@ -95,8 +59,8 @@ export default function UserPage() {
 
     console.log("swr")
     console.log(id)
-    const userSwr = useSWR<FullUser>(apiUrl(`/User/id/${id}`), fetcher);
-    const polygonSwr = useSWR<Polygon[]>(apiUrl(`/User/id/${id}/polygon`), fetcher);
+    const userSwr = useSWR<FullUser>(`/User/id/${id}`, fetcher);
+    const polygonSwr = useSWR<Polygon[]>(`/User/id/${id}/polygon`, fetcher);
 
     if (userSwr.isLoading || !userSwr.data) return <CenterLayout><p>loading...</p></CenterLayout>
 

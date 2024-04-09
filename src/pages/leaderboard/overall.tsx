@@ -1,11 +1,10 @@
 import useSWR from "swr";
-import {apiUrl} from "@/config";
 import {useRouter} from "next/router";
 import {useGExplorerStore} from "@/state";
 import React, {useEffect, useState} from "react";
 import fetcher from "@/fetcher";
 import {CenterLayout, MainLayout} from "@/styles/universal";
-import {Avatar, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import {Avatar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import {Leaderboard} from "@/types/types";
 import {UserPaper} from "@/styles/userpage";
 import useTranslation from "next-translate/useTranslation";
@@ -61,7 +60,7 @@ export default function OverallLeaderboardPage() {
 
     console.log("swr")
     console.log(id)
-    const leaderboardSwr = useSWR<Leaderboard<number>>(apiUrl(`/Leaderboard/overall`), fetcher);
+    const leaderboardSwr = useSWR<Leaderboard<number>>(`/Leaderboard/overall`, fetcher);
 
     if (leaderboardSwr.isLoading || !leaderboardSwr.data) return <CenterLayout><p>loading...</p></CenterLayout>
 
