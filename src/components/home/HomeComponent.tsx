@@ -8,17 +8,17 @@ export default function HomeComponent() {
     const {t} = useTranslation("home")
     return <DefaultLayout>
         <BoxWithImage>
-            <Image src={"/gdansk.webp"} alt={"gdansk"} fill={true}/>
-            <StandardBox $disableBoxShadow={true}>
+            <Image src={"/gdansk.webp"} alt={"gdansk"} fill={true} style={{paddingBottom: "4rem"}}/>
+            <StandardBox $disableBoxShadow={true} style={{padding: "2rem", fontWeight: "bold", fontSize: "2rem", textAlign: "center"}}>
                 {t("aboutShort")}
             </StandardBox>
         </BoxWithImage>
         <HomeGrid>
             <StandardBox>
-                Lubie pociągi
+                Sprawdź najbliższe przejazdy
             </StandardBox>
             <StandardBox>
-                Lubie tramwaje
+                Sprawdź się! Ile Gdańska zwiedziłeś
             </StandardBox>
             <StandardBox>
                 Lubie autobusy
