@@ -4,14 +4,6 @@ import Link from "next/link";
 export const MapBox = styled.div`
     overflow: hidden;
     height: 100vh;
-    //z-index: 1;
-`;
-
-export const LatLonZoom = styled.div`
-    position: absolute;
-    padding: .25rem;
-    bottom: 0;
-    left: 0;
 `;
 
 export const MenuButton = styled.button<{ $open: boolean }>`
@@ -44,6 +36,7 @@ export const MenuButton = styled.button<{ $open: boolean }>`
 `;
 
 export const MenuBox = styled.div<{ $open: boolean }>`
+    //overflow: hidden;
     display: flex;
     flex-direction: column;
     transition: 300ms;
@@ -123,7 +116,7 @@ export const MapDarkener = styled.div<{ $open: boolean }>`
     bottom: 0;
 `;
 
-export const POIinfo = styled.div`
+export const InfoList = styled.div`
     display: flex;
     flex-direction: column;
     padding-top: 1rem;
@@ -138,7 +131,7 @@ export const POIimage = styled.div`
     }
 `;
 
-export const POItitle = styled.div`
+export const InfoTitle = styled.div`
     padding: 1rem 2rem;
     font-weight: bold;
     font-size: 2rem;
@@ -146,7 +139,7 @@ export const POItitle = styled.div`
     backdrop-filter: brightness(${props => props.theme.type === "dark" ? "120%" : "105%"});
 `;
 
-export const POIsubtitle = styled.p`
+export const InfoSubtitle = styled.p`
     font-size: .9rem;
     font-weight: normal;
     color: var(--primaryText);
@@ -214,4 +207,23 @@ export const POIwebsite = styled.a`
     :hover {
         text-decoration: underline;
     }
+`;
+
+export const DeparturesList = styled.div`
+    display: flex;
+    color: var(--primaryText);
+    flex-direction: column;
+    overflow-y: auto;
+    height: calc(100vh - 186px);
+
+    > div:nth-child(2n) {
+        backdrop-filter: brightness(75%);
+    }
+`;
+
+export const DeparturesListItem = styled.div`
+    padding: 1rem 2rem;
+    display: grid;
+    grid-template-columns: 2rem 1fr 6rem;
+    gap: 1rem;
 `;
