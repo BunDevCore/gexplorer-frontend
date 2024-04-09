@@ -91,6 +91,24 @@ export const MenuLink = styled(Link)`
     }
 `;
 
+export const MenuItem = styled.div`
+    padding: 1rem 2.75rem;
+    display: flex;
+    gap: 2rem;
+    text-decoration: none;
+    color: var(--primaryText);
+    transition: 100ms;
+    > svg {
+        font-size: 2rem;
+    }
+    > p {
+        align-self: center;
+    }
+    :hover {
+        color: var(--accent)
+    }
+`;
+
 export const MapDarkener = styled.div<{ $open: boolean }>`
     pointer-events: ${props => props.$open ? "initial" : "none" };
     z-index: 1;

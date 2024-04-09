@@ -10,7 +10,7 @@ import {
     POIimage,
     POIinfo, POIlist,
     POIsubtitle,
-    POItitle, POIwebsite, POIminiMenu, POIminiMenuItem
+    POItitle, POIwebsite, POIminiMenu, POIminiMenuItem, MenuItem
 } from "@/styles/map";
 import {useSearchParams} from "next/navigation";
 import {useRouter} from "next/router";
@@ -25,21 +25,27 @@ import {Separator} from "@/styles/universal";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import BeenhereIcon from '@mui/icons-material/Beenhere';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import RouteIcon from '@mui/icons-material/Route';
+import SearchIcon from '@mui/icons-material/Search';
 import PhoneIcon from '@mui/icons-material/Phone';
+import {useGExplorerStore} from "@/state";
+import POIs from "../../public/geo/poi.json";
+import {FavoriteBorderOutlined} from "@mui/icons-material";
 
 // TODO: move to separate types file
 type POIProperties = {
-    "title": string
-    "type": string
-    "description": string
-    "image": string
-    "address": string | null
-    "phone": string | null
-    "website": string | null
+    id: string
+    title: string
+    type: string
+    description: string
+    image: string
+    address: string | null
+    phone: string | null
+    website: string | null
 }
 
 export default function MapPage() {
-    const {lang} = useTranslation();
+    const {lang} = useTranslation("map");
     const [menuOpen, setMenuOpen] = useState(false);
     const mapContainer = useRef<HTMLDivElement>(null);
     const map = useRef<null | mapboxgl.Map>(null);
@@ -52,6 +58,7 @@ export default function MapPage() {
     const [centerLoaded, setCenterLoaded] = useState(false);
 
     const [POI, setPOI] = useState<POIProperties | null>(null)
+    const selected = mapParams.get("select");
 
     useEffect(() => {
         if (map.current) return; // initialize map only once
@@ -61,6 +68,7 @@ export default function MapPage() {
             default: false,
             style: 'mapbox://styles/mapbox/streets-v12',
             attributionControl: false,
+            dragRotate: true,
             center: [18.63, 54.35],
             zoom: 11,
         });
@@ -76,7 +84,6 @@ export default function MapPage() {
             if (!map.current) return;
             map.current?.resize();
             let labels = ['country-label', 'state-label',
-                'settlement-label', 'settlement-subdivision-label',
                 'airport-label', 'poi-label', 'water-point-label',
                 'water-line-label', 'natural-point-label',
                 'natural-line-label', 'waterway-label', 'road-label'];
@@ -93,17 +100,39 @@ export default function MapPage() {
                 data: "/geo/poi.json"
             });
 
+            map.current?.loadImage("/logos/gexplorer_logo.png", (e, image) => {
+                if (e) throw e;
+                if (image === undefined) throw ":(";
+                map.current?.addImage("gexplorer-icon", image);
+            });
+
             map.current?.addLayer({
                 "id": "gdansk-layer",
-                "type": "circle",
+                "type": "symbol",
                 "source": "g-poi",
-                'paint': {
-                    "circle-radius": 4,
-                    "circle-stroke-width": 2,
-                    "circle-color": "#cf0000",
-                    "circle-stroke-color": "black"
+                "layout": {
+                    "icon-rotate": 180,
+                    "icon-keep-upright": true,
+                    "icon-rotation-alignment": "viewport",
+                    "icon-image": "gexplorer-icon",
+                    "icon-size": 0.025
                 }
             });
+
+            if (selected !== null) {
+                for (let i = 0; i < POIs.features.length; i++) {
+                    if (POIs.features[i].properties.id === selected) {
+                        // @ts-ignore it works
+                        setPOI(POIs.features[i].properties)
+                        setMenuOpen(true);
+                        map.current?.flyTo({
+                            // @ts-ignore coordinates exist in geometry
+                            center: POIs.features[i].geometry.coordinates,
+                            zoom: 16
+                        })
+                    }
+                }
+            }
         });
 
         map.current?.on('click', (event) => {
@@ -129,7 +158,7 @@ export default function MapPage() {
             map.current?.remove();
             map.current = null;
         }
-    }, []); // eslint is whining here but we do NOT want to reinitialize the map on every prop change trust me
+    }, []); // eslint is whining here, but we do NOT want to reinitialize the map on every prop change trust me
 
     useEffect(() => {
         if (!zoomLoaded && router.query.zoom) {
@@ -148,15 +177,6 @@ export default function MapPage() {
     const toggleMenu = () => {
         setPOI(null);
         setMenuOpen(!menuOpen);
-    }
-
-    // TODO: if logged try to send request
-    const save = () => {
-        // redirect("/");
-    }
-
-    const been = () => {
-        // redirect("/");
     }
 
     const menuIconX = 10;
@@ -198,43 +218,70 @@ export default function MapPage() {
             </svg>
         </MenuButton>
         <MenuBox $open={menuOpen}>
-            {POI === null ?
-                <>
-                    <MenuTitle href={"/"}>Gexplorer</MenuTitle>
-                    <MenuLink href="/"><HomeIcon/> <p>Strona Główna</p></MenuLink>
-                </> :
-                <>
-                    <MenuTitle href={"/"}>Gexplorer</MenuTitle>
-                    <POIinfo>
-                        <POIimage>
-                            <Image src={"/geo/images/" + POI.image} alt={POI.title} fill={true}/>
-                        </POIimage>
-                        <POItitle>
-                            {POI.title}
-                            <POIsubtitle>
-                                {POI.type}
-                            </POIsubtitle>
-                        </POItitle>
-                        <POIminiMenu>
-                            <POIminiMenuItem onClick={save}>
-                                <i><FavoriteIcon/></i> <p>Zapisz</p>
-                            </POIminiMenuItem>
-                            <POIminiMenuItem onClick={been}>
-                                <i><BeenhereIcon/></i> <p>Zwiedzone</p>
-                            </POIminiMenuItem>
-                        </POIminiMenu>
-                        {POI.description ? <Separator/> : <></>}
-                        {POI.description ? <POIdesc>{POI.description}</POIdesc> : <></>}
-                        <Separator/>
-                        <POIlist>
-                            {POI.address ? <POIlistItem><PlaceIcon/> <p>{POI.address}</p></POIlistItem> : <></>}
-                            {POI.phone ? <POIlistItem><PhoneIcon/> <p>{POI.phone}</p></POIlistItem> : <></>}
-                            {POI.website ? <POIlistItem><PublicIcon/> <POIwebsite href={POI.website}>{POI.website}</POIwebsite></POIlistItem> : <></>}
-                        </POIlist>
-                    </POIinfo>
-                </>
-            }
+            {POI === null ? <MapMenu/> : <SelectedPOI POI={POI}/>}
         </MenuBox>
         <MapDarkener $open={menuOpen} onClick={toggleMenu}/>
     </div>;
+}
+
+const MapMenu = () => {
+    const {t} = useTranslation("map")
+    return <>
+        <MenuTitle href={"/"}>Gexplorer</MenuTitle>
+        <MenuLink href="/"><HomeIcon/> <p>{t("home", null, {ns: "navbar"})}</p></MenuLink>
+        <MenuItem><SearchIcon/> <p>{t("search")}</p></MenuItem>
+        <MenuItem><RouteIcon/> <p>{t("routes")}</p></MenuItem>
+        <MenuItem><FavoriteIcon/> <p>{t("saved")}</p></MenuItem>
+    </>
+}
+
+const SelectedPOI = ({POI}: {POI: POIProperties}) => {
+    const router = useRouter()
+    const {t} = useTranslation("poi");
+    const loggedIn = useGExplorerStore(s => s.loggedIn);
+
+    // TODO: if logged try to send request
+    const save = () => {
+        if (!loggedIn) {
+            router.push("/account?cb=/map?select="+POI.id)
+        }
+    }
+
+    const been = () => {
+        if (!loggedIn) {
+            router.push("/account?cb=/map?select="+POI.id)
+        }
+    }
+
+    return <>
+        <MenuTitle href={"/"}>Gexplorer</MenuTitle>
+        <POIinfo>
+            <POIimage>
+                <Image src={"/geo/images/" + POI.image} alt={POI.title} fill={true}/>
+            </POIimage>
+            <POItitle>
+                {POI.title}
+                <POIsubtitle>
+                    {POI.type}
+                </POIsubtitle>
+            </POItitle>
+            <POIminiMenu>
+                <POIminiMenuItem onClick={save}>
+                    <i><FavoriteIcon/></i> <p>{t("save", null, {ns: "map"})}</p>
+                </POIminiMenuItem>
+                <POIminiMenuItem onClick={been}>
+                    <i><BeenhereIcon/></i> <p>{t("visited", null, {ns: "map"})}</p>
+                </POIminiMenuItem>
+            </POIminiMenu>
+            {POI.description ? <Separator/> : <></>}
+            {POI.description ? <POIdesc>{POI.description}</POIdesc> : <></>}
+            <Separator/>
+            <POIlist>
+                {POI.address ? <POIlistItem><PlaceIcon/> <p>{POI.address}</p></POIlistItem> : <></>}
+                {POI.phone ? <POIlistItem><PhoneIcon/> <p>{POI.phone}</p></POIlistItem> : <></>}
+                {POI.website ? <POIlistItem><PublicIcon/> <POIwebsite
+                    href={POI.website}>{POI.website}</POIwebsite></POIlistItem> : <></>}
+            </POIlist>
+        </POIinfo>
+    </>
 }

@@ -7,6 +7,7 @@ module.exports = {
         "/account": ["account"],
         "/about": ["about"],
         "/settings": ["settings"],
-        "/upload": ["upload"]
+        "/upload": ["upload"],
+        "/map": ["map", "poi"]
     },
 }

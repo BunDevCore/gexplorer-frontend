@@ -8,13 +8,13 @@ import "../styles/globals.css";
 import {getTheme} from "@/theme/theme";
 import type {Theme, ThemeName} from "@/types/theme";
 import type {AppProps} from "next/app";
-import type { LocaleName} from "@/types/settings";
+import type {LocaleName} from "@/types/settings";
 import {useGExplorerStore} from "@/state";
 import mapboxgl from "mapbox-gl";
 import {apiUrl} from "@/config";
 import setLanguage from "next-translate/setLanguage";
 import {usePathname} from "next/navigation";
-import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles';
+import {ThemeProvider as MuiThemeProvider, createTheme} from '@mui/material/styles';
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -25,7 +25,7 @@ const muiTheme = (theme: Theme) => {
     return createTheme({
         palette: {
             mode: theme.type
-,            primary: {
+            , primary: {
                 main: theme.accent
             }
         },
@@ -114,19 +114,19 @@ const App = ({Component, pageProps}: AppProps) => {
         }
     }, [token]);
 
-    return <ThemeProvider theme={getTheme(themeName)}>
-        <MuiThemeProvider theme={muiTheme(getTheme(themeName))}>
+    return <MuiThemeProvider theme={muiTheme(getTheme(themeName))}>
+        <ThemeProvider theme={getTheme(themeName)}>
             <GlobalStyles theme={getTheme(themeName)}/>
             <Head key="main">
                 <link href="/logos/gexplorer_logo.svg" rel="icon" type="image/svg"/>
                 <title>GExplorer</title>
             </Head>
             {usePathname() === "/map" || <Navbar/>}
-            <ToastContainer />
+            <ToastContainer/>
             <Component {...pageProps} theme={{get: themeName, set: setThemeName}}/>
             {usePathname() === "/map" || <Footer/>}
-        </MuiThemeProvider>
-    </ThemeProvider>;
+        </ThemeProvider>
+    </MuiThemeProvider>;
 }
 
 export default App;
