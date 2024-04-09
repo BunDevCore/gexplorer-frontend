@@ -41,7 +41,7 @@ export const GexplorerIcon = styled.div`
     width: 6rem;
     position: fixed;
     left: 50%;
-    top: 3rem;
+    top: 3.5rem;
     transform: translateX(-50%);
     z-index: 999999;
 

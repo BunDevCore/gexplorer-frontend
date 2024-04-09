@@ -121,8 +121,8 @@ const App = ({Component, pageProps}: AppProps) => {
                 <title>GExplorer</title>
             </Head>
             {usePathname() === "/map" || <Navbar/>}
-            <ToastContainer/>
             <Component {...pageProps} theme={{get: themeName, set: setThemeName}}/>
+            <div style={{position: "absolute"}}><ToastContainer/></div>
             {usePathname() === "/map" || <Footer/>}
         </ThemeProvider>
     </MuiThemeProvider>;
