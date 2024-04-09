@@ -4,7 +4,6 @@ import {createGlobalStyle, ThemeProvider} from "styled-components";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Head from "next/head";
-import "../styles/globals.css";
 import {getTheme} from "@/theme/theme";
 import type {Theme, ThemeName} from "@/types/theme";
 import type {AppProps} from "next/app";
@@ -17,15 +16,15 @@ import {usePathname} from "next/navigation";
 import {ThemeProvider as MuiThemeProvider, createTheme} from '@mui/material/styles';
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import "../styles/globals.css";
 
 mapboxgl.accessToken = "pk.eyJ1IjoiaW5maW5pZmVuIiwiYSI6ImNsZ21uc3d1YjA3b2QzZW1tcWQ4ZWhuZ3kifQ.ide6_yWZQVDRD546IXsfDw"
-
 
 const muiTheme = (theme: Theme) => {
     return createTheme({
         palette: {
-            mode: theme.type
-            , primary: {
+            mode: theme.type,
+            primary: {
                 main: theme.accent
             }
         },

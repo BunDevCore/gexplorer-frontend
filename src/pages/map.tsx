@@ -28,6 +28,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import PhoneIcon from '@mui/icons-material/Phone';
 import {useGExplorerStore} from "@/state";
 import POIs from "../../public/geo/poi.json";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 // TODO: move to separate types file
 type POIProperties = {
@@ -51,35 +52,30 @@ export default function MapPage() {
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
+        const lng = Number(params.get("lng") ?? 18.63);
+        const lat = Number(params.get("lat") ?? 54.35);
+        const zoom = Number(params.get("zoom") ?? 11);
         const map = new mapboxgl.Map({
-            //@ts-ignore
+            // @ts-ignore
             container: mapContainer.current,
             default: false,
             style: 'mapbox://styles/mapbox/streets-v12',
             attributionControl: false,
             dragRotate: true,
-            center: [18.63, 54.35],
-            zoom: 11,
+            center: [lng, lat],
+            zoom: zoom,
         });
 
         map.on('move', () => {
             params.set("lng", String(map.getCenter().lng));
             params.set("lat", String(map.getCenter().lat));
             params.set("zoom", String(map.getZoom()));
+            params.delete("select");
             replaceRouter(router.pathname + '?' + params)
         });
 
         map.on('load', () => {
-            const lng = params.get("lng");
-            const lat = params.get("lat");
-            const zoom = params.get("zoom");
             const selected = params.get("select");
-            if (lng !== null && lat !== null) {
-                map.setCenter({lng: Number(lng), lat: Number(lat)})
-            }
-            if (zoom !== null) {
-                map.setZoom(Number(zoom))
-            }
             if (selected !== null) {
                 for (let i = 0; i < POIs.features.length; i++) {
                     if (POIs.features[i].properties.id === selected) {
@@ -121,9 +117,9 @@ export default function MapPage() {
             });
 
             map.loadImage("/logos/gexplorer_logo.png", (e, image) => {
-                if (e) throw e;
-                if (image === undefined) throw ":(";
-                map.addImage("gexplorer-icon", image);
+                if (!e && image !== undefined) {
+                    map.addImage("gexplorer-icon", image);
+                }
             });
 
             map.addLayer({
@@ -157,6 +153,8 @@ export default function MapPage() {
                 zoom: 16
             }, event)
             setMenuOpen(true);
+            params.set("select", feature.properties?.id);
+            replaceRouter(router.pathname + '?' + params)
         });
 
         return () => map.remove();

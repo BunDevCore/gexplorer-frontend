@@ -4,7 +4,7 @@ import Link from "next/link";
 export const MapBox = styled.div`
     overflow: hidden;
     height: 100vh;
-    z-index: -1;
+    //z-index: 1;
 `;
 
 export const LatLonZoom = styled.div`
