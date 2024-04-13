@@ -44,7 +44,7 @@ export default function MapPage() {
     const [menuOpen, setMenuOpen] = useState(false);
     const mapContainer = useRef<HTMLDivElement>(null);
     const router = useRouter();
-    const replaceRouter = useDebounceCallback(router.replace, 500);
+    const replaceRouter = useDebounceCallback((url) => router.replace(url, undefined, {shallow: true}), 500);
     const [dataProperties, setDataProperties] = useState<POIProperties | GAITPropertiesVehicle | GAITPropertiesStop | null>(null)
     const [dataType, setDataType] = useState<"POI" | "vehicle" | "stop" | null>(null)
 
