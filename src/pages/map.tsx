@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from "react";
-import mapboxgl, {GeoJSONSourceRaw, NavigationControl} from "mapbox-gl";
+import mapboxgl, {NavigationControl} from "mapbox-gl";
 import {
     MapBox,
     MapDarkener,
@@ -10,7 +10,7 @@ import {
     POIimage,
     InfoList, POIlist,
     InfoSubtitle,
-    InfoTitle, POIwebsite, POIminiMenu, POIminiMenuItem, MenuItem, DeparturesList, DeparturesListItem
+    InfoTitle, POIwebsite, POIminiMenu, POIminiMenuItem, MenuItem, DeparturesList, DeparturesListItem, BackButton
 } from "@/styles/map";
 import {useRouter} from "next/router";
 import {useDebounceCallback} from "usehooks-ts";
@@ -38,10 +38,8 @@ import {
     POIProperties
 } from "@/types/map";
 import type {GeoJSON} from "geojson";
-import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
 
 export default function MapPage() {
-    const {lang} = useTranslation("map");
     const [menuOpen, setMenuOpen] = useState(false);
     const mapContainer = useRef<HTMLDivElement>(null);
     const router = useRouter();
@@ -64,6 +62,7 @@ export default function MapPage() {
             style: "mapbox://styles/mapbox/streets-v12",
             attributionControl: false,
             dragRotate: true,
+            maxPitch: 50,
             center: [lng, lat],
             zoom: zoom,
             bearing: rot,
@@ -325,12 +324,8 @@ export default function MapPage() {
         setDataProperties(null);
     }
 
-    const toggleMenuOrBack = () => {
-        if (dataProperties !== null) {
-            setMenuOpen(true);
-        } else {
-            setMenuOpen(!menuOpen);
-        }
+    const toggleBack = () => {
+        setMenuOpen(true);
         setDataProperties(null);
     }
 
@@ -358,45 +353,47 @@ export default function MapPage() {
                   content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
         </Head>
         <MapBox ref={mapContainer}/>
-        <MenuButton onClick={toggleMenuOrBack} $open={menuOpen}>
-            {dataProperties !== null ? <svg
-                    width="48"
-                    height="48"
-                    style={{
-                        strokeLinecap: "round",
-                        strokeWidth: 3,
-                        transition: "300ms",
-                        transform: "translate(-50%, -50%)"
-                    }}>
-                    <line x1={18} y1={24} x2={48 - 18} y2={12}/>
-                    <line x1={18} y1={24} x2={48 - 18} y2={48 - 12}/>
-                </svg> :
-                <svg
-                    width="48"
-                    height="48"
-                    style={{
-                        strokeLinecap: "round",
-                        strokeWidth: 2.5,
-                        transition: "300ms",
-                        transform: "translate(-50%, -50%)"
-                    }}>
-                    <line x1={menuIconX} y1={menuIconY - menuIconSpacing} x2={48 - menuIconX}
-                          y2={menuIconY - menuIconSpacing}
-                          style={{
-                              ...menuOpen ? {
-                                  transform: `translate(${menuIconSpacing}px, ${menuIconY - menuIconSpacing}px) rotate(45deg)`
-                              } : {}, transition: "inherit", transformOrigin: "top"
-                          }}/>
-                    <line x1={menuIconX} y1={menuIconY} x2={48 - menuIconX} y2={menuIconY}
-                          style={{opacity: Number(!menuOpen), transition: "inherit"}}/>
-                    <line x1={menuIconX} y1={menuIconY + menuIconSpacing} x2={48 - menuIconX}
-                          y2={menuIconY + menuIconSpacing}
-                          style={{
-                              ...menuOpen ? {
-                                  transform: `translate(${menuIconSpacing}px, -${menuIconY - menuIconSpacing}px) rotate(-45deg)`
-                              } : {}, transition: "inherit", transformOrigin: "bottom"
-                          }}/>
-                </svg>}
+        <BackButton onClick={toggleBack} $open={menuOpen} $dataDisplayed={dataProperties!==null}>
+            <svg
+                width="48"
+                height="48"
+                style={{
+                    strokeLinecap: "round",
+                    strokeWidth: 3,
+                    transition: "300ms",
+                    transform: "translate(-50%, -50%)"
+                }}>
+                <line x1={18} y1={24} x2={48 - 18} y2={12}/>
+                <line x1={18} y1={24} x2={48 - 18} y2={48 - 12}/>
+            </svg>
+        </BackButton>
+        <MenuButton onClick={toggleMenu} $open={menuOpen}>
+            <svg
+                width="48"
+                height="48"
+                style={{
+                    strokeLinecap: "round",
+                    strokeWidth: 2.5,
+                    transition: "300ms",
+                    transform: "translate(-50%, -50%)"
+                }}>
+                <line x1={menuIconX} y1={menuIconY - menuIconSpacing} x2={48 - menuIconX}
+                      y2={menuIconY - menuIconSpacing}
+                      style={{
+                          ...menuOpen ? {
+                              transform: `translate(${menuIconSpacing}px, ${menuIconY - menuIconSpacing}px) rotate(45deg)`
+                          } : {}, transition: "inherit", transformOrigin: "top"
+                      }}/>
+                <line x1={menuIconX} y1={menuIconY} x2={48 - menuIconX} y2={menuIconY}
+                      style={{opacity: Number(!menuOpen), transition: "inherit"}}/>
+                <line x1={menuIconX} y1={menuIconY + menuIconSpacing} x2={48 - menuIconX}
+                      y2={menuIconY + menuIconSpacing}
+                      style={{
+                          ...menuOpen ? {
+                              transform: `translate(${menuIconSpacing}px, -${menuIconY - menuIconSpacing}px) rotate(-45deg)`
+                          } : {}, transition: "inherit", transformOrigin: "bottom"
+                      }}/>
+            </svg>
         </MenuButton>
         <MenuBox $open={menuOpen}>
             {sideBox()}
