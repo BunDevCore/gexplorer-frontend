@@ -274,3 +274,15 @@ export const ChangingListItem = styled.div`
     grid-template-columns: 2rem 1fr 6rem;
     gap: 1rem;
 `;
+
+export const ChangingListFull = styled.div`
+    display: flex;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem;
+`;

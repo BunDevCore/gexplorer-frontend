@@ -1,6 +1,14 @@
 import {GAITPropertiesStop, GAITStopDepartures} from "@/types/map";
 import {useEffect, useState} from "react";
-import {ChangingList, ChangingListItem, InfoList, InfoSubtitle, InfoTitle, MenuTitle} from "@/styles/map";
+import {
+    ChangingList,
+    ChangingListFull,
+    ChangingListItem,
+    InfoList,
+    InfoSubtitle,
+    InfoTitle,
+    MenuTitle
+} from "@/styles/map";
 
 export default function SelectedStops({Stop}: { Stop: GAITPropertiesStop }) {
     const [departures, setDepartures] = useState<{ lastUpdate: string, departures: GAITStopDepartures[] } | null>(null);
@@ -20,7 +28,8 @@ export default function SelectedStops({Stop}: { Stop: GAITPropertiesStop }) {
                 </InfoSubtitle>
             </InfoTitle>
             <ChangingList>
-                {departures === null ? <div>NOTHING TO FIND HERE</div> :
+                {departures === null || departures.departures.length === 0 ?
+                    <ChangingListFull>Ciemno wszęǳie, głucho wszęǳie, Co to bęǳie, co to bęǳie?</ChangingListFull> :
                     departures.departures.map(v => <ChangingListItem key={v.id + v.routeShortName + v.estimatedTime}>
                         <p>{v.routeShortName}</p> <p>{v.headsign}</p>
                         {/* @ts-ignore numbers numbering the numbers */}
