@@ -155,12 +155,6 @@ export const MapDarkener = styled.div<{ $open: boolean }>`
     bottom: 0;
 `;
 
-export const InfoList = styled.div`
-    display: flex;
-    flex-direction: column;
-    padding-top: 1rem;
-`;
-
 export const POIimage = styled.div`
     height: 15rem;
     position: relative;
@@ -168,6 +162,16 @@ export const POIimage = styled.div`
     img {
         object-fit: cover;
     }
+`;
+
+export const InfoList = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+`;
+
+export const InfoRight = styled.span`
+    float: right
 `;
 
 export const InfoTitle = styled.div`
@@ -252,7 +256,7 @@ export const POIwebsite = styled.a`
     }
 `;
 
-export const DeparturesList = styled.div`
+export const ChangingList = styled.div`
     display: flex;
     color: var(--primaryText);
     flex-direction: column;
@@ -264,7 +268,7 @@ export const DeparturesList = styled.div`
     }
 `;
 
-export const DeparturesListItem = styled.div`
+export const ChangingListItem = styled.div`
     padding: 1rem 2rem;
     display: grid;
     grid-template-columns: 2rem 1fr 6rem;

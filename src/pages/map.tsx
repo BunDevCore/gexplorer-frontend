@@ -6,38 +6,32 @@ import {
     MenuBox,
     MenuButton,
     MenuLink,
-    MenuTitle, POIlistItem, POIdesc,
-    POIimage,
-    InfoList, POIlist,
-    InfoSubtitle,
-    InfoTitle, POIwebsite, POIminiMenu, POIminiMenuItem, MenuItem, DeparturesList, DeparturesListItem, BackButton
+    MenuTitle,
+    MenuItem,
+    BackButton
 } from "@/styles/map";
 import {useRouter} from "next/router";
 import {useDebounceCallback} from "usehooks-ts";
 import useTranslation from "next-translate/useTranslation";
 import Head from "next/head";
 import HomeIcon from '@mui/icons-material/Home';
-import Image from "next/image";
-import PlaceIcon from '@mui/icons-material/Place';
-import PublicIcon from '@mui/icons-material/Public';
-import {Separator} from "@/styles/universal";
-import BeenhereIcon from '@mui/icons-material/Beenhere';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import RouteIcon from '@mui/icons-material/Route';
 import SearchIcon from '@mui/icons-material/Search';
-import PhoneIcon from '@mui/icons-material/Phone';
-import {useGExplorerStore} from "@/state";
 import POIs from "../../public/geo/poi.json";
 import "mapbox-gl/dist/mapbox-gl.css";
 import {
     GAITPropertiesStop,
     GAITPropertiesVehicle,
+    GAITRoutes,
     GAITStop,
-    GAITStopDepartures,
     GAITVehicle,
     POIProperties
 } from "@/types/map";
 import type {GeoJSON} from "geojson";
+import SelectedPOI from "@/components/map/POI";
+import SelectedVehicles from "@/components/map/Vehicle";
+import SelectedStops from "@/components/map/Stop";
 
 export default function MapPage() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -233,20 +227,13 @@ export default function MapPage() {
                                 "icon-rotation-alignment": "viewport",
                                 "icon-image": "bus-stop-icon",
                                 "icon-size": [
-                                    "interpolate",
-                                    ["exponential", 1.5],
-                                    ["zoom"],
-                                    14,
-                                    0.125,
-                                    22,
-                                    0.45
+                                    "interpolate", ["exponential", 1.5], ["zoom"],
+                                    14, 0.125,
+                                    22, 0.45
                                 ],
                                 "text-anchor": "top",
                                 "text-offset": [0, 1],
-                                "text-size": [
-                                    'step',
-                                    ['zoom'],
-                                    0,
+                                "text-size": ["step", ["zoom"], 0,
                                     17, 10
                                 ],
                                 "text-field": ["concat", ["get", "name"], " ", ["get", "code"]]
@@ -271,7 +258,12 @@ export default function MapPage() {
                     "paint": {
                         "circle-radius": 6,
                         "circle-stroke-width": 2,
-                        "circle-color": "#97d9ff",
+                        "circle-color": ["case",
+                            ["==", "BUS", ["get", "vehicleType"]], "#0072b4",
+                            ["==", "TRAM", ["get", "vehicleType"]], "#c40000",
+                            ["==", "FERRY", ["get", "vehicleType"]], "#71c6ff",
+                            "#a9a9a9"
+                        ],
                         "circle-stroke-color": "black"
                     }
                 });
@@ -341,7 +333,7 @@ export default function MapPage() {
             case "POI":
                 return <SelectedPOI POI={dataProperties as POIProperties}/>;
             case "vehicle":
-                return <SelectedPOI POI={dataProperties as POIProperties}/>;
+                return <SelectedVehicles Vehicle={dataProperties as GAITPropertiesVehicle}/>;
             case "stop":
                 return <SelectedStops Stop={dataProperties as GAITPropertiesStop}/>;
         }
@@ -413,85 +405,6 @@ const MapMenu = () => {
     </>
 }
 
-const SelectedPOI = ({POI}: { POI: POIProperties }) => {
-    const router = useRouter()
-    const {t} = useTranslation("poi");
-    const loggedIn = useGExplorerStore(s => s.loggedIn);
-
-    // TODO: if logged try to send request
-    const save = () => {
-        if (!loggedIn) {
-            router.push("/account?cb=/map?select=" + POI.id)
-        }
-    }
-    const been = () => {
-        if (!loggedIn) {
-            router.push("/account?cb=/map?select=" + POI.id)
-        }
-    }
-    return <>
-        <MenuTitle href={"/"}>Gexplorer</MenuTitle>
-        <InfoList>
-            <POIimage>
-                <Image src={"/geo/images/" + POI.image} alt={POI.title} fill={true}/>
-            </POIimage>
-            <InfoTitle>
-                {POI.title}
-                <InfoSubtitle>
-                    {POI.category}
-                </InfoSubtitle>
-            </InfoTitle>
-            <POIminiMenu>
-                <POIminiMenuItem onClick={save}>
-                    <i><FavoriteIcon/></i> <p>{t("save", null, {ns: "map"})}</p>
-                </POIminiMenuItem>
-                <POIminiMenuItem onClick={been}>
-                    <i><BeenhereIcon/></i> <p>{t("visited", null, {ns: "map"})}</p>
-                </POIminiMenuItem>
-            </POIminiMenu>
-            {POI.description ? <Separator/> : <></>}
-            {POI.description ? <POIdesc>{POI.description}</POIdesc> : <></>}
-            <Separator/>
-            <POIlist>
-                {POI.address ? <POIlistItem><PlaceIcon/> <p>{POI.address}</p></POIlistItem> : <></>}
-                {POI.phone ? <POIlistItem><PhoneIcon/> <p>{POI.phone}</p></POIlistItem> : <></>}
-                {POI.website ? <POIlistItem><PublicIcon/> <POIwebsite
-                    href={POI.website}>{POI.website}</POIwebsite></POIlistItem> : <></>}
-            </POIlist>
-        </InfoList>
-    </>
-}
-
-const SelectedStops = ({Stop}: { Stop: GAITPropertiesStop }) => {
-    console.log(Stop);
-    const [departures, setDepartures] = useState<{ lastUpdate: string, departures: GAITStopDepartures[] } | null>(null);
-    useEffect(() => {
-        fetch("https://ckan2.multimediagdansk.pl/departures?stopId=" + Stop.id)
-            .then(v => v.json())
-            .then(v => setDepartures(v));
-    }, []);
-
-    return <>
-        <MenuTitle href={"/"}>Gexplorer</MenuTitle>
-        <InfoList>
-            <InfoTitle>
-                {Stop.name}
-                <InfoSubtitle>
-                    {Stop.desc} {Stop.code}
-                </InfoSubtitle>
-            </InfoTitle>
-            <DeparturesList>
-                {departures === null ? <div>NOTHING TO FIND HERE</div> :
-                    departures.departures.map(v => <DeparturesListItem key={v.id + v.routeShortName + v.estimatedTime}>
-                        <p>{v.routeShortName}</p> <p>{v.headsign}</p>
-                        {/* @ts-ignore numbers numbering the numbers */}
-                        <p>{Math.max(Math.floor((new Date(v.estimatedTime) - Date.now()) / 60000), 0)} min</p>
-                    </DeparturesListItem>)}
-            </DeparturesList>
-        </InfoList>
-    </>
-}
-
 async function getGEOjsonVehicles(): Promise<GeoJSON.FeatureCollection<GeoJSON.Geometry>> {
     const geojsonVehicles: GeoJSON.FeatureCollection<GeoJSON.Geometry> = {
         type: "FeatureCollection",
@@ -500,6 +413,10 @@ async function getGEOjsonVehicles(): Promise<GeoJSON.FeatureCollection<GeoJSON.G
     // see: https://ckan.multimediagdansk.pl/dataset/tristar/resource/4c4025f0-01bf-41f7-a39f-d156d201b82b
     let rawDataVehicle = await fetch("https://ckan2.multimediagdansk.pl/gpsPositions?v=2");
     let vehicles: { lastUpdate: string, vehicles: GAITVehicle[] } = await rawDataVehicle.json();
+    let rawData = await fetch("https://ckan.multimediagdansk.pl/dataset/c24aa637-3619-4dc2-a171-a23eec8f2172/resource/22313c56-5acf-41c7-a5fd-dc5dc72b3851/download/routes.json");
+    let jsonData = await rawData.json();
+    let routes: { lastUpdate: string, routes: GAITRoutes[] } = jsonData[new Date().toISOString().split("T")[0]]
+
     for (let i = 0; i < vehicles.vehicles.length; i++) {
         geojsonVehicles.features.push({
             "type": "Feature",
@@ -510,6 +427,7 @@ async function getGEOjsonVehicles(): Promise<GeoJSON.FeatureCollection<GeoJSON.G
                 "name": vehicles.vehicles[i].routeShortName,
                 "generated": vehicles.vehicles[i].generated,
                 "headsign": vehicles.vehicles[i].headsign,
+                "vehicleType": routes.routes.find(v => v.routeId === vehicles.vehicles[i].routeId)?.routeType ?? "UNKNOWN"
             },
             "geometry": {
                 "coordinates": [

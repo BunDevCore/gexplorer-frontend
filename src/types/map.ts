@@ -44,16 +44,29 @@ export type GAITStopDepartures = {
 
 export type GAITPropertiesVehicle = {
     generated: string
+    name: string
     routeShortName: string
-    vehicleCode: string
+    code: string
     headsign: string
 }
 
 export type GAITVehicle = {
+    routeId: number
+    tripId: number
+    vehicleService: string
     generated: string
     routeShortName: string
     vehicleCode: string
     headsign: string
     lat: number
     lon: number
+}
+
+export type GAITRoutes = {
+    routeId: number,
+    agencyId: number,
+    routeShortName: string
+    routeLongName: string
+    activationDate: string
+    routeType: "BUS" | "TRAM" | "FERRY" | "UNKNOWN"
 }
