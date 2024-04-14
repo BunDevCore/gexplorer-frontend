@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from "react";
-import mapboxgl, {NavigationControl} from "mapbox-gl";
+import mapboxgl, {GeoJSONSourceRaw, NavigationControl} from "mapbox-gl";
 import {
     MapBox,
     MapDarkener,
@@ -38,6 +38,7 @@ import {
     POIProperties
 } from "@/types/map";
 import type {GeoJSON} from "geojson";
+import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
 
 export default function MapPage() {
     const {lang} = useTranslation("map");
@@ -185,16 +186,43 @@ export default function MapPage() {
                     type: "geojson",
                     data: geojsonStops
                 });
-                map.addLayer({
-                    "id": "gait-stops-layer",
-                    "type": "circle",
-                    "minzoom": 14,
-                    "source": "gait-stops",
-                    "paint": {
-                        "circle-radius": 4,
-                        "circle-stroke-width": 2,
-                        "circle-color": "#009dff",
-                        "circle-stroke-color": "black"
+
+                map.loadImage("/geo/images/bus-stop.png", (e, image) => {
+                    if (!e && image !== undefined) {
+                        map.addImage("bus-stop-icon", image);
+
+                        map.addLayer({
+                            "id": "gait-stops-layer",
+                            "type": "symbol",
+                            "minzoom": 14,
+                            "source": "gait-stops",
+                            "layout": {
+                                "icon-keep-upright": true,
+                                "icon-rotation-alignment": "viewport",
+                                "icon-image": "bus-stop-icon",
+                                "icon-size": [
+                                    "interpolate",
+                                    ["exponential", 1.5],
+                                    ["zoom"],
+                                    14,
+                                    0.125,
+                                    22,
+                                    0.45
+                                ],
+                                "text-anchor": "top",
+                                "text-offset": [0, 1],
+                                "text-size": [
+                                    'step',
+                                    ['zoom'],
+                                    0,
+                                    17, 10
+                                ],
+                                "text-field": ["concat", ["get", "name"], " ", ["get", "code"]]
+                            },
+                            "paint": {
+                                "icon-color": "blue"
+                            }
+                        });
                     }
                 });
 
@@ -221,8 +249,11 @@ export default function MapPage() {
         const updateVehicleMarkers = setInterval(async () => {
             const geojsonVehicles = await getGEOjsonVehicles();
             if (geojsonVehicles === undefined) return;
-            // @ts-ignore setData exists in getSource when the source is of type geojson smh
-            map.getSource("gait-vehicles")?.setData(geojsonVehicles)
+            let src = map.getSource("gait-vehicles");
+            if (src !== null && src !== undefined) {
+                // @ts-ignore setData exists in getSource when the source is of type geojson smh
+                src.setData(geojsonVehicles);
+            }
         }, 5000);
 
         map.on("click", (event) => {
@@ -245,7 +276,7 @@ export default function MapPage() {
             map.flyTo({
                 // @ts-ignore coordinates exist in geometry
                 center: feature.geometry.coordinates,
-                zoom: 16
+                zoom: dataType === "POI" ? 16 : 18
             }, event)
             setMenuOpen(true);
         });
