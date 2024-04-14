@@ -167,6 +167,8 @@ export default function MapPage() {
                         "type": "symbol",
                         "source": "g-poi",
                         "layout": {
+                            "icon-allow-overlap": true,
+                            "icon-ignore-placement": true,
                             "icon-rotate": 180,
                             "icon-keep-upright": true,
                             "icon-rotation-alignment": "viewport",
@@ -223,7 +225,6 @@ export default function MapPage() {
                             "minzoom": 14,
                             "source": "gait-stops",
                             "layout": {
-                                "icon-keep-upright": true,
                                 "icon-rotation-alignment": "viewport",
                                 "icon-image": "bus-stop-icon",
                                 "icon-size": [
@@ -231,6 +232,10 @@ export default function MapPage() {
                                     14, 0.125,
                                     22, 0.45
                                 ],
+                                "icon-allow-overlap": true,
+                                "icon-ignore-placement": true,
+                                "icon-keep-upright": true,
+                                "text-allow-overlap": true,
                                 "text-anchor": "top",
                                 "text-offset": [0, 1],
                                 "text-size": ["step", ["zoom"], 0,
@@ -250,29 +255,83 @@ export default function MapPage() {
                     type: "geojson",
                     data: geojsonVehicles
                 });
-                map.addLayer({
-                    "id": "gait-vehicles-layer",
-                    "type": "circle",
-                    "minzoom": 12,
-                    "source": "gait-vehicles",
-                    "paint": {
-                        "circle-radius": 6,
-                        "circle-stroke-width": 2,
-                        "circle-color": ["case",
-                            ["==", "BUS", ["get", "vehicleType"]], "#0072b4",
-                            ["==", "TRAM", ["get", "vehicleType"]], "#c40000",
-                            ["==", "FERRY", ["get", "vehicleType"]], "#71c6ff",
-                            "#a9a9a9"
-                        ],
-                        "circle-stroke-color": "black"
-                    }
-                });
+
+                // vehicle point
+                let bus = createImage(map, "/geo/images/bus.png", "bus-icon")
+                let tram = createImage(map, "/geo/images/tram.png", "tram-icon")
+                let ferry = createImage(map, "/geo/images/ferry.png", "ferry-icon")
+                let unknownVehicle = createImage(map, "/geo/images/unknownVehicle.png", "unknown-vehicle-icon")
+                let loadedAllIcons = bus && tram && ferry && unknownVehicle;
+                if (loadedAllIcons) {
+                    map.addLayer({
+                        "id": "gait-vehicles-layer",
+                        "type": "symbol",
+                        "minzoom": 10,
+                        "source": "gait-vehicles",
+                        "layout": {
+                            "text-field": ["get", "name"],
+                            "text-anchor": "center",
+                            "text-allow-overlap": true,
+                            "text-font": ["Arial Unicode MS Bold"],
+                            "text-size": ["interpolate", ["linear"], ["zoom"],
+                                12, 0,
+                                13, 0,
+                                14, 10,
+                                16, 10,
+                                17, 16,
+                                22, 16
+                            ],
+                            "icon-size": ["interpolate", ["linear"], ["zoom"],
+                                12, .2,
+                                13, .2,
+                                14, .2,
+                                15, .2,
+                                16, .35,
+                                17, .35,
+                                22, .35
+                            ],
+                            "icon-allow-overlap": true,
+                            "icon-ignore-placement": true,
+                            "icon-keep-upright": true,
+                            "icon-image": ["case",
+                                ["==", "BUS", ["get", "vehicleType"]], "bus-icon",
+                                ["==", "TRAM", ["get", "vehicleType"]], "tram-icon",
+                                ["==", "FERRY", ["get", "vehicleType"]], "ferry-icon",
+                                "unknown-vehicle-icon"
+                            ],
+                        },
+                        "paint": {
+                            "text-color": "white"
+                        }
+                    });
+                }
+
+                // arrow pointing towards the way
+                // cant offset icon when rotation aligment map
+                // TODO: maybe fix in future with viewport aligment and mapbox Expressions
+                // if (createImage(map, "/geo/images/directionArrow.png", "direction-arrow")) {
+                //     map.addLayer({
+                //         "id": "gait-vehicles-layer-arrow",
+                //         "type": "symbol",
+                //         "minzoom": 15,
+                //         "source": "gait-vehicles",
+                //         "layout": {
+                //             "icon-rotation-alignment": "map",
+                //             "icon-rotate": ["get", "direction"],
+                //             "icon-image": "direction-arrow",
+                //             "icon-size": .25,
+                //             "icon-allow-overlap": true,
+                //             "icon-ignore-placement": true,
+                //             "icon-keep-upright": true,
+                //         }
+                //     });
+                // }
             })();
         });
 
         const updateVehicleMarkers = setInterval(async () => {
             const geojsonVehicles = await getGEOjsonVehicles();
-            if (geojsonVehicles === undefined) return;
+            if (geojsonVehicles === undefined || map === undefined || map === null) return;
             let src = map.getSource("gait-vehicles");
             if (src !== null && src !== undefined) {
                 // @ts-ignore setData exists in getSource when the source is of type geojson smh
@@ -422,12 +481,15 @@ async function getGEOjsonVehicles(): Promise<GeoJSON.FeatureCollection<GeoJSON.G
             "type": "Feature",
             "properties": {
                 "type": "vehicle",
+                "routeId": vehicles.vehicles[i].routeId,
+                "tripId": vehicles.vehicles[i].tripId,
                 "id": "vehicle-" + vehicles.vehicles[i].vehicleCode,
                 "code": vehicles.vehicles[i].vehicleCode,
                 "name": vehicles.vehicles[i].routeShortName,
                 "generated": vehicles.vehicles[i].generated,
                 "headsign": vehicles.vehicles[i].headsign,
-                "vehicleType": routes.routes.find(v => v.routeId === vehicles.vehicles[i].routeId)?.routeType ?? "UNKNOWN"
+                "vehicleType": routes.routes.find(v => v.routeId === vehicles.vehicles[i].routeId)?.routeType ?? "UNKNOWN",
+                "direction": vehicles.vehicles[i].direction
             },
             "geometry": {
                 "coordinates": [
@@ -439,4 +501,18 @@ async function getGEOjsonVehicles(): Promise<GeoJSON.FeatureCollection<GeoJSON.G
         },)
     }
     return geojsonVehicles;
+}
+
+function createImage(map: mapboxgl.Map, url: string, iconName: string): boolean {
+    let ret = true;
+    map.loadImage(url, (e, image) => {
+        if ((e === null || e === undefined) && image !== undefined) {
+            map.addImage(iconName, image);
+        } else {
+            console.warn(e);
+            ret = false;
+        }
+    });
+    return ret;
+
 }

@@ -43,6 +43,8 @@ export type GAITStopDepartures = {
 }
 
 export type GAITPropertiesVehicle = {
+    routeId: number
+    tripId: number
     generated: string
     name: string
     routeShortName: string
@@ -58,6 +60,7 @@ export type GAITVehicle = {
     routeShortName: string
     vehicleCode: string
     headsign: string
+    direction: number
     lat: number
     lon: number
 }
@@ -69,4 +72,16 @@ export type GAITRoutes = {
     routeLongName: string
     activationDate: string
     routeType: "BUS" | "TRAM" | "FERRY" | "UNKNOWN"
+}
+
+export type GAITStopTimes = {
+    stopId: number
+    tripId: number
+    arrivalTime: string
+    stopShortName: string
+    virtual: 1 | 0 | null
+    nonpassenger: 1 | 0 | null
+    depot: 1 | 0 | null
+    onDemand: 1 | 0 | null
+    ticketZoneBorder: 1 | 0 | null
 }
