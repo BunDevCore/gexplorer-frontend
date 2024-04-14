@@ -21,6 +21,7 @@
     {
       "type": "Feature",
       "properties": {
+        "type": "POI",
         "id": "stadion",
         "title": "Polsat Plus Arena Gdańsk",
         "category": "Stadion",
@@ -40,6 +41,7 @@
     {
       "type": "Feature",
       "properties": {
+        "type": "POI",
         "id": "ww2-museum",
         "title": "Muzeum II Wojny Światowej w Gdańsku",
         "category": "Muzeum",
@@ -59,6 +61,7 @@
     {
       "type": "Feature",
       "properties": {
+        "type": "POI",
         "id": "zsl",
         "title": "Zespół Szkół Łączności Im. Obrońców Poczty Polskiej Gdańsk",
         "category": "Szkoła",
@@ -76,6 +79,7 @@
     {
       "type": "Feature",
       "properties": {
+        "type": "POI",
         "id": "westerplatte",
         "title": "Westerplatte",
         "category": "Miejsce historyczne",
