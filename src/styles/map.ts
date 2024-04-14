@@ -21,6 +21,8 @@ export const MenuButton = styled.button<{ $open: boolean }>`
     border-radius: 100%;
     border: none;
     z-index: 3;
+    width: 2rem;
+    height: 2rem;
     
     svg {
         stroke: ${props => props.theme.type === "light" ? "#4f4f4f" : "#f4f4f4"};
