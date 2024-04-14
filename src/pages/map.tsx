@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from "react";
-import mapboxgl from "mapbox-gl";
+import mapboxgl, {NavigationControl} from "mapbox-gl";
 import {
     MapBox,
     MapDarkener,
@@ -54,26 +54,39 @@ export default function MapPage() {
         const lng = Number(params.get("lng") ?? 18.63);
         const lat = Number(params.get("lat") ?? 54.35);
         const zoom = Number(params.get("zoom") ?? 11);
+        const rot = Number(params.get("rot") ?? 0);
+        const pit = Number(params.get("pit") ?? 0);
         const map = new mapboxgl.Map({
             // @ts-ignore
             container: mapContainer.current,
-            default: false,
-            style: 'mapbox://styles/mapbox/streets-v12',
+            default: true,
+            style: "mapbox://styles/mapbox/streets-v12",
             attributionControl: false,
             dragRotate: true,
             center: [lng, lat],
             zoom: zoom,
+            bearing: rot,
+            pitch: pit
         });
 
         map.on('move', () => {
             params.set("lng", String(map.getCenter().lng));
             params.set("lat", String(map.getCenter().lat));
             params.set("zoom", String(map.getZoom()));
+            params.set("rot", String(map.getBearing()));
+            params.set("pit", String(map.getPitch()));
             params.delete("select");
             replaceRouter(router.pathname + '?' + params)
         });
 
         map.on('load', () => {
+            let nav = new NavigationControl({
+                showCompass: true,
+                showZoom: true,
+                visualizePitch: false
+            })
+            map.addControl(nav, "top-right");
+
             const selected = params.get("select");
             if (selected !== null) {
                 for (let i = 0; i < POIs.features.length; i++) {
@@ -96,19 +109,22 @@ export default function MapPage() {
                 tileSize: 512,
             });
             map.setTerrain({source: "mapbox-dem"});
-
             map.resize();
-            let labels = ['country-label', 'state-label',
-                'airport-label', 'poi-label', 'water-point-label',
-                'water-line-label', 'natural-point-label',
-                'natural-line-label', 'waterway-label', 'road-label'];
 
-            labels.forEach((label => {
-                map.setLayoutProperty(label, 'text-field', [
-                    'get',
-                    `name_${lang !== "pl" ? lang : "en"}`
-                ]);
-            }));
+            // CHANGING LABEL LANGUAGES DOESN'T WORK
+            // they disappear
+            // let labels = ['country-label', 'state-label',
+            //     'airport-label', 'poi-label', 'water-point-label',
+            //     'water-line-label', 'natural-point-label',
+            //     'natural-line-label', 'waterway-label', 'road-label'];
+            // if (lang !== "pl") {
+            //     labels.forEach((label => {
+            //         map.setLayoutProperty(label, 'text-field', [
+            //             'get',
+            //             `name_${lang}`
+            //         ]);
+            //     }));
+            // }
 
             map.addSource("g-poi", {
                 type: "geojson",
@@ -405,9 +421,9 @@ const SelectedStops = ({Stop}: { Stop: GAITPropertiesStop }) => {
             </InfoTitle>
             <DeparturesList>
                 {departures === null ? <div>NOTHING TO FIND HERE</div> :
-                    departures.departures.map(v => <DeparturesListItem key={v.id+v.routeShortName+v.estimatedTime}>
+                    departures.departures.map(v => <DeparturesListItem key={v.id + v.routeShortName + v.estimatedTime}>
                         <p>{v.routeShortName}</p> <p>{v.headsign}</p>
-                         {/* @ts-ignore numbers numbering the numbers */}
+                        {/* @ts-ignore numbers numbering the numbers */}
                         <p>{Math.max(Math.floor((new Date(v.estimatedTime) - Date.now()) / 60000), 0)} min</p>
                     </DeparturesListItem>)}
             </DeparturesList>
