@@ -13,5 +13,8 @@
     "pl": "Polish (Polski)",
     "en": "English",
     "de": "German (Deutsch)"
-  }
+  },
+  "mapSettings": "Map Settings",
+  "mapTransport": "Hide transport",
+  "mapPOI": "Hide points of interest"
 }

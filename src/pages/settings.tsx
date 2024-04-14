@@ -67,5 +67,17 @@ export default function Settings({theme}: { theme: { get: ThemeName, set: Dispat
                 </Select>
             </SettingLine>
         </StandardBox>
+        <StandardBox>
+            <SettingTitle>{t("mapSettings")}</SettingTitle>
+            <SettingLine>
+                <p>{t("mapTransport")}</p>
+            {/*    switch */}
+            </SettingLine>
+            <SettingLine>
+                <p>{t("mapPOI")}</p>
+                {/*    switch */}
+
+            </SettingLine>
+        </StandardBox>
     </DefaultLayout>;
 }

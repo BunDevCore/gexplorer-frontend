@@ -13,5 +13,8 @@
     "pl": "Polski",
     "en": "Angielski (English)",
     "de": "Niemiecki (Deutsch)"
-  }
+  },
+  "mapSettings": "Ustawienia mapy",
+  "mapTransport": "Ukryj transport",
+  "mapPOI": "Ukryj miejsca"
 }
