@@ -22,5 +22,8 @@
   "changePass": "Change username",
   "changeUser": "Change password",
   "logout": "Logout",
-  "loading": "Loading! Please wait..."
+  "loading": "Loading! Please wait...",
+  "noAchievements": "Do didn't achieve anything",
+  "yourAchievements": "Your achievements",
+  "achieved": "Achieved"
 }

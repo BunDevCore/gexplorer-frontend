@@ -21,7 +21,7 @@ export const AccountName = styled.p`
 export const AccountInfoLayout = styled.div`
     display: flex;
     flex-direction: row;
-    padding: 2rem 2rem;
+    padding: 2rem 2rem 0;
     gap: 1rem;
     align-content: center;
     align-items: center;
@@ -30,6 +30,6 @@ export const AccountInfoLayout = styled.div`
 export const AccountButtons = styled.div`
     display: flex;
     flex-direction: row;
-    padding: 2rem 2rem;
+    padding: 2rem;
     gap: 1rem;
 `;

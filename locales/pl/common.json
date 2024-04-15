@@ -10,7 +10,6 @@
   "areaHeader": "Powierzchnia",
   "totalAreaHeader": "Całkowita powierzchnia",
   "percentHeader": "Stopień eksploracji",
-  "goToTrip": "Zobacz podróż",
   "districtAreas": "Pola w dzielnicach",
   "overallArea": "Pole ogólne",
   "mainPage": "Strona główna",
@@ -21,5 +20,9 @@
   "changePass": "Zmień nazwę użytkownika",
   "changeUser": "Zmień hasło",
   "logout": "Wyloguj",
-  "loading": "Ładowanie! Proszę poczekać..."
+  "loading": "Ładowanie! Proszę poczekać...",
+  "noAchievements": "Nie posiadasz żadnych osiągnięć",
+  "goToTrip": "Pokaż podróż",
+  "yourAchievements": "Twoje osiągnięcia",
+  "achieved": "Osiągnięto"
 }

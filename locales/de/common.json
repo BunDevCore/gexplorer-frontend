@@ -7,5 +7,9 @@
   "changePass": "Change username",
   "changeUser": "Change password",
   "logout": "Logout",
-  "loading": "Ładowanie! Proszę poczekać..."
+  "loading": "Ładowanie! Proszę poczekać...",
+  "noAchievements": "Nie posiadasz żadnych osiągnięć",
+  "goToTrip": "Pokaż podróż",
+  "yourAchievements": "Twoje osiągnięcia",
+  "achieved": "Osiągnięto"
 }

@@ -8,6 +8,7 @@ module.exports = {
         "/about": ["about"],
         "/settings": ["settings"],
         "/upload": ["upload"],
-        "/map": ["map", "poi"]
+        "/map": ["map", "poi"],
+        "/achievement": ["achievement"]
     },
 }
