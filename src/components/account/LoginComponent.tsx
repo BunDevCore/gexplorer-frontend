@@ -95,7 +95,7 @@ export default function LoginComponent() {
             setPassLabel("passNotContainsSpace")
             return;
         }
-        if (!/\w{8,}/.test(pass)) {
+        if (pass.length < 8) {
             setPassLabel("passLongerThan7")
             return;
         }
@@ -144,7 +144,7 @@ export default function LoginComponent() {
                            onChange={(e) => setUser(e.target.value)}
                            onKeyUp={handleKeyUp}/>
 
-                <TextField sx={{display: !login ? "none" : ""}} id="login-password-again"
+                <TextField sx={{display: !login ? "none" : ""}} id="email"
                            label={t("labelEmail")} variant="outlined" type="email" required
                            error={false}
                            onChange={(e) => setEmail(e.target.value)}
