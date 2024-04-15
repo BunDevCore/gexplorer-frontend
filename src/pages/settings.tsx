@@ -2,7 +2,7 @@ import {DefaultLayout, StandardBox} from "@/styles/universal";
 import {SettingTitle, SettingLine} from "@/styles/settings";
 import Select, {SelectChangeEvent} from "@mui/material/Select";
 import {MenuItem, Switch} from "@mui/material";
-import {Dispatch, SetStateAction, useEffect, useState} from "react";
+import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
 import useTranslation from "next-translate/useTranslation";
 import {langList, themeList} from "@/types/settings";
 import setLanguage from "next-translate/setLanguage";
@@ -28,6 +28,7 @@ export default function Settings({theme}: { theme: { get: ThemeName, set: Dispat
     useEffect(() => {
         setTransport(Boolean(getCookie("MAP_TRANSPORT") ?? false));
         setPOI(Boolean(getCookie("MAP_POI") ?? false));
+        setExplored(Boolean(getCookie("MAP_EXPLORED") ?? false));
     }, []);
 
     const handleTheme = (e: SelectChangeEvent) => {
@@ -58,7 +59,7 @@ export default function Settings({theme}: { theme: { get: ThemeName, set: Dispat
         toast((checked ? t("hidden") : t("shown"))+" "+t("transport"), {type: "info"});
     }
 
-    const handlePOI = (_:  React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+    const handlePOI = (_: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
         setPOI(checked);
         setCookie("MAP_POI", checked, {
             sameSite: true
@@ -66,7 +67,7 @@ export default function Settings({theme}: { theme: { get: ThemeName, set: Dispat
         toast((checked ? t("hidden") : t("shown"))+" "+t("places"), {type: "info"});
     }
 
-    const handleExplored = (_:  React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+    const handleExplored = (_: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
         setExplored(checked);
         setCookie("MAP_EXPLORED", checked, {
             sameSite: true
