@@ -2,5 +2,9 @@
   "e404": "not fond \uD83D\uDC80",
   "eDesc404": "Oh nein! Die gewünschte Seite konnte nicht gefunden werden :(",
   "settings": "Settings",
-  "saved": "Ich habe saved"
+  "saved": "Ich habe saved",
+  "changePfp": "Change profile picture",
+  "changePass": "Change username",
+  "changeUser": "Change password",
+  "logout": "Logout"
 }

@@ -17,5 +17,9 @@
   "mainPage": "Home page",
   "aboutUs": "About us",
   "API": "API",
-  "something": "Something"
+  "something": "Something",
+  "changePfp": "Change profile picture",
+  "changePass": "Change username",
+  "changeUser": "Change password",
+  "logout": "Logout"
 }
