@@ -8,5 +8,6 @@
   "SyntaxError": "GPX syntax error - are you sure this is a valid GPX file?",
   "TimeRequired": "No timestamps",
   "noFilePicked": "No file picked!",
-  "importStarted": "Import started - please wait"
+  "importStarted": "Import started - please wait",
+  "upload": "Send"
 }

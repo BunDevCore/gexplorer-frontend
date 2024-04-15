@@ -6,5 +6,6 @@
   "changePfp": "Change profile picture",
   "changePass": "Change username",
   "changeUser": "Change password",
-  "logout": "Logout"
+  "logout": "Logout",
+  "loading": "Ładowanie! Proszę poczekać..."
 }

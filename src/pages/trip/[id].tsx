@@ -25,14 +25,10 @@ export default function TripPage() {
         setId(id as string)
     }, [router]);
 
-
-    console.log("swr")
-    console.log(id)
     const {data, error, isLoading} = useSWR(`/Trip/id/${id}`, fetcher);
 
     if (error) console.log(error)
     if (isLoading || !data) return <p>loading...</p>
 
-    console.log("geom", data.geometry)
     return <TripMap tripGeometry={data.gpsPolygon}></TripMap>;
 }

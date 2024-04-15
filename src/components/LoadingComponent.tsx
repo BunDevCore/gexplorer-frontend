@@ -1,7 +1,12 @@
-import {Card} from "@mui/material";
+import {DefaultLayout, StandardBox} from "@/styles/universal";
+import useTranslation from "next-translate/useTranslation";
 
 export default function LoadingComponent() {
-    return <Card>
-        loading, please hang tight :)
-    </Card>
+    const {t} = useTranslation("common");
+
+    return <DefaultLayout>
+        <StandardBox>
+            {t("loading")}
+        </StandardBox>
+    </DefaultLayout>
 }

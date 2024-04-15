@@ -20,5 +20,6 @@
   "changePfp": "Zmień obraz profilowy",
   "changePass": "Zmień nazwę użytkownika",
   "changeUser": "Zmień hasło",
-  "logout": "Wyloguj"
+  "logout": "Wyloguj",
+  "loading": "Ładowanie! Proszę poczekać..."
 }

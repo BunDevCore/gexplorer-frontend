@@ -123,7 +123,8 @@ const App = ({Component, pageProps}: AppProps) => {
             {usePathname() === "/map" || <Navbar/>}
             <Component {...pageProps} theme={{get: themeName, set: setThemeName}}/>
             <div style={{position: "absolute"}}><ToastContainer/></div>
-            {usePathname() === "/map" || <Footer/>}
+            {/* eslint-disable-next-line react-hooks/rules-of-hooks */}
+            {(usePathname() === "/map" || usePathname().startsWith("/trip/")) || <Footer/>}
         </ThemeProvider>
     </MuiThemeProvider>;
 }

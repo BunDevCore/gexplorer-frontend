@@ -8,5 +8,6 @@
   "SyntaxError": "Błąd składni GPX - czy to na pewno prawidłowy plik GPX?",
   "TimeRequired": "Brak czasów",
   "noFilePicked": "Nie wybrano pliku",
-  "importStarted": "Import rozpoczęty - poczekaj kilka sekund"
+  "importStarted": "Import rozpoczęty - poczekaj kilka sekund",
+  "upload": "Prześlij"
 }

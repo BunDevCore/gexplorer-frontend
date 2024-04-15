@@ -1,11 +1,12 @@
 import {useGExplorerStore} from "@/state";
 import {ChangeEvent, useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import {MainLayout, StandardBox} from "@/styles/universal";
+import {DefaultLayout, StandardBox} from "@/styles/universal";
 import {apiUrl} from "@/config";
 import {GpxImportError, Trip} from "@/types/types";
 import useTranslation from "next-translate/useTranslation";
 import {toast} from "react-toastify";
+import {Button} from "@mui/material";
 
 export default function UploadPage() {
     const loggedIn = useGExplorerStore(s => s.loggedIn)
@@ -36,8 +37,7 @@ export default function UploadPage() {
                 let translated = t("successfulImport", {newArea: trip.newArea, area: trip.area})
                 toast(translated)
             });
-        }
-        else if (error !== null) {
+        } else if (error !== null) {
             let translated = t("failedImport", {cause: t(error.cause)})
             toast(translated)
         }
@@ -93,11 +93,12 @@ export default function UploadPage() {
         });
     }
 
-    return <MainLayout><StandardBox>
+    return <DefaultLayout><StandardBox style={{display: "flex", flexDirection: "column", gap: "1rem"}}>
         <h1>{t("importTrip")}</h1>
         <p>{t("uploadDescription1")}</p>
         <p><b>{t("attention")}</b> {t("uploadDescription2")}</p>
         <input type="file" name="gpx" id="gpx" onChange={fileChangeHandler}/>
-        <input type="submit" onClick={submit}/>
-    </StandardBox></MainLayout>
+        <Button variant={"contained"} onClick={submit}>{t("upload")}</Button>
+        {/*<input type="submit" onClick={submit}/>*/}
+    </StandardBox></DefaultLayout>
 }

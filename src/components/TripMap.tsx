@@ -2,7 +2,7 @@ import mapboxgl from "mapbox-gl";
 import {useEffect, useRef, useState} from "react";
 import {GeoJSON} from "geojson";
 
-export default function TripMap({tripGeometry}: {tripGeometry: GeoJSON.Geometry}) {
+export default function TripMap({tripGeometry}: { tripGeometry: GeoJSON.Geometry }) {
     const mapContainer = useRef<HTMLDivElement>(null);
     const map = useRef<null | mapboxgl.Map>(null);
     const [lng, setLng] = useState(18.63);
@@ -15,6 +15,7 @@ export default function TripMap({tripGeometry}: {tripGeometry: GeoJSON.Geometry}
             //@ts-ignore
             container: mapContainer.current,
             style: 'mapbox://styles/mapbox/streets-v12',
+            attributionControl: false,
             center: [lng, lat],
             zoom: zoom
 
@@ -56,9 +57,7 @@ export default function TripMap({tripGeometry}: {tripGeometry: GeoJSON.Geometry}
                 // maxzoom: 18,
                 'type': 'fill',
                 'source': 'explored', // reference the data source
-                'layout': {
-
-                },
+                'layout': {},
                 'paint': {
                     'fill-color': '#0080ff', // blue color fill
                     'fill-opacity': 0.2,
@@ -70,10 +69,7 @@ export default function TripMap({tripGeometry}: {tripGeometry: GeoJSON.Geometry}
     });
 
 
-    return (
-        <div>
-            <div style={{height: "800px"}} ref={mapContainer} className="map-container" />
-            <div>lat {lat} lon {lng} zoom {zoom}</div>
-        </div>
-    );
+    return <div style={{marginTop: "-10rem", overflow: "hidden"}}>
+        <div style={{height: "100vh", width: "100vw", overflow: "hidden"}} ref={mapContainer} className="map-container"/>
+    </div>;
 }

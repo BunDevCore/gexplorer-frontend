@@ -6,5 +6,6 @@
   "successfulImport": "Import successful +{{newArea}}m<sup>2</sup>",
   "failedImport": "Import failed: {{cause}}",
   "SyntaxError": "GPX syntax error - are you sure this is a valid GPX file?",
-  "TimeRequired": "No timestamps"
+  "TimeRequired": "No timestamps",
+  "upload": "Prześlij"
 }
