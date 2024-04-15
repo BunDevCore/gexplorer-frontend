@@ -156,6 +156,7 @@ export const MapDarkener = styled.div<{ $open: boolean }>`
 `;
 
 export const POIimage = styled.div`
+    color: var(--primaryText);
     height: 15rem;
     position: relative;
 

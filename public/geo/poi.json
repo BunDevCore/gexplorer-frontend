@@ -1,100 +1,604 @@
 {
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {
-        "type": "POI",
-        "id": "example",
-        "title": "example",
-        "category": "Example",
-        "description": "lorem impsum coś tam coś tam",
-        "website": "https://example.com/"
-      },
-      "geometry": {
-        "coordinates": [
-          18.651661167340762,
-          54.34922187793481
-        ],
-        "type": "Point"
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "type": "POI",
-        "id": "stadion",
-        "title": "Polsat Plus Arena Gdańsk",
-        "category": "Stadion",
-        "description": "Wybudowany na Euro 2012 supernowoczesny stadion, na którym rozgrywane są mecze ligowe, pucharowe i międzynarodowe.",
-        "image": "stadion.jpg",
-        "address": "Pokoleń Lechii Gdańsk 1, 80-560 Gdańsk",
-        "website": "https://polsatplusarenagdansk.pl/"
-      },
-      "geometry": {
-        "coordinates": [
-          18.640329719849717,
-          54.389942535723776
-        ],
-        "type": "Point"
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "type": "POI",
-        "id": "ww2-museum",
-        "title": "Muzeum II Wojny Światowej w Gdańsku",
-        "category": "Muzeum",
-        "description": "Nowoczesne muzeum o charakterystycznej bryle poświęcone losom Polaków podczas II wojny światowej.",
-        "phone": "58 760 09 60",
-        "address": "plac Władysława Bartoszewskiego 1, 80-862 Gdańsk",
-        "website": "https://muzeum1939.pl/"
-      },
-      "geometry": {
-        "coordinates": [
-          18.66093537712061,
-          54.356012391308695
-        ],
-        "type": "Point"
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "type": "POI",
-        "id": "zsl",
-        "title": "Zespół Szkół Łączności Im. Obrońców Poczty Polskiej Gdańsk",
-        "category": "Szkoła",
-        "address": "Podwale Staromiejskie 51, 80-845 Gdańsk",
-        "website": "https://waszaedukacja.pl/"
-      },
-      "geometry": {
-        "coordinates": [
-          18.657053699565495,
-          54.353999372784415
-        ],
-        "type": "Point"
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "type": "POI",
-        "id": "westerplatte",
-        "title": "Westerplatte",
-        "category": "Miejsce historyczne",
-        "description": "Dawny obszar wojskowy i miejsce pierwszej inwazji w II wojnie światowej, obecnie z wielkim kamiennym pomnikiem.",
-        "address": "80-001 Gdańsk",
-        "website": "https://gdansk.pl/"
-      },
-      "geometry": {
-        "coordinates": [
-          18.666969149382737,
-          54.40670154239365
-        ],
-        "type": "Point"
-      }
-    }
-  ],
-  "type": "FeatureCollection"
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.679139,
+                    54.395846
+                ]
+            },
+            "properties": {
+                "id": "fortress",
+                "type": "POI",
+                "image": "wisloujscie.jpg",
+                "phone": "58 573 31 28",
+                "title": "Twierdza Wisłoujście",
+                "address": "Stara Twierdza 1, 80-551 Gdańsk",
+                "website": "https://muzeumgdansk.pl/oddzialy-muzeum/twierdza-wisloujscie/",
+                "category": "museum"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.640371,
+                    54.38992
+                ]
+            },
+            "properties": {
+                "id": "amber-stadium",
+                "type": "POI",
+                "image": "amber-stadium.jpg",
+                "phone": null,
+                "title": "Polsat Plus Arena Gdańsk",
+                "address": "Pokoleń Lechii Gdańsk 1, 80-560 Gdańsk",
+                "website": "https://polsatplusarenagdansk.pl/",
+                "category": "stadium"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.656819,
+                    54.355203
+                ]
+            },
+            "properties": {
+                "title": "Muzeum Poczty Polskiej w Gdańsku",
+                "id": "poczta-polska",
+                "type": "POI",
+                "image": "poczta.jpg",
+                "address": "plac Obrońców Poczty Polskiej 1/2, 80-800 Gdańsk",
+                "website": "https://muzeumgdansk.pl/wizyta-w-muzeum-gdanska/oddzialy/",
+                "phone": "58 573 31 28",
+                "category": "museum"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.660714,
+                    54.35621
+                ]
+            },
+            "properties": {
+                "title": "Muzeum II Wojny Światowej w Gdańsku",
+                "id": "ww2-museum",
+                "type": "POI",
+                "image": "ww2-museum.webp",
+                "address": "plac Władysława Bartoszewskiego 1, 80-862 Gdańsk",
+                "website": "https://muzeum1939.pl/",
+                "category": "museum",
+                "phone": "58 760 09 60"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.652214,
+                    54.349935
+                ]
+            },
+            "properties": {
+                "title": "Bazylika Mariacka Wniebowzięcia Najświętszej Maryi Panny w Gdańsku",
+                "id": "bazylia",
+                "image": "bazylika.jpg",
+                "type": "POI",
+                "address": "Podkramarska 5, 80-834 Gdańsk",
+                "phone": "58 301 39 82",
+                "website": "https://bazylikamariacka.gdansk.pl/",
+                "category": "catholic"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.652548,
+                    54.348799
+                ]
+            },
+            "properties": {
+                "category": "museum",
+                "title": "Ratusz Głównego Miasta",
+                "id": "ratusz",
+                "type": "POI",
+                "image": "ratusz.jpg",
+                "website": "https://muzeumgdansk.pl/",
+                "address": "Długa 46, 80-831 Gdańsk",
+                "phone": "58 573 31 28"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.649288,
+                    54.349262
+                ]
+            },
+            "properties": {
+                "title": "Dom Uphagena",
+                "id": "uphagen",
+                "type": "POI",
+                "image": "uphagen.jpg",
+                "phone": "58 573 31 28",
+                "website": "https://muzeumgdansk.pl/oddzialy-muzeum/dom-uphagena/",
+                "address": "Długa 12, 80-827 Gdańsk"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.653212,
+                    54.348566
+                ]
+            },
+            "properties": {
+                "id": "neptun",
+                "image": "neptun.jpg",
+                "type": "POI",
+                "title": "Fontanna Neptuna",
+                "category": "atraction",
+                "phone": null,
+                "website": "http://www.gdmel.pl/fontanny/historia-gdanskich-fontann",
+                "address": "Długi Targ, 80-833 Gdańsk"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.65333,
+                    54.348735
+                ]
+            },
+            "properties": {
+                "id": "artus",
+                "type": "POI",
+                "image": "artus.jpg",
+                "title": "Dwór Artusa",
+                "address": "Długi Targ 43-44, 80-831 Gdańsk",
+                "website": "https://muzeumgdansk.pl/wizyta-w-muzeum-gdanska/oddzialy/",
+                "category": "museum",
+                "phone": "789 449 654"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.657449,
+                    54.35057
+                ]
+            },
+            "properties": {
+                "title": "Stary żuraw portowy",
+                "address": "Szeroka 67/68, 80-835 Gdańsk",
+                "website": null,
+                "category": "atraction",
+                "phone": null,
+                "id": "zuraw",
+                "image": "zuraw.jpg",
+                "type": "POI"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.655713,
+                    54.347939
+                ]
+            },
+            "properties": {
+                "id": "green",
+                "image": "green.jpg",
+                "type": "POI",
+                "title": "Zielona Brama w Gdańsku",
+                "address": "Długi Targ 24, 80-828 Gdańsk",
+                "website": "http://mng.gda.pl/",
+                "phone": "58 307 59 12",
+                "category": "museum"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.663361,
+                    54.347268
+                ]
+            },
+            "properties": {
+                "id": "dejavu",
+                "image": "deja-vu.jpg",
+                "type": "POI",
+                "title": "DeJa Vu Muzeum",
+                "address": "Długie Ogrody 18, 80-765 Gdańsk",
+                "website": "http://www.dejavumuzeum.pl/",
+                "phone": "797 443 262",
+                "category": "museum"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.646925,
+                    54.345555
+                ]
+            },
+            "properties": {
+                "id": "narodowe",
+                "type": "POI",
+                "image": "narodowe.jpg",
+                "title": "Muzeum Narodowe w Gdańsku",
+                "address": "Toruńska 1, 80-822 Gdańsk",
+                "website": "http://mng.gda.pl/",
+                "category": "museum",
+                "phone": "58 301 68 04"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.640232,
+                    54.357694
+                ]
+            },
+            "properties": {
+                "id": "gradowa",
+                "type": "POI",
+                "image": "gradowa.webp",
+                "phone": null,
+                "title": "Góra Gradowa",
+                "address": "Gradowa, 80-001 Gdańsk",
+                "website": null,
+                "category": "viewpoint"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.666918,
+                    54.406688
+                ]
+            },
+            "properties": {
+                "id": "westerplatte",
+                "type": "POI",
+                "image": "westerplatte.webp",
+                "phone": null,
+                "title": "Westerplatte",
+                "address": "80-001 Gdańsk",
+                "website": "http://www.gdansk.pl/",
+                "category": "historicPlace"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.729565,
+                    54.375567
+                ]
+            },
+            "properties": {
+                "id": "stogi",
+                "type": "POI",
+                "image": "stogi.webp",
+                "phone": "null",
+                "title": "Plaża Stogi",
+                "address": "Gdańsk",
+                "website": "https://podroztrwa.pl/plaza-stogi/",
+                "category": "beach"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.684767,
+                    54.404043
+                ]
+            },
+            "properties": {
+                "id": "westerplatte-beach",
+                "type": "POI",
+                "image": "westerplatte-beach.jpg",
+                "phone": null,
+                "title": "Plaża przy Westerplatte",
+                "address": "Gdańsk",
+                "website": null,
+                "category": "beach"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.624038,
+                    54.413349
+                ]
+            },
+            "properties": {
+                "id": "molo-brzezno",
+                "type": "POI",
+                "image": "molo-brzezno.jpg",
+                "phone": null,
+                "title": "Molo w Brzeźnie",
+                "address": "Jantarowa 1, 80-341 Gdańsk",
+                "website": null,
+                "category": "atraction"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.59952,
+                    54.425592
+                ]
+            },
+            "properties": {
+                "id": "jelitkowo-beach",
+                "type": "POI",
+                "image": "jelitkowo.webp",
+                "phone": null,
+                "title": "Plaża Jelitkowo",
+                "address": "Gdańsk",
+                "website": null,
+                "category": "beach"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.605525,
+                    54.415088
+                ]
+            },
+            "properties": {
+                "id": "park-regana",
+                "type": "POI",
+                "image": "regana.webp",
+                "phone": null,
+                "title": "Park Ronalda Regana",
+                "address": "Prezydenta Lecha Kaczyńskiego 20, 80-365 Gdańsk",
+                "website": null,
+                "category": "park"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.535022,
+                    54.414283
+                ]
+            },
+            "properties": {
+                "id": "zoo-oliwa",
+                "type": "POI",
+                "image": "zoo.webp",
+                "phone": "58 552 00 41",
+                "title": "Gdański Ogród Zoologiczny",
+                "address": "Karwieńska 3, 80-328 Gdańsk",
+                "website": "https://zoo.gda.pl/",
+                "category": "zoo"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.562228,
+                    54.410964
+                ]
+            },
+            "properties": {
+                "id": "oliwa-park",
+                "type": "POI",
+                "image": "park-oliwa.jpg",
+                "phone": "58 524 45 68",
+                "title": "Park Oliwski im. Adama Mickiewicza",
+                "address": "Opata Jacka Rybińskiego, 80-001 Gdańsk",
+                "website": "http://www.parkoliwski.gdansk.pl/",
+                "category": "park"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.593167,
+                    54.354626
+                ]
+            },
+            "properties": {
+                "id": "edu",
+                "type": "POI",
+                "image": "edu-park.jpg",
+                "phone": "58 740 42 00",
+                "title": "Gdański Park Naukowo-Technologiczny",
+                "address": "Trzy Lipy 3, 80-172 Gdańsk",
+                "website": "https://gpnt.pl/",
+                "category": "atraction"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.644797,
+                    54.350452
+                ]
+            },
+            "properties": {
+                "id": "ikm",
+                "type": "POI",
+                "image": "ikm.jpg",
+                "title": "Instytut Kultury Miejskiej",
+                "address": "Targ Rakowy 11, 80-806 Gdańsk",
+                "website": "http://www.ikm.gda.pl/",
+                "category": "social",
+                "phone": "58 760 72 16"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.650245,
+                    54.354134
+                ]
+            },
+            "properties": {
+                "title": "Muzeum Bursztynu",
+                "id": "amber-museum",
+                "type": "POI",
+                "image": "amber-museum.jpg",
+                "address": "Wielkie Młyny 16, 80-849 Gdańsk",
+                "website": "https://muzeumgdansk.pl/wizyta-w-muzeum-gdanska/oddzialy/",
+                "phone": "58 573 31 28",
+                "category": "museum"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.649038,
+                    54.360531
+                ]
+            },
+            "properties": {
+                "id": "stoczniowcy",
+                "type": "POI",
+                "image": "pps.jpg",
+                "title": "Pomnik Poległych Stoczniowców 1970",
+                "address": "Plac Solidarności, 80-001 Gdańsk",
+                "website": "http://www.gdansk.pl/",
+                "phone": null,
+                "category": "statue"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.649229,
+                    54.361339
+                ]
+            },
+            "properties": {
+                "id": "solidarnosc",
+                "type": "POI",
+                "image": "ecs.jpg",
+                "title": "Europejskie Centrum Solidarności",
+                "address": "pI. Solidarności 1, 80-863 Gdańsk",
+                "website": "http://www.ecs.gda.pl/",
+                "category": "museum",
+                "phone": "58 772 41 11"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.790751,
+                    54.351628
+                ]
+            },
+            "properties": {
+                "id": "ptasi-raj",
+                "type": "POI",
+                "image": "ptasi-raj.jpg",
+                "phone": null,
+                "title": "\"Ptasi Raj\"",
+                "address": null,
+                "website": "https://wyspa-sobieszewska.pl/rezerwat-ptasi-raj/",
+                "category": "park"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.835225,
+                    54.355148
+                ]
+            },
+            "properties": {
+                "id": "sobieszewo",
+                "type": "POI",
+                "image": "sobieszewo.jpg",
+                "phone": null,
+                "title": "Plaża Sobieszewska",
+                "address": "Gdańsk",
+                "website": "http://www.wyspa.pl/wyspa-sobieszewska/plaze-i-kapieliska-na-wyspie-sobieszewskiej",
+                "category": "beach"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.636834,
+                    54.354802
+                ]
+            },
+            "properties": {
+                "id": "hevelianum",
+                "type": "POI",
+                "image": "hevelianum.jpg",
+                "phone": "58 742 33 52",
+                "title": "Hevelianum",
+                "address": "Gradowa 10, 80-802 Gdańsk",
+                "website": "https://hevelianum.pl/",
+                "category": "museum"
+            }
+        }
+    ]
 }

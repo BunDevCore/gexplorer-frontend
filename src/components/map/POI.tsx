@@ -45,7 +45,7 @@ export default function SelectedPOI({POI}: { POI: POIProperties }) {
             <InfoTitle>
                 {POI.title}
                 <InfoSubtitle>
-                    {POI.category}
+                    {t(POI.category)}
                 </InfoSubtitle>
             </InfoTitle>
             <POIminiMenu>
@@ -56,8 +56,8 @@ export default function SelectedPOI({POI}: { POI: POIProperties }) {
                     <i><BeenhereIcon/></i> <p>{t("visited", null, {ns: "map"})}</p>
                 </POIminiMenuItem>
             </POIminiMenu>
-            {POI.description ? <Separator/> : <></>}
-            {POI.description ? <POIdesc>{POI.description}</POIdesc> : <></>}
+            {t(POI.id) !== POI.id ? <Separator/> : <></>}
+            {t(POI.id) !== POI.id ? <POIdesc>{t(POI.id)}</POIdesc> : <></>}
             <Separator/>
             <POIlist>
                 {POI.address ? <POIlistItem><PlaceIcon/> <p>{POI.address}</p></POIlistItem> : <></>}

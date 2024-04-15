@@ -3,7 +3,6 @@ export type POIProperties = {
     id: string
     title: string
     category: string
-    description: string
     image: string
     address: string | null
     phone: string | null
