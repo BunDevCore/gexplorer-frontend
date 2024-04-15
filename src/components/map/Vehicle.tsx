@@ -43,8 +43,13 @@ export default function SelectedVehicles({Vehicle}: { Vehicle: GAITPropertiesVeh
             {/* TODO: limit stops to the end of the route (ignore for now or try if you really want idc) */}
             <ChangingList>
                 {stopTimes === null || stopTimes.length === 0 ?
-                    <ChangingListFull>Ładowanie?</ChangingListFull> :
-                    stopTimes.map((v, i) => !Boolean(v.virtual) && !Boolean(v.depot) && !Boolean(v.nonpassenger) &&
+                    <ChangingListFull>Ładowanie</ChangingListFull> :
+                    stopTimes.sort((a, b) =>
+                        // @ts-ignore DO NOT TOUCH THIS CODE, EVER
+                        Math.floor((new Date(new Date().toISOString().split("T")[0]+"T"+a.arrivalTime.split("T")[1]) - Date.now()) / 60000) -
+                        // @ts-ignore DO NOT TOUCH THIS CODE, EVER
+                        Math.floor((new Date(new Date().toISOString().split("T")[0]+"T"+b.arrivalTime.split("T")[1]) - Date.now()) / 60000)
+                    ).map((v, i) => !Boolean(v.virtual) && !Boolean(v.depot) && !Boolean(v.nonpassenger) &&
                     // @ts-ignore DO NOT TOUCH THIS CODE, EVER
                     Math.floor((new Date(new Date().toISOString().split("T")[0]+"T"+v.arrivalTime.split("T")[1]) - Date.now()) / 60000) > 0
                         ? <ChangingListItem key={v.tripId + v.stopShortName + v.arrivalTime}>
