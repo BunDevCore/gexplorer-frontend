@@ -16,5 +16,11 @@
   },
   "mapSettings": "Map Settings",
   "mapTransport": "Hide transport",
-  "mapPOI": "Hide points of interest"
+  "mapPOI": "Hide points of interest",
+  "mapExplored": "Hide explored",
+  "hidden": "Hidden",
+  "shown": "Shown",
+  "transport": "transport",
+  "places": "places",
+  "explored": "explored"
 }

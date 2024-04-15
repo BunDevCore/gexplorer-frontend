@@ -16,5 +16,11 @@
   },
   "mapSettings": "Ustawienia mapy",
   "mapTransport": "Ukryj transport",
-  "mapPOI": "Ukryj miejsca"
+  "mapExplored": "Ukryj wyeksplorowane",
+  "mapPOI": "Ukryj miejsca",
+  "hidden": "Ukryto",
+  "shown": "Pokazano",
+  "transport": "transport",
+  "places": "miejsca",
+  "explored": "odkryte tereny"
 }

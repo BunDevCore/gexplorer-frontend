@@ -16,8 +16,6 @@ import useTranslation from "next-translate/useTranslation";
 import Head from "next/head";
 import HomeIcon from '@mui/icons-material/Home';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import RouteIcon from '@mui/icons-material/Route';
-import SearchIcon from '@mui/icons-material/Search';
 import POIs from "../../public/geo/poi.json";
 import "mapbox-gl/dist/mapbox-gl.css";
 import {
@@ -33,6 +31,7 @@ import SelectedPOI from "@/components/map/POI";
 import SelectedVehicles from "@/components/map/Vehicle";
 import SelectedStops from "@/components/map/Stop";
 import SettingsIcon from '@mui/icons-material/Settings';
+import {getCookie} from "cookies-next";
 
 export default function MapPage() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -40,10 +39,11 @@ export default function MapPage() {
     const router = useRouter();
     const replaceRouter = useDebounceCallback((url) => router.replace(url, undefined, {shallow: true}), 500);
     const [dataProperties, setDataProperties] = useState<POIProperties | GAITPropertiesVehicle | GAITPropertiesStop | null>(null)
-    const [dataType, setDataType] = useState<"POI" | "vehicle" | "stop" | null>(null)
+    const [dataType, setDataType] = useState<"POI" | "vehicle" | "stop" | null>(null);
 
     // @ts-ignore
     useEffect(() => {
+
         const params = new URLSearchParams(window.location.search);
         const lng = Number(params.get("lng") ?? 18.63);
         const lat = Number(params.get("lat") ?? 54.35);
@@ -75,6 +75,10 @@ export default function MapPage() {
         });
 
         map.on('load', () => {
+            const disableTransport = Boolean(getCookie("MAP_TRANSPORT") ?? false);
+            const disablePOIs = Boolean(getCookie("MAP_POI") ?? false);
+            const disableExplored = Boolean(getCookie("MAP_EXPLORED") ?? false);
+
             // 3d buildings
             map.addLayer({
                     'id': 'add-3d-buildings',
@@ -174,7 +178,8 @@ export default function MapPage() {
                             "icon-keep-upright": true,
                             "icon-rotation-alignment": "viewport",
                             "icon-image": "gexplorer-icon",
-                            "icon-size": 0.025
+                            "icon-size": 0.025,
+                            "visibility": disablePOIs ? "none" : "visible"
                         }
                     });
                 }
@@ -242,7 +247,8 @@ export default function MapPage() {
                                 "text-size": ["step", ["zoom"], 0,
                                     17, 10
                                 ],
-                                "text-field": ["concat", ["get", "name"], " ", ["get", "code"]]
+                                "text-field": ["concat", ["get", "name"], " ", ["get", "code"]],
+                                "visibility": disableTransport ? "none" : "visible"
                             },
                             "paint": {
                                 "icon-color": "blue"
@@ -300,6 +306,7 @@ export default function MapPage() {
                                 ["==", "FERRY", ["get", "vehicleType"]], "ferry-icon",
                                 "unknown-vehicle-icon"
                             ],
+                            "visibility": disableTransport ? "none" : "visible"
                         },
                         "paint": {
                             "text-color": "white"
@@ -406,7 +413,7 @@ export default function MapPage() {
                   content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
         </Head>
         <MapBox ref={mapContainer}/>
-        <BackButton onClick={toggleBack} $open={menuOpen} $dataDisplayed={dataProperties!==null}>
+        <BackButton onClick={toggleBack} $open={menuOpen} $dataDisplayed={dataProperties !== null}>
             <svg
                 width="48"
                 height="48"
