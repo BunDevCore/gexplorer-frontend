@@ -14,6 +14,7 @@ export interface State {
     setLoggedIn: (value: boolean) => void
     setDistricts: (value: District[]) => void
     setDistrictsLoading: (value: boolean) => void
+    setLogout: () => void
 }
 
 export const useGExplorerStore = create<State>(
@@ -28,6 +29,7 @@ export const useGExplorerStore = create<State>(
         setLoggedIn: (value) => set((state) => ({loggedIn: value, initialAuthDone: true})),
         setDistricts: (value) => set((state) => ({districts: Object.fromEntries(value.map(d =>
             [d.id, d]))})),
-        setDistrictsLoading: (value) => set((state) => ({districtsLoading: value}))
+        setDistrictsLoading: (value) => set((state) => ({districtsLoading: value})),
+        setLogout: () => set((state) => ({districtsLoading: false, token: undefined, loggedIn: false, initialAuthDone: false, id: "", districts: {}}))
     }),
 )

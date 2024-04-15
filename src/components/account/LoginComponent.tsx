@@ -20,7 +20,6 @@ export default function LoginComponent() {
     const [pass, setPass] = useState("");
     const [passAgain, setPassAgain] = useState("");
     const [email, setEmail] = useState("");
-    const router = useRouter();
 
     useEffect(() => {
         let t = getCookie("token");
@@ -36,7 +35,7 @@ export default function LoginComponent() {
                 if (res.status === 401) {
                     return;
                 } else {
-                    await router.replace("/")
+                    window.location.replace("/");
                 }
             })();
         }
@@ -55,7 +54,6 @@ export default function LoginComponent() {
                     "password": pass
                 })
             });
-            console.log(res.status)
             if (res.status === 400) {
                 setPassLabel("badEntry")
                 return;
@@ -64,7 +62,7 @@ export default function LoginComponent() {
                 setCookie("token", data, {
                     sameSite: "lax",
                 });
-                await router.replace("/")
+                window.location.replace("/");
             }
         })();
     };
@@ -125,7 +123,7 @@ export default function LoginComponent() {
             setCookie("token", data, {
                 sameSite: "lax",
             });
-            await router.replace("/")
+            window.location.replace("/");
         })();
     };
 
