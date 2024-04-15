@@ -9,6 +9,7 @@ import setLanguage from "next-translate/setLanguage";
 import {setCookie, getCookie} from "cookies-next";
 import type {ThemeName} from "@/types/theme";
 import {toast} from "react-toastify";
+import {useGExplorerStore} from "@/state";
 
 const MenuProps = {
     PaperProps: {
@@ -111,7 +112,7 @@ export default function Settings({theme}: { theme: { get: ThemeName, set: Dispat
                 <p>{t("mapPOI")}</p>
                 <Switch onChange={handlePOI} checked={POI}/>
             </SettingLine>
-            <SettingLine>
+            <SettingLine style={{display: useGExplorerStore(s => s.loggedIn) ? "" : "none"}}>
                 <p>{t("mapExplored")}</p>
                 <Switch onChange={handleExplored} checked={explored}/>
             </SettingLine>
