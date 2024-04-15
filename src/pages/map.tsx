@@ -32,6 +32,7 @@ import type {GeoJSON} from "geojson";
 import SelectedPOI from "@/components/map/POI";
 import SelectedVehicles from "@/components/map/Vehicle";
 import SelectedStops from "@/components/map/Stop";
+import SettingsIcon from '@mui/icons-material/Settings';
 
 export default function MapPage() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -331,11 +332,12 @@ export default function MapPage() {
 
         const updateVehicleMarkers = setInterval(async () => {
             const geojsonVehicles = await getGEOjsonVehicles();
-            if (geojsonVehicles === undefined || map === undefined || map === null) return;
-            let src = map.getSource("gait-vehicles");
-            if (src !== null && src !== undefined) {
-                // @ts-ignore setData exists in getSource when the source is of type geojson smh
-                src.setData(geojsonVehicles);
+            if (!(geojsonVehicles === undefined || map === undefined || map === null)) {
+                let src = map.getSource("gait-vehicles");
+                if (src !== null && src !== undefined) {
+                    // @ts-ignore setData exists in getSource when the source is of type geojson smh
+                    src.setData(geojsonVehicles);
+                }
             }
         }, 5000);
 
@@ -454,12 +456,11 @@ export default function MapPage() {
 }
 
 const MapMenu = () => {
-    const {t} = useTranslation("map")
+    const {t} = useTranslation("common")
     return <>
         <MenuTitle href={"/"}>Gexplorer</MenuTitle>
-        <MenuLink href="/"><HomeIcon/> <p>{t("home", null, {ns: "navbar"})}</p></MenuLink>
-        <MenuItem><SearchIcon/> <p>{t("search")}</p></MenuItem>
-        <MenuItem><RouteIcon/> <p>{t("routes")}</p></MenuItem>
+        <MenuLink href="/"><HomeIcon/> <p>{t("mainPage")}</p></MenuLink>
+        <MenuLink href="/settings"><SettingsIcon/> <p>{t("settings")}</p></MenuLink>
         <MenuItem><FavoriteIcon/> <p>{t("saved")}</p></MenuItem>
     </>
 }
