@@ -90,4 +90,17 @@ export const HomeGrid = styled.div`
     display: grid;
     gap: 1rem;
     grid-auto-columns: 1fr 1fr;
+    grid-auto-rows: 1fr 1fr;
+    grid-template-areas:
+        "a b"
+        "c b";
+
+    @media (max-width: 700px) {
+        grid-template-areas:
+        "a" "c" "b";
+    }
+`;
+
+export const HomeMapBox = styled.div`
+    overflow: hidden;
 `;

@@ -1,8 +1,6 @@
 {
-  "aboutShort": "Good project by good people. It works (I think?). To use our program to its fullest you need to log in or register.",
-  "promo": [
-    "We smart",
-    "We track",
-    "But most importantly we dox you for free"
-  ]
+  "aboutShort": "Welcome to GExplorer",
+  "first": "Check where buses and trams are located. When will it leave the stop.",
+  "second": "Check yourself! How much of Gdańsk have you visited? Register today and explore Gdańsk and earn achievements",
+  "third": "Visit interesting places and get to know Gdańsk"
 }

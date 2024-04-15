@@ -1,11 +1,30 @@
 import {DefaultLayout, StandardBox} from "@/styles/universal";
-import {BoxWithImage, HomeGrid} from "@/styles/home";
+import {BoxWithImage, HomeGrid, HomeMapBox} from "@/styles/home";
 import useTranslation from "next-translate/useTranslation";
 import Image from "next/image";
-import React from "react";
+import React, {useEffect, useRef} from "react";
+import mapboxgl from "mapbox-gl";
 
 export default function HomeComponent() {
+    const mapContainer = useRef<HTMLDivElement>(null);
     const {t} = useTranslation("home")
+
+    useEffect(() => {
+        const map = new mapboxgl.Map({
+            // @ts-ignore
+            container: mapContainer.current,
+            default: true,
+            style: "mapbox://styles/mapbox/streets-v12",
+            attributionControl: false,
+            dragRotate: false,
+            center: [18.65, 54.35],
+            zoom: 11,
+            trackResize: false
+        });
+
+        return () => map.remove()
+    }, []);
+
     return <DefaultLayout>
         <BoxWithImage>
             <Image src={"/gdansk.webp"} alt={"gdansk"} fill={true} style={{paddingBottom: "4rem"}}/>
@@ -14,14 +33,15 @@ export default function HomeComponent() {
             </StandardBox>
         </BoxWithImage>
         <HomeGrid>
-            <StandardBox>
-                Sprawdź najbliższe przejazdy
+            <StandardBox style={{gridArea: "a", padding: "2rem", width: "100%", textAlign: "center", alignSelf: "center"}}>
+                {t("first")}
             </StandardBox>
-            <StandardBox>
-                Sprawdź się! Ile Gdańska zwiedziłeś
+            <StandardBox style={{gridArea: "c", padding: "2rem", width: "100%", textAlign: "center", alignSelf: "center"}}>
+                {t("second")}
             </StandardBox>
-            <StandardBox>
-                Lubie autobusy
+            <StandardBox style={{gridArea: "b", padding: "1rem", width: "100%", textAlign: "center", alignSelf: "center"}}>
+                <p style={{padding: "0.5rem"}}>{t("third")}</p>
+                <HomeMapBox ref={mapContainer}/>
             </StandardBox>
         </HomeGrid>
         {/*<ItemTextList>*/}
