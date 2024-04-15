@@ -26,12 +26,16 @@ import {
     GAITVehicle,
     POIProperties
 } from "@/types/map";
-import type {GeoJSON} from "geojson";
+import {GeoJSON, Polygon} from "geojson";
 import SelectedPOI from "@/components/map/POI";
 import SelectedVehicles from "@/components/map/Vehicle";
 import SelectedStops from "@/components/map/Stop";
 import SettingsIcon from '@mui/icons-material/Settings';
 import {getCookie} from "cookies-next";
+import useSWR from "swr";
+import fetcher from "@/fetcher";
+import {useGExplorerStore} from "@/state";
+import {makeMultiPolygon} from "@/topologyUtils";
 
 export default function MapPage() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -40,6 +44,9 @@ export default function MapPage() {
     const replaceRouter = useDebounceCallback((url) => router.replace(url, undefined, {shallow: true}), 500);
     const [dataProperties, setDataProperties] = useState<POIProperties | GAITPropertiesVehicle | GAITPropertiesStop | null>(null)
     const [dataType, setDataType] = useState<"POI" | "vehicle" | "stop" | null>(null);
+    const loggedIn = useGExplorerStore(s => s.loggedIn)
+    const user = useGExplorerStore(s => s.id)
+    const polygonSwr = useSWR<Polygon[]>(`/User/id/${user}/polygon`, fetcher);
 
     // @ts-ignore
     useEffect(() => {
@@ -335,6 +342,43 @@ export default function MapPage() {
                 //     });
                 // }
             })();
+
+            // ADD the explored area
+            if (loggedIn && polygonSwr.data !== undefined && polygonSwr.data !== null) {
+                const polygons = makeMultiPolygon(polygonSwr.data)
+                map.addSource(
+                    "explored-source",
+                    {
+                        type: "geojson",
+                        buffer: 99,
+                        data: polygons
+                    }
+                )
+                map.addLayer({
+                    "id": "explored",
+                    "type": "line",
+                    "source": "explored-source",
+                    "layout": {
+                        "visibility": disableExplored ? "none" : "visible"
+                    },
+                    "paint": {
+                        "line-color": '#0080ff',
+                    }
+                });
+                map.addLayer({
+                    "id": "explored2",
+                    "type": "fill",
+                    "source": "explored-source",
+                    "layout": {
+                        "visibility": disableExplored ? "none" : "visible"
+                    },
+                    "paint": {
+                        "fill-color": "#0080ff",
+                        "fill-opacity": 0.2,
+                        "fill-antialias": true,
+                    }
+                });
+            }
         });
 
         const updateVehicleMarkers = setInterval(async () => {
