@@ -26,16 +26,16 @@ export default function SelectedPOI({POI}: { POI: POIProperties }) {
     const loggedIn = useGExplorerStore(s => s.loggedIn);
 
     // TODO: if logged try to send request
-    const save = () => {
-        if (!loggedIn) {
-            router.push("/account?cb=/map?select=" + POI.id)
-        }
-    }
-    const been = () => {
-        if (!loggedIn) {
-            router.push("/account?cb=/map?select=" + POI.id)
-        }
-    }
+    // const save = () => {
+    //     if (!loggedIn) {
+    //         router.push("/account?cb=/map?select=" + POI.id)
+    //     }
+    // }
+    // const been = () => {
+    //     if (!loggedIn) {
+    //         router.push("/account?cb=/map?select=" + POI.id)
+    //     }
+    // }
     return <>
         <MenuTitle href={"/"}>Gexplorer</MenuTitle>
         <InfoList>
@@ -48,14 +48,14 @@ export default function SelectedPOI({POI}: { POI: POIProperties }) {
                     {t(POI.category)}
                 </InfoSubtitle>
             </InfoTitle>
-            <POIminiMenu>
-                <POIminiMenuItem onClick={save}>
-                    <i><FavoriteIcon/></i> <p>{t("save", null, {ns: "map"})}</p>
-                </POIminiMenuItem>
-                <POIminiMenuItem onClick={been}>
-                    <i><BeenhereIcon/></i> <p>{t("visited", null, {ns: "map"})}</p>
-                </POIminiMenuItem>
-            </POIminiMenu>
+            {/*<POIminiMenu>*/}
+            {/*    <POIminiMenuItem onClick={save}>*/}
+            {/*        <i><FavoriteIcon/></i> <p>{t("save", null, {ns: "map"})}</p>*/}
+            {/*    </POIminiMenuItem>*/}
+            {/*    <POIminiMenuItem onClick={been}>*/}
+            {/*        <i><BeenhereIcon/></i> <p>{t("visited", null, {ns: "map"})}</p>*/}
+            {/*    </POIminiMenuItem>*/}
+            {/*</POIminiMenu>*/}
             {t(POI.id) !== POI.id ? <Separator/> : <></>}
             {t(POI.id) !== POI.id ? <POIdesc>{t(POI.id)}</POIdesc> : <></>}
             <Separator/>
