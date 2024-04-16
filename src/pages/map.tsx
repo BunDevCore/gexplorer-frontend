@@ -7,7 +7,6 @@ import {
     MenuButton,
     MenuLink,
     MenuTitle,
-    MenuItem,
     BackButton
 } from "@/styles/map";
 import {useRouter} from "next/router";
@@ -36,6 +35,7 @@ import useSWR from "swr";
 import fetcher from "@/fetcher";
 import {useGExplorerStore} from "@/state";
 import {makeMultiPolygon} from "@/topologyUtils";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function MapPage() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -512,7 +512,7 @@ const MapMenu = () => {
         <MenuTitle href={"/"}>Gexplorer</MenuTitle>
         <MenuLink href="/"><HomeIcon/> <p>{t("mainPage")}</p></MenuLink>
         <MenuLink href="/settings"><SettingsIcon/> <p>{t("settings")}</p></MenuLink>
-        <MenuItem><FavoriteIcon/> <p>{t("saved")}</p></MenuItem>
+        <MenuLink href="/account"><AccountCircleIcon/> <p>{t("account")}</p></MenuLink>
     </>
 }
 
