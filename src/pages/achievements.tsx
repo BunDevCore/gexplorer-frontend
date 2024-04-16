@@ -23,7 +23,7 @@ type User = {
 }
 
 export default function Achievements() {
-    const {t} = useTranslation("achievement");
+    const {t} = useTranslation("achievements");
     const com = useTranslation("common");
 
     const id = useGExplorerStore(s => s.id)
@@ -38,8 +38,10 @@ export default function Achievements() {
         <StandardBox style={{display: "flex", flexDirection: "column", gap: "1rem"}}><h1>{com.t("yourAchievements")}:</h1>
             {(userSWR.data !== undefined && userSWR.data !== null && userSWR.data.achievements.length !== 0) ? userSWR.data?.achievements.map((v, i) => <StandardBox
                 style={{background: "var(--secondary)"}} key={i}><AchiInsideContent>
-                <p>{i + 1}</p> <p style={{gridArea: "b", fontWeight: "bold", padding: "0 0 0.5rem 0"}}>{t(v.achievementId)}</p>
-                <p style={{gridArea: "c"}}>{com.t("achieved")}: {DateTime.fromISO(v.timeAchieved).toLocaleString(DateTime.DATETIME_MED)}</p>
+                <p>{i + 1}</p> <p
+                style={{gridArea: "b", fontWeight: "bold", padding: "0 0 0.5rem 0"}}>{t(v.achievementId+".name")}</p>
+                <p style={{gridArea: "c", padding: "0 0 0.5rem 0"}}>{t(v.achievementId+".desc")}</p>
+                <p style={{gridArea: "e"}}>{com.t("achieved")}: {DateTime.fromISO(v.timeAchieved).toLocaleString(DateTime.DATETIME_MED)}</p>
                 <Button style={{gridArea: "d"}} variant={"contained"}
                         onClick={() => goToTrip(v.achievedOnTripId)}>{com.t("goToTrip")}</Button>
             </AchiInsideContent>

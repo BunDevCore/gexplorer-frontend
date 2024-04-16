@@ -5,7 +5,8 @@ export const AchiInsideContent = styled.div`
     grid-template-columns: 2rem 1fr 14rem;
     grid-template-areas: 
         "a b d"
-        "a c d";
+        "a c d"
+        "a e d";
     
     p:nth-child(1) {
         grid-area: a;

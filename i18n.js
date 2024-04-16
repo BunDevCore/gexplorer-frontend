@@ -9,6 +9,6 @@ module.exports = {
         "/settings": ["settings"],
         "/upload": ["upload"],
         "/map": ["map", "poi"],
-        "/achievement": ["achievement"]
+        "/achievements": ["achievements"]
     },
 }
