@@ -25,12 +25,13 @@ export default function ProfileComponent(props: { username: string | undefined |
 
     return <DefaultLayout>
         <StandardBox style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-            <div>
+            <div style={{padding: "1rem", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
                 <h1>{t("welcome")} {data.username}!</h1>
                 <h1>{t("explored")} <AreaCounter area={data.overallAreaAmount}></AreaCounter></h1>
             </div>
-            <div style={{display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
+            <div style={{display: "flex", flexDirection: "column", justifyContent: "space-between", gap: "1rem"}}>
                 <Button variant={"contained"} onClick={() => window.location.replace("/achievements")}>{t("achievements")}</Button>
+                <Button variant={"contained"} onClick={() => window.location.replace("/leaderboard/overall")}>{t("leaderboard")}</Button>
                 <Button variant={"contained"} onClick={() => window.location.replace("/upload")}>{t("import")}</Button>
             </div>
         </StandardBox>

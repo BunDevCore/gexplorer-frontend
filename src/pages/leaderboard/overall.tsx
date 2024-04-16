@@ -3,7 +3,7 @@ import {useRouter} from "next/router";
 import {useGExplorerStore} from "@/state";
 import React, {useEffect, useState} from "react";
 import fetcher from "@/fetcher";
-import {CenterLayout, MainLayout} from "@/styles/universal";
+import {CenterLayout, DefaultLayout, StandardBox} from "@/styles/universal";
 import {Avatar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import {Leaderboard} from "@/types/types";
 import {UserPaper} from "@/styles/userpage";
@@ -64,9 +64,9 @@ export default function OverallLeaderboardPage() {
 
     if (leaderboardSwr.isLoading || !leaderboardSwr.data) return <CenterLayout><p>loading...</p></CenterLayout>
 
-    return <MainLayout><CenterLayout><UserPaper variant={"outlined"} elevation={4}>
+    return <DefaultLayout><StandardBox>
         <h1>{t("overallAreaLeaderboard")}</h1>
         <LeaderboardTable leaderboard={leaderboardSwr.data}/>
         {/*kurwa*/}
-    </UserPaper></CenterLayout></MainLayout>
+    </StandardBox></DefaultLayout>
 }

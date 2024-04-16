@@ -26,5 +26,8 @@
   "noAchievements": "Do didn't achieve anything",
   "yourAchievements": "Your achievements",
   "achieved": "Achieved",
-  "account": "Account"
+  "account": "Account",
+  "overallAreaLeaderboard": "Leaderboard",
+  "positionHeader": "Place",
+  "userNameHeader": "Username"
 }

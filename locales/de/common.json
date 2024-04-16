@@ -12,5 +12,8 @@
   "goToTrip": "Pokaż podróż",
   "yourAchievements": "Twoje osiągnięcia",
   "achieved": "Osiągnięto",
-  "account": "Konto"
+  "account": "Konto",
+  "overallAreaLeaderboard": "Tabela wyników",
+  "positionHeader": "Miejsce",
+  "userNameHeader": "Nazwa użytkownika"
 }
